@@ -1,0 +1,49 @@
+.side {
+    margin-top: 55px;
+    background-color: #336699;
+}
+
+.sidebar {
+    width: 225px;
+    height: 100vh;
+    position: fixed;
+    z-index: 1000;
+    overflow: auto;
+}
+
+.side .content .col-md-3 {
+    border: 2px solid white;
+}
+
+.side .components a {
+    padding-left: 20px;
+    display: block;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.sidebar .components a:hover {
+    background-color: #4a7eb2;
+    text-decoration: none;
+}
+.sidebar .components .dropdown-toggle::after {
+    margin-left: 15px; /* Add margin to the left of the arrow */
+  }
+
+.image-style{
+    height: 172px;
+    width: 172px;
+    margin-left: 13px;
+}
+
+.image2-style{
+    height: 60px;
+    width: 60px;
+    margin-left: 13px;
+}
+.corn-style{
+    height: 50px;
+    width: 50px;
+    margin-left: 13px;
+    margin-top: 10px;
+}

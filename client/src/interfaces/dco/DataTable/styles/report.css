@@ -1,0 +1,14 @@
+.table-cell-center {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; /* Align content to the left */
+}
+
+.align-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%; /* Ensures the div takes up the full height of the cell */
+}

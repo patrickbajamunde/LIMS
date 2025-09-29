@@ -1,0 +1,24 @@
+.reg-analysis {
+    margin-top: 56px;
+}
+
+.analysis {
+    margin-left: 250px;
+}
+
+.reg-analysis .analysis .description .form-control {
+    height: 250px;
+}
+
+.reg-analysis .analysis .description .custom-select {
+    height: 250px;
+}
+
+.reg-analysis .analysis a {
+    padding-left: 20px;
+    display: block;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+

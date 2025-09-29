@@ -1,0 +1,10 @@
+.app-container {
+    min-height: 100vh; /* Ensure it takes up the full viewport height */
+    display: flex;
+    flex-direction: column;
+    background-color: #F2F2F2;
+  }
+
+*{
+    font-family: 'Calibri', sans-serif;
+}

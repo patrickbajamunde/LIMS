@@ -1,0 +1,29 @@
+.head{
+    height: 40px;
+}
+
+.analysis{
+    margin-right: 25px;
+}
+
+label{
+    font-weight: bold;
+    color: #333;
+}
+
+.TransDate {
+    /* Add your styles here */
+    font-weight: bold;
+    color: #333;
+    margin-left: auto;
+    
+    
+  }
+
+.ItemNum{
+    padding-left: 100px;
+}
+
+.testMethod{
+    padding-left: 100px;
+}

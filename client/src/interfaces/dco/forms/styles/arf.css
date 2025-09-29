@@ -1,0 +1,65 @@
+.head{
+    height: 40px;
+}
+
+.analysis{
+    margin-right: 25px;
+}
+
+label{
+    font-weight: bold;
+    color: #333;
+}
+
+.TransDate {
+    /* Add your styles here */
+    font-weight: bold;
+    color: #333;
+    margin-left: auto;
+    
+    
+  }
+
+.ItemNum{
+    padding-left: 100px;
+}
+
+.testMethod{
+    padding-left: 100px;
+}
+
+.reg-analysis {
+    margin-top: 56px;
+}
+
+.analysis {
+    margin-left: 250px;
+}
+
+.reg-analysis .analysis .description .form-control {
+    height: 100px;
+}
+
+
+.reg-analysis .analysis a {
+    padding-left: 20px;
+    display: block;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.message{
+    position:fixed;
+    top: 90px;
+    left: 1295px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.datePerformed{
+    padding-left: 98px;
+}
+
+.fromTo{
+    padding-left: 88px;
+}
