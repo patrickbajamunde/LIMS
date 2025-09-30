@@ -26,28 +26,28 @@ function Home() {
   useEffect(() => {
     const fetchRegCount = async () => {
       try {
-        const resReg = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countReg", {
+        const resReg = await axios.get("http://localhost:8001/api/dbcontrol/countReg", {
           withCredentials: true,
         })
-        const resCorn = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countCorn", {
+        const resCorn = await axios.get("http://localhost:8001/api/dbcontrol/countCorn", {
           withCredentials: true,
         })
-        const resLgu = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countLgu", {
+        const resLgu = await axios.get("http://localhost:8001/api/dbcontrol/countLgu", {
           withCredentials: true,
         })
-        const resResearch = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countResearch", {
+        const resResearch = await axios.get("http://localhost:8001/api/dbcontrol/countResearch", {
           withCredentials: true,
         })
-        const resWalk = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countWalkin", {
+        const resWalk = await axios.get("http://localhost:8001/api/dbcontrol/countWalkin", {
           withCredentials: true,
         })
-        const resHVC = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countHVC", {
+        const resHVC = await axios.get("http://localhost:8001/api/dbcontrol/countHVC", {
           withCredentials: true,
         })
-        const resRice = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countRice",{
+        const resRice = await axios.get("http://localhost:8001/api/dbcontrol/countRice",{
           withCredentials: true,
         })
-        const resGovtAgency = await axios.get("http://192.168.254.110:8001/api/dbcontrol/countGovtAgency",{
+        const resGovtAgency = await axios.get("http://localhost:8001/api/dbcontrol/countGovtAgency",{
           withCredentials: true,
         })
 
@@ -70,80 +70,6 @@ function Home() {
   return (
     <div className='d-flex container-fluid home'>
       <div className='content container-fluid mt-1'>
-
-        {/* Old Dashboard Cards*/}
-        {/*}
-        <div className='row d-flex flex-nowrap'>
-          <div className='col mb-3'>
-            <div className='parent-cont p-3 bg-light shadow-sm d-flex justify-content-around border'>
-              <div>
-                <h3 className='fs-2'>{walkinCount}</h3>
-                <p className='fs-5'>Walk-in</p>
-              </div>
-              <div>
-                <img src={image5} alt="description" className='corn-style' />
-              </div>
-              <div className='view1 d-flex container '>
-                <Link className='text-white nav-link ms-auto' to="/Dco/Walkin/">view more</Link>
-              </div>
-            </div>
-          </div>
-          <div className='col mb-3'>
-            <div className='parent-cont p-3 bg-light shadow-sm d-flex justify-content-around border'>
-              <div>
-                <h3 className='fs-2'>{regCount}</h3>
-                <p className='fs-5'>Regulatory</p>
-              </div>
-              <i className='bi bi-person p-3 fs-1'></i>
-              <div className='view2 d-flex container '>
-                <Link className='text-white nav-link ms-auto' to="/Dco/Regulatory/">view more</Link>
-              </div>
-            </div>
-          </div>
-          <div className='col mb-3'>
-            <div className='parent-cont p-3 bg-light shadow-sm d-flex justify-content-around border'>
-              <div>
-                <h3 className='fs-2'>{cornCount}</h3>
-                <p className='fs-5'>Corn Program</p>
-              </div>
-              <div>
-                <img src={image3} alt="description" className='corn-style' />
-              </div>
-              <div className='view3 d-flex container '>
-                <Link className='text-white nav-link ms-auto' to="/Dco/Corn%20Program/">view more</Link>
-              </div>
-            </div>
-          </div>
-          <div className='col mb-3'>
-            <div className='parent-cont p-3 bg-light shadow-sm d-flex justify-content-around border'>
-              <div>
-                <h3 className='fs-2'>{lguCount}</h3>
-                <p className='fs-5'>LGU</p>
-              </div>
-              <div>
-                <img src={image2} alt="description" className='image2-style' />
-              </div>
-              <div className='view4 d-flex container'>
-                <Link className='text-white nav-link ms-auto' to="/Dco/LGU/">view more</Link>
-              </div>
-            </div>
-          </div>
-          <div className='col mb-3'>
-            <div className='parent-cont p-3 bg-light shadow-sm d-flex justify-content-around border'>
-              <div>
-                <h3 className='fs-2'>{resCount}</h3>
-                <p className='fs-5'>Research</p>
-              </div>
-              <div>
-                <img src={image4} alt="description" className='image2-style' />
-              </div>
-              <div className='view5 d-flex container'>
-                <Link className='text-white nav-link ms-auto' to="/Dco/Research/">view more</Link>
-              </div>
-            </div>
-          </div>
-        </div>
-        {*/}
 
         {/*NEW DASHBOARD CARDS DESIGN ROW 1*/}
         <div className='row d-flex'>
@@ -178,6 +104,7 @@ function Home() {
               </div>
             </div>
           </div>
+          
           
           {/*REGULATORY CARD */}
           <div className='col mb-3'>
@@ -227,7 +154,7 @@ function Home() {
               >
                 <Link
                   className='text-white nav-link ms-auto p-0'
-                  to="/Dco/Corn%20Program/"
+                  to="/Dco/CornProgram/"
                 >
                   view more
                 </Link>
@@ -296,7 +223,7 @@ function Home() {
               >
                 <Link
                   className='text-white nav-link ms-auto p-0'
-                  to="/Dco/Research/"
+                  to="/Dco/HVCrops/"
                 >
                   view more
                 </Link>
@@ -327,7 +254,7 @@ function Home() {
               >
                 <Link
                   className='text-white nav-link ms-auto p-0'
-                  to="/Dco/Research/"
+                  to="/Dco/Rice Program/"
                 >
                   view more
                 </Link>
@@ -359,7 +286,7 @@ function Home() {
               >
                 <Link
                   className='text-white nav-link ms-auto p-0'
-                  to="/Dco/Research/"
+                  to="/Dco/Government Agency/"
                 >
                   view more
                 </Link>

@@ -3,7 +3,7 @@ import Research from "../DataTable/Research";
 
 function ResearchPage() {
   return (
-    <div className='d-flex reg-analysis '>
+    <div className='d-flex '>
         <div className=' analysis container-fluid mb-5'>      
             <Research/>
         </div>

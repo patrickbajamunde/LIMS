@@ -128,7 +128,7 @@ function UpdateReport() {
   const submitForm = async (e) =>{
     e.preventDefault();
     const form = {...result};
-    await axios.put(`http://192.168.254.110:8001/api/report/update/report/${id}`, form,{
+    await axios.put(`http://localhost:8001/api/report/update/report/${id}`, form,{
       withCredentials: true,
     })
     .then((response) => {
@@ -140,7 +140,7 @@ function UpdateReport() {
   }
 
   useEffect( ()=> {
-        axios.get(`http://192.168.254.110:8001/api/report/reportData/${id}`)
+        axios.get(`http://localhost:8001/api/report/reportData/${id}`)
         .then((response)=> {
             setResult(response.data)
         })

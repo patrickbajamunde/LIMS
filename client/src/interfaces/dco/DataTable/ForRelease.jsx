@@ -20,7 +20,7 @@ export default function ForRelease() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://192.168.254.110:8001/api/dbcontrol/forRelease", {
+                const response = await axios.get("http://localhost:8001/api/dbcontrol/forRelease", {
                     withCredentials: true,
                 });
                 setclient(response.data);
@@ -40,7 +40,7 @@ export default function ForRelease() {
 
             // Call the API to update the status to "Released"
             const response = await axios.put(
-                `http://192.168.254.110:8001/api/report/update/report/${roaId}`,
+                `http://localhost:8001/api/report/update/report/${roaId}`,
                 { status: "Released" },
                 { withCredentials: true }
             );
@@ -63,7 +63,7 @@ export default function ForRelease() {
             const confirmDelete = window.confirm("Are you want to delete this report?")
             if (!confirmDelete) return;
 
-            await axios.delete(`http://192.168.254.110:8001/api/report/delete/report/${roaDataId}`, {
+            await axios.delete(`http://localhost:8001/api/report/delete/report/${roaDataId}`, {
                 withCredentials: true,
             })
 

@@ -13,7 +13,7 @@ function RoaData() {
     const backRoute = location.state?.from || "/Dco/ForRelease/";
 
     useEffect(() => {
-        axios.get(`http://192.168.254.110:8001/api/report/reportData/${id}`)
+        axios.get(`http://localhost:8001/api/report/reportData/${id}`)
             .then((response) => {
                 setReportDetails(response.data)
             })
@@ -32,12 +32,12 @@ function RoaData() {
 
     return (
         <>
-            <div className="d-flex pt-5">
+            <div className="d-flex pt-3">
                 <div className="col card border-0 analysis shadow-sm container-fluid mb-5">
                     {reportDetails ? (
                         <>
                             {/*HEADER*/}
-                            <div className="row card-header bg-primary text-white">
+                            <div className="row card-header text-white" style={{ backgroundColor: '#003e8fff' }}>
                                 <div className="rounded-circle justify-content-center d-flex align-items-center bg-white bg-opacity-25 mt-3"
                                     style={{ width: '80px', height: '80px' }}>
                                     <i className='bi bi-file-earmark-text fs-2' />

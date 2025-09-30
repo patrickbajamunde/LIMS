@@ -134,7 +134,7 @@ function RoaForm() {
   const submitForm = async (e) => {
     e.preventDefault();
     const form = { ...result, roaDetails: roaReport };
-    await axios.post("http://192.168.254.110:8001/api/report/newReport", form, {
+    await axios.post("http://localhost:8001/api/report/newReport", form, {
       withCredentials: true,
     })
       .then((response) => {
@@ -157,7 +157,7 @@ function RoaForm() {
   }
 
   return (
-    <div className='d-flex reg-analysis'>
+    <div className='d-flex mt-3'>
       <div className=' analysis container-fluid shadow-sm border bordered-darker mb-5'>
         <div className='row g-6'>
           <div className='head bg-dark container'>

@@ -20,7 +20,7 @@ export default function ReleasedRoa() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://192.168.254.110:8001/api/dbcontrol/released", {
+                const response = await axios.get("http://localhost:8001/api/dbcontrol/released", {
                     withCredentials: true,
                 });
                 setclient(response.data);
@@ -40,7 +40,7 @@ export default function ReleasedRoa() {
 
             // Call the API to update the status to "Released"
             const response = await axios.put(
-                `http://192.168.254.110:8001/api/report/update/report/${roaId}`,
+                `http://localhost:8001/api/report/update/report/${roaId}`,
                 { status: "Released" },
                 { withCredentials: true }
             );

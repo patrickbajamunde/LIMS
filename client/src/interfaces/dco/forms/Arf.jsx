@@ -104,7 +104,7 @@ function Arf() {
   const submitForm = async (e) => {
     e.preventDefault();
     const form = { ...request, sampleDetails: sample };
-    await axios.post("http://192.168.254.110:8001/api/client/newClient", form,
+    await axios.post("http://localhost:8001/api/client/newClient", form,
       {
         withCredentials: true,
       }
@@ -134,7 +134,7 @@ function Arf() {
 
   return (
 
-    <div className='d-flex reg-analysis'>
+    <div className='d-flex mt-3'>
       <div className=' analysis container-fluid shadow-sm border bordered-darker mb-5'>
         <div className='row g-6'>
           <div className='message col-md-4'>
@@ -296,7 +296,6 @@ function Arf() {
               {/* ...existing form fields below... */}
             </div>
             <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
-              <button type="submit" className="btn btn-primary col-md-2">Print</button>
               <button type="button" className="btn btn-primary col-md-2" onClick={submitForm}>Save</button>
             </div>
           </form>

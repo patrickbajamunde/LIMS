@@ -13,7 +13,7 @@ const TestPdf = ({requestId, icon, disabledIcon}) => {
 
     useEffect(() => {
         // Fetch request data using the requestId passed as a prop
-        axios.get(`http://192.168.254.110:8001/api/client/getClient/${requestId}`)
+        axios.get(`http://localhost:8001/api/client/getClient/${requestId}`)
             .then((response) => {
                 setRequest(response.data);
             })

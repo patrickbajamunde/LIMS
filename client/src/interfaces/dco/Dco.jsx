@@ -8,11 +8,8 @@ import Sidebar from './components/Sidebar';
 function Dco() {
   return (
     <div className='app-container'>
-        <div className='header'>
-            <Header />
-        </div>
         <div>
-            <Sidebar />
+            <Sidebar/>
         </div>
         <div className='home' >
           <Outlet />

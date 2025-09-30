@@ -3,7 +3,7 @@ import Walkin from "../DataTable/Walkin";
 
 function WalkinPage() {
   return (
-    <div className='d-flex reg-analysis '>
+    <div className='d-flex '>
         <div className=' analysis container-fluid mb-5'>      
             <Walkin/>
         </div>

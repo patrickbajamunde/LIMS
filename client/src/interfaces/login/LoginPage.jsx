@@ -14,7 +14,7 @@ function LoginPage() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('http://192.168.254.110:8001/api/auth/login',{
+      const res = await axios.post('http://localhost:8001/api/auth/login',{
         email,
         password,
       },{

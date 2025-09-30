@@ -21,7 +21,7 @@ export default function Research() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://192.168.254.110:8001/api/client/userRequest",{
+                const response = await axios.get("http://localhost:8001/api/client/userRequest",{
                     withCredentials: true,
                 });
 
@@ -42,7 +42,7 @@ export default function Research() {
             if (!confirmDelete) return;
 
             //if confirmDelete is true send a DELETE request from the API
-            await axios.delete(`http://192.168.254.110:8001/api/client/delete/arf/${arfId}`, {
+            await axios.delete(`http://localhost:8001/api/client/delete/arf/${arfId}`, {
                 withCredentials: true,
             });
 

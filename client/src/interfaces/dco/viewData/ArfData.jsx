@@ -15,7 +15,7 @@ function ArfData() {
     const backRoute = location.state?.from || "/Dco/Walkin/";
 
     useEffect(() => {
-        axios.get(`http://192.168.254.110:8001/api/client/getClient/${id}`)
+        axios.get(`http://localhost:8001/api/client/getClient/${id}`)
             .then((response) => {
                 setRequestData(response.data)
             })
@@ -34,12 +34,12 @@ function ArfData() {
 
     return (
         <>
-            <div className='d-flex pt-5'>
+            <div className='d-flex pt-3'>
                 <div className='col card border-0 shadow-sm analysis container-fluid mb-5  '>
 
                     {requestData ? (
                         <>
-                            <div className='row card-header bg-primary bg-gradient text-white '>
+                            <div className='row card-header text-white ' style={{ backgroundColor: '#003e8fff' }}>
                                 <div className="col-auto rounded-circle justify-content-center d-flex align-items-center px-3 bg-white bg-opacity-25">
                                     <i className='bi bi-file-earmark-text fs-1' />
                                 </div>

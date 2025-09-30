@@ -3,7 +3,7 @@ import ForRelease from '../DataTable/ForRelease';
 
 function ForReleaseRoa() {
   return (
-    <div className='d-flex reg-analysis '>
+    <div className='d-flex '>
         <div className=' analysis container-fluid mb-5'>      
             <ForRelease/>
         </div>

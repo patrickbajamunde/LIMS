@@ -11,7 +11,7 @@ const GenerateRoa = ({roaId, icon, disabledIcon}) => {
     const [report, setReport] = useState(null)
 
     useEffect(() =>{
-        axios.get(`http://192.168.254.110:8001/api/report/reportData/${roaId}`)
+        axios.get(`http://localhost:8001/api/report/reportData/${roaId}`)
              .then((response) => {
                 setReport(response.data);
              })
