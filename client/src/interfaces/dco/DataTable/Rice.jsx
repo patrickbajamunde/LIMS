@@ -109,11 +109,7 @@ export default function Rice() {
             ),
             sortable: true,
         },
-        {
-            name: "Status",
-            selector: (row) => row.status,
-            sortable: true,
-        },
+        
         {
             name: "Action",
             cell: (row) => (

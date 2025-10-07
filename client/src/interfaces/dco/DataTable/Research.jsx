@@ -110,11 +110,7 @@ export default function Research() {
             ),
             sortable: true,
         },
-        {
-            name: "Status",
-            selector: (row) => row.status,
-            sortable: true,
-        },
+       
         {
             name: "Action",
             cell: (row) => (
@@ -126,8 +122,12 @@ export default function Research() {
                     type="button"
                     className="btn p-0 border-0"><i className="bi bi-pencil-square text-success "></i></Link>
 
-                  
-                    <TestPdf requestId={row._id}/>
+                    
+                    <TestPdf
+                        requestId={row._id}
+                        icon={<i className="bi bi-box-arrow-down text-primary"></i>}
+                        disabledIcon={<i className="bi bi-box-arrow-down text-secondary"></i>}
+                    />
                     <Link to={`/Dco/requestDetails/${row._id}`} state={{from: '/Dco/Research/'}} type="button" className="btn p-0 border-0"><i class="bi bi-eye"></i></Link>
                 </div>
               ),

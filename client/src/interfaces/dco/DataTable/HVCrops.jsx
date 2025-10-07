@@ -114,11 +114,7 @@ export default function HVCrops() {
             ),
             sortable: true,
         },
-        {
-            name: "Status",
-            selector: (row) => row.status,
-            sortable: true,
-        },
+
         {
             name: "Action",
             cell: (row) => (

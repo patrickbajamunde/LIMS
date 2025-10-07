@@ -115,11 +115,6 @@ export default function CornProgram() {
             sortable: true,
         },
         {
-            name: "Status",
-            selector: (row) => row.status,
-            sortable: true,
-        },
-        {
             name: "Action",
             cell: (row) => (
                 <div className="d-flex align-items-center gap-2">

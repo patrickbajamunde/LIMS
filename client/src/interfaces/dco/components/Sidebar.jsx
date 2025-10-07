@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import './styles/sidebar.css';
+import image1 from '../Components/images/DA2.png';
 
 function Sidebar() {
     const navigate = useNavigate();
@@ -25,14 +26,21 @@ function Sidebar() {
         <div>
             <div className={`text-white position-fixed top-0 start-0 h-100 d-flex flex-column`}
                 style={{ width: '230px', zIndex: 1000, backgroundColor: '#38406eff' }}>
-                
+
                 {/* Header Section */}
-                <div className="px-3 pt-3 border-bottom mx-2">
-                    <h4 className="mb-2">Integrated Laboratories</h4>
+                <div className="pt-1 border-bottom mx-2 mb-2">
+                    <div className='row justify-content-center'>
+                        <div className="col-2 me-2">
+                            <img src={image1} alt="description" className='image-style' />
+                        </div>
+                        <div className="col d-flex justify-items-center mb-2 ">
+                            <span className='fw-bold fs-3'>ILMS</span>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Scrollable Navigation Section */}
-                <div className="flex-grow-1 overflow-auto px-3 sidebar-scroll" style={{paddingBottom: '0'}}>
+                <div className="flex-grow-1 overflow-auto px-3 sidebar-scroll" style={{ paddingBottom: '0' }}>
                     <ul className="nav flex-column">
                         <li className='nav-item'>
                             <Link to="Home" className='nav-link text-white sidebar-link'>
@@ -61,28 +69,28 @@ function Sidebar() {
                             <div className='collapse' id='homeSubmenu'>
                                 <ul className='list-unstyled ms-5'>
                                     <li>
-                                        <Link className="nav-link text-white mt-2" to="Walkin/">Walk-in</Link>
+                                        <Link className="nav-link text-white mt-2 sidebar-link" to="Walkin/">Walk-in</Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white' to="Regulatory/">Regulatory</Link>
+                                        <Link className='nav-link text-white sidebar-link' to="Regulatory/">Regulatory</Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white' to="CornProgram/">Corn Program</Link>
+                                        <Link className='nav-link text-white sidebar-link' to="CornProgram/">Corn Program</Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white' to="LGU/">LGU</Link>
+                                        <Link className='nav-link text-white sidebar-link' to="LGU/">LGU</Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white' to="Research/">Research</Link>
+                                        <Link className='nav-link text-white sidebar-link' to="Research/">Research</Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white' to="HVCrops/">High Value Crops</Link>
+                                        <Link className='nav-link text-white sidebar-link' to="HVCrops/">High Value Crops</Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white' to="Rice Program/">Rice Program</Link>
+                                        <Link className='nav-link text-white sidebar-link' to="Rice Program/">Rice Program</Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white' to="Government Agency/">Government Agency</Link>
+                                        <Link className='nav-link text-white sidebar-link' to="Government Agency/">Govt. Agency</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -96,10 +104,10 @@ function Sidebar() {
                             <div className='collapse' id='roaList'>
                                 <ul className='list-unstyled ms-5'>
                                     <li>
-                                        <Link className='nav-link text-white mt-2' to='ForRelease/'> For Release </Link>
+                                        <Link className='nav-link text-white mt-2 sidebar-link' to='ForRelease/'> For Release </Link>
                                     </li>
                                     <li>
-                                        <Link className='nav-link text-white mt-2' to='Released/'> Released </Link>
+                                        <Link className='nav-link text-white mt-2 sidebar-link' to='Released/'> Released </Link>
                                     </li>
                                 </ul>
                             </div>

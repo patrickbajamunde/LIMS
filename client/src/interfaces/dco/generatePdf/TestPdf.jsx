@@ -167,7 +167,7 @@ const TestPdf = ({requestId, icon, disabledIcon}) => {
     return (
     <>
         {request ? (
-            <PDFDownloadLink document={generatePdf()} fileName="Testpdf" style={{ padding: 0 }}>
+            <PDFDownloadLink document={generatePdf()} fileName={request.requestId} style={{ padding: 0 }}>
                 <button className="btn p-0 border-0">
                     {icon}
                 </button>

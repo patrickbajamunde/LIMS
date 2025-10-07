@@ -158,9 +158,9 @@ function RoaForm() {
 
   return (
     <div className='d-flex mt-3'>
-      <div className=' analysis container-fluid shadow-sm border bordered-darker mb-5'>
+      <div className=' analysis card container-fluid shadow-sm border bordered-darker mb-5'>
         <div className='row g-6'>
-          <div className='head bg-dark container'>
+          <div className='head container rounded-top'  style={{ backgroundColor: '#003e8fff' }}>
 
             <div className='mt-1'>
               <i className='bi bi-info-circle text-white fs-5 ms-1 me-1' />
