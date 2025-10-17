@@ -144,7 +144,7 @@ function Arf() {
               </div>
             )}
           </div>
-          <div className='head container rounded-top'  style={{ backgroundColor: '#003e8fff' }}>
+          <div className='head container rounded-top' style={{ backgroundColor: '#003e8fff' }}>
 
             <div className='mt-1'>
               <i className='bi bi-info-circle text-white fs-5 ms-1 me-1' />
@@ -153,11 +153,12 @@ function Arf() {
           </div>
 
           <form className='mt-4 mb-4' onSubmit={submitForm}>
-            <div className='container-fluid mt-3 '>
-              <div className='row mt-4'>
-                <label className='col-md-3 col-form-label '>Type Of Client: </label>
-                <div className='col-md-3'>
-                  <select id='clientType' name="clientType" onChange={inputHandler} value={request.clientType} className='form-select'>
+            <div className='card p-4 mb-3 shadow-sm border'>
+              <h5 className='mb-4 text-primary fw-bold'>Request Details</h5>
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <label className='form-label '>Type Of Client: </label>
+                  <select id='clientType' name="clientType" onChange={inputHandler} value={request.clientType} className='form-select border border-dark'>
                     <option selected>Choose...</option>
                     <option value="Regulatory">Regulatory</option>
                     <option value="Corn Program">Corn Program</option>
@@ -169,89 +170,78 @@ function Arf() {
                     <option value="Government Agency">Government Agency</option>
                     <option value="High Value Crops Program">High Value Crops Program</option>
                     <option value="Research">Research</option>
-
                   </select>
                 </div>
 
-                <label className='ItemNum col-md-3 col-form-label'>Request ID: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="text" className="form-control" id="requestId" name="requestId" onChange={inputHandler} value={request.requestId} placeholder="" />
-                </div>
-              </div>
-
-              <div className='row mt-4'>
-                <label className='col-md-3 col-form-label '>Transaction Date: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="date" className="form-control" id="transactionDate" name='transactionDate' value={request.transactionDate} onChange={inputHandler} placeholder="" />
-                  </div>
+                <div className="col-md-6">
+                  <label className='form-label'>Request ID: </label>
+                  <input type="text" className="form-control border border-dark" id="requestId" name="requestId" onChange={inputHandler} value={request.requestId} placeholder="" />
                 </div>
 
-                <label className='testMethod col-md-3 col-form-label '>Recevied By: </label>
-                <div className='col-md-3 '>
-                  <select id='receivedBy' name='receivedBy' onChange={inputHandler} value={request.receivedBy} className='form-select'>
+                <div className="col-md-6">
+                  <label className='form-label '>Transaction Date: </label>
+                  <input type="date" className="form-control border border-dark" id="transactionDate" name='transactionDate' value={request.transactionDate} onChange={inputHandler} placeholder="" />
+                </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Recevied By: </label>
+                  <select id='receivedBy' name='receivedBy' onChange={inputHandler} value={request.receivedBy} className='form-select border border-dark'>
                     <option selected>Choose...</option>
                     <option value="Susan P. Bergantin">Susan P. Bergantin</option>
                     <option value="Jessa Mae M. Luces">Jessa Mae M. Luces</option>
                   </select>
                 </div>
+
+                <div className="col-md-6"></div>
               </div>
             </div>
 
-            <div className='container-fluid shadow-sm border border-secondary border-1 mt-3'>
+            <div className='container-fluid shadow-sm border border-secondary border-1 mt-3 mb-3'>
             </div>
 
-            <div className='container-fluid mt-3 '>
-              <div className='row mt-4'>
-
-                <label className='col-md-3 col-form-label '>Customer Name: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="text" className="form-control" id="clientName" name='clientName' value={request.clientName} onChange={inputHandler} placeholder="" />
-                  </div>
+            <div className='card p-4 mb-3 shadow-sm border'>
+              <h5 className='mb-4 text-primary fw-bold'>Customer Details</h5>
+              <div className='row g-4'>
+                <div className="col-md-6">
+                  <label className='form-label '>Customer Name: </label>
+                  <input type="text" className="form-control border border-dark" id="clientName" name='clientName' value={request.clientName} onChange={inputHandler} placeholder="" />
                 </div>
 
-                <label className='ItemNum col-md-3 col-form-label'>Contact No./Email: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="tel" className="form-control" id="mobile" name='clientEmail' value={request.clientEmail} onChange={inputHandler} placeholder="" />
-                </div>
-              </div>
-              <div className='row mt-4'>
-                <label className='col-md-3 col-form-label '>Address: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="tel" className="form-control" id="clientAddress" name='clientAddress' value={request.clientAddress} onChange={inputHandler} placeholder="" />
-                  </div>
+                <div className="col-md-6">
+                  <label className='form-label'>Contact No./Email: </label>
+                  <input type="tel" className="form-control border border-dark" id="mobile" name='clientEmail' value={request.clientEmail} onChange={inputHandler} placeholder="" />
                 </div>
 
-                <label className='testMethod col-md-3 col-form-label '>Gender: </label>
-                <div className='col-md-3 '>
-                  <select id='clientGender' name="clientGender" onChange={inputHandler} value={request.clientGender} className='form-select'>
+                <div className="col-md-6">
+                  <label className='form-label '>Address: </label>
+                  <input type="tel" className="form-control border border-dark" id="clientAddress" name='clientAddress' value={request.clientAddress} onChange={inputHandler} placeholder="" />
+                </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Gender: </label>
+                  <select id='clientGender' name="clientGender" onChange={inputHandler} value={request.clientGender} className='form-select border border-dark'>
                     <option selected>Choose...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
                 </div>
-              </div>
-              <div className='row mt-4'>
-                <label className='col-md-3 col-form-label '>Date of Sample Disposal: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="date" className="form-control" id="sampleDisposal" name='sampleDisposal' value={request.sampleDisposal} onChange={inputHandler} placeholder="" />
-                  </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Date of Sample Disposal: </label>
+                  <input type="date" className="form-control border border-dark" id="sampleDisposal" name='sampleDisposal' value={request.sampleDisposal} onChange={inputHandler} placeholder="" />
                 </div>
 
-                <label className='ItemNum col-md-3 col-form-label'>Report due date: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="date" className="form-control" id="reportDue" name='reportDue' value={request.reportDue} onChange={inputHandler} placeholder="" />
+                <div className="col-md-6">
+                  <label className='form-label'>Report due date: </label>
+                  <input type="date" className="form-control border border-dark" id="reportDue" name='reportDue' value={request.reportDue} onChange={inputHandler} placeholder="" />
                 </div>
               </div>
             </div>
 
-            <div className='container-fluid border border-secondary border-1 mt-3'></div>
+            <div className='container-fluid border border-secondary border-1 mt-3 mb-3'></div>
 
 
-            <div className='container-fluid mt-3 mb-5'>
+            <div className='card p-4 mb-3 shadow-sm border'>
               <div className='d-flex justify-content-end'>
                 <button
                   type="button"
@@ -307,7 +297,7 @@ function Arf() {
             <div className="modal-content">
               <form onSubmit={sampleSubmit} method="post">
 
-                <div className="modal-header">
+                <div className="modal-header bg-primary text-white">
                   <h5 className="modal-title">Add Sample Details</h5>
                   <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
                 </div>
@@ -318,7 +308,7 @@ function Arf() {
                     <label className='form-label'>Lab Code</label>
                     <input
                       type='text'
-                      className='form-control'
+                      className='form-control border border-dark'
                       name='labCode'
                       value={sampleDetail.labCode}
                       onChange={sampleInputHandler}
@@ -329,7 +319,7 @@ function Arf() {
                     <label className='form-label'>Sample Code</label>
                     <input
                       type='text'
-                      className='form-control'
+                      className='form-control border border-dark'
                       name='sampleCode'
                       value={sampleDetail.sampleCode}
                       onChange={sampleInputHandler}
@@ -340,7 +330,7 @@ function Arf() {
                     <label className="form-label">Sample Description</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control border border-dark"
                       name="sampleDescription"
                       value={sampleDetail.sampleDescription}
                       onChange={sampleInputHandler}
@@ -352,7 +342,7 @@ function Arf() {
                     <label className="form-label">Test Parameter Requested</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control border border-dark"
                       name="parameterReq"
                       value={sampleDetail.parameterReq}
                       onChange={sampleInputHandler}
@@ -364,7 +354,7 @@ function Arf() {
                     <label className="form-label">Test Method Requested</label>
                     <input
                       type="text"
-                      className="form-control"
+                      className="form-control border border-dark"
                       name="methodReq"
                       value={sampleDetail.methodReq}
                       onChange={sampleInputHandler}
