@@ -190,7 +190,7 @@ function RoaForm() {
                 </div>
                 <div className="col-md-6">
                   <label className='form-label '>Date Received: </label>
-                  <input type="date" className="date form-control border border-dark" name='dateIssued' onChange={inputHandler} value={result.dateIssued} placeholder="" />
+                  <input type="date" className="date form-control border border-dark" name='dateReceived' onChange={inputHandler} value={result.dateReceived} placeholder="" />
                 </div>
                 <div className="col-md-6">
                   <div className="col">

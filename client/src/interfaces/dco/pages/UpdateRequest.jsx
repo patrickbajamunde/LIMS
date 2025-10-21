@@ -132,8 +132,19 @@ function UpdateRequest() {
     )
       .then((response) => {
         setSuccessMessage("Form updated successfully!");
-        navigate('/Dco/Walkin/')
         setTimeout(() => setSuccessMessage(""), 3000);
+        setRequest({
+          requestId: "",
+          clientType: "",
+          clientName: "",
+          clientAddress: "",
+          clientEmail: "",
+          clientGender: "",
+          sampleDisposal: "",
+          reportDue: "",
+          transactionDate: "",
+          receivedBy: "",
+        })
       })
       .catch((error) => {
         console.log(error)

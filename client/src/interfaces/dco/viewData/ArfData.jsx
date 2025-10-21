@@ -147,7 +147,7 @@ function ArfData() {
                                 <tbody>
                                     {requestData && requestData.sampleDetails.length > 0 ? (
                                         requestData.sampleDetails.map((requestItems, index) => (
-                                            <tr key={index}>
+                                            <tr className="text-center" key={index}>
                                                 <td className='text-primary fw-bold'>{requestItems.labCode}</td>
                                                 <td className='text-success fw-bold'>{requestItems.sampleCode}</td>
                                                 <td>{requestItems.sampleDescription}</td>

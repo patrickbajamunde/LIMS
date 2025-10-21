@@ -147,7 +147,7 @@ function RoaData() {
                                 <tbody>
                                     {reportDetails && reportDetails.roaDetails.length > 0 ? (
                                         reportDetails.roaDetails.map((reportItem, index) => (
-                                            <tr key={index}>
+                                            <tr className='text-center' key={index}>
                                                 <td>{reportItem.labCode}</td>
                                                 <td>{reportItem.sampleCode}</td>
                                                 <td>{reportItem.sampleDescription}</td>
@@ -170,7 +170,16 @@ function RoaData() {
                     <div className="d-flex flex-wrap gap-2 justify-content-center pb-4">
                         <div className="btn btn-primary text-white">
                             <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
-                                icon={<span className='text-white fw-bold'>Generate PDF</span>}
+                                copyType='CUSTOMER COPY'
+                                fileType='_Customer_Copy'
+                                icon={<span className='text-white fw-bold'>Customer Copy</span>}
+                            />
+                        </div>
+                        <div className="btn btn-primary text-white">
+                            <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
+                                copyType='LABORATORY COPY'
+                                fileType='_Laboratory_Copy'
+                                icon={<span className='text-white fw-bold'>Laboratory Copy</span>}
                             />
                         </div>
                         <button className="btn btn-success fw-bold">
