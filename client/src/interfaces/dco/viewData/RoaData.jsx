@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
 import GenerateRoa from '../generatePdf/GenerateRoa';
 
 
@@ -11,6 +11,9 @@ function RoaData() {
     const { id } = useParams();
     const location = useLocation();
     const backRoute = location.state?.from || "/Dco/ForRelease/";
+    const navigate = useNavigate();
+
+
 
     useEffect(() => {
         axios.get(`http://localhost:8001/api/report/reportData/${id}`)
@@ -168,31 +171,24 @@ function RoaData() {
                     </div>
 
                     <div className="d-flex flex-wrap gap-2 justify-content-center pb-4">
-                        <div className="btn btn-primary text-white">
-                            <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
-                                copyType='CUSTOMER COPY'
-                                fileType='_Customer_Copy'
-                                icon={<span className='text-white fw-bold'>Customer Copy</span>}
-                            />
-                        </div>
-                        <div className="btn btn-primary text-white">
-                            <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
-                                copyType='LABORATORY COPY'
-                                fileType='_Laboratory_Copy'
-                                icon={<span className='text-white fw-bold'>Laboratory Copy</span>}
-                            />
-                        </div>
-                        <button className="btn btn-success fw-bold">
-                            <Link
-                                to={`/Dco/updateRoa/${id}`}
-                                type="button"
-                                className="btn p-0 border-0 text-white fw-bold">Edit Request
-                            </Link>
-                        </button>
-                        <button className="btn btn-danger fw-bold">
-                            <Link to={backRoute} type="button" className="btn p-0 border-0 d-flex align-items-center gap-2">
-                                <span className='text-white fw-bold ps-4 pe-4'>Back</span>
-                            </Link>
+                        <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
+                            copyType="CUSTOMER COPY"
+                            fileType='_Customer_Copy'
+                            icon={<button type='button' className='btn btn-primary text-white fw-bold'>Customer Copy</button>}
+                        />
+                        <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
+                            copyType="LABORATORY COPY"
+                            fileType='_Laboratory_Copy'
+                            icon={<button type='button' className='btn btn-primary text-white fw-bold'>Laboratory Copy</button>}
+                        />
+                        {reportDetails && reportDetails.status === 'For release' && (
+                            <button type='button' className="btn btn-success text-white fw-bold" onClick={() => navigate(`/Dco/updateRoa/${id}`, { state: { from: `/Dco/reportDetails/${id}` } })}>
+                                Edit Request
+                            </button>
+                        )}
+
+                        <button type='button' className="btn btn-danger text-white fw-bold" onClick={() => navigate(backRoute)}>
+                            <span className='text-white fw-bold ps-4 pe-4'>Back</span>
                         </button>
                     </div>
                 </div>

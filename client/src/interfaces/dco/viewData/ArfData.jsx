@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
 import image1 from '../Components/images/ILD.png';
 import './styles/arfData.css'
 import TestPdf from "../generatePdf/testPdf";
@@ -13,6 +13,7 @@ function ArfData() {
     const { id } = useParams();
     const location = useLocation();
     const backRoute = location.state?.from || "/Dco/Walkin/";
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios.get(`http://localhost:8001/api/client/getClient/${id}`)
@@ -167,22 +168,14 @@ function ArfData() {
                     </div>
 
                     <div className="d-flex flex-wrap gap-2 justify-content-center pb-4">
-                        <div className="btn btn-primary text-white">
-                            <TestPdf requestId={requestData ? requestData._id : null}
-                                icon={<span className='text-white fw-bold'>Generate PDF</span>}
-                            />
-                        </div>
-                        <button className="btn btn-success fw-bold">
-                            <Link
-                                to={`/Dco/updateArf/${id}`}
-                                type="button"
-                                className="btn p-0 border-0 text-white fw-bold">Edit Request
-                            </Link>
+                        <TestPdf requestId={requestData ? requestData._id : null}
+                            icon={<button type='button' className=' btn btn-primary text-white fw-bold'>Generate PDF</button>}
+                        />
+                        <button type='button' className="btn btn-success fw-bold text-white" onClick={() => navigate(`/Dco/updateArf/${id}`, { state: { from: `/Dco/requestDetails/${id}` } })}>
+                            Edit Request
                         </button>
-                        <button className="btn btn-danger fw-bold">
-                            <Link to={backRoute} type="button" className="btn p-0 border-0 d-flex align-items-center gap-2">
-                                <span className='text-white fw-bold ps-4 pe-4'>Back</span>
-                            </Link>
+                        <button type='button' className="btn btn-danger text-white fw-bold" onClick={() => navigate(backRoute)}>
+                            <span className='text-white fw-bold ps-4 pe-4'>Back</span>
                         </button>
                     </div>
                 </div>

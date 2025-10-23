@@ -142,20 +142,7 @@ export default function ReleasedRoa() {
         },
     ];
 
-    const handleDelete = (row) => {
-        const confirmDelete = window.confirm(
-            `Are you sure you want to delete ${row.sampleDescription}?`
-        );
-        if (confirmDelete) {
-            const updatedData = data.filter((item) => item.itemNo !== row.itemNo);
-            setData(updatedData);
-        }
-    };
 
-
-    const handleAction = (row) => {
-        alert(`Action clicked for ${row.sampleDescription}`);
-    };
 
     // Filter the data based on the search term
     React.useEffect(() => {
