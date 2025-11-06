@@ -43,7 +43,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType }) => {
                         </View>
                     </View>
 
-                    <View style={[styles.row, { position: 'absolute', right: 10, color: 'red', fontSize: 8, border: '2 solid red', padding: 5 }]}>
+                    <View style={[styles.row, { position: 'absolute', right: 10, color: 'red', fontSize: 8, border: '2 solid red', padding: 5, marginTop: 8 }]} fixed>
                         <Text>{copyType}</Text>
                     </View>
 
