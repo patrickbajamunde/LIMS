@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
 import image2 from '../Components/images/goverment.png';
-import image3 from '../Components/images/corn.png';
+import image3 from '../components/images/corn.png';
 import image4 from '../Components/images/search.png';
 import image5 from '../Components/images/walk.png';
 import Dashboard from '../DataTable/Dashboard';

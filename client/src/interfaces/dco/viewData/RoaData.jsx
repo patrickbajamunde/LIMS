@@ -183,7 +183,7 @@ function RoaData() {
                         />
                         {reportDetails && reportDetails.status === 'For release' && (
                             <button type='button' className="btn btn-success text-white fw-bold" onClick={() => navigate(`/Dco/updateRoa/${id}`, { state: { from: `/Dco/reportDetails/${id}` } })}>
-                                Edit Request
+                                Edit Report
                             </button>
                         )}
 
