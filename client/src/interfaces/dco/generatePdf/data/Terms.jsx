@@ -12,6 +12,7 @@ const terms = [
         title: "3. TERMS OF PAYMENT & SCHEDULE OF FEES/CHARGES. ",
         content: " Full payment shall be made upon submission of samples. The Regional Feed Chemical Analysis Laboratory (RFCAL) may receive samples but the analysis will commence only when full payment has been made. Published fees are fixed and subject to change without prior notice. Payments shall be made only in cash, Landbank manager’s or cashier’s check paid to DA-RFO V, and in Philippine pesos. All payments shall be made to the Cashier and always request an official Receipt. Students shall be entitled to a discount subject to the existing guidelines of the agency."
     },
+    
     {
         title: "4. SAMPLE REQUIREMENTS.",
         content: "Only samples of the following category will be accepted for analysis: (a) sample must be categorized as feed mix or feed ingredients; (b) The sample should be solid, either homogeneous or heterogeneous; if homogeneous, it must be finely ground, and if heterogeneous, it must be blended; and (d) sample size must not be less than 100 grams and must be finely ground."

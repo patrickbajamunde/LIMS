@@ -174,6 +174,9 @@ function ArfData() {
                         <button type='button' className="btn btn-success fw-bold text-white" onClick={() => navigate(`/Dco/updateArf/${id}`, { state: { from: `/Dco/requestDetails/${id}` } })}>
                             Edit Request
                         </button>
+                        <button type='button' className="btn btn-success fw-bold text-white" onClick={() => navigate(`/Dco/GenerateRoa/${id}`, { state: { from: `/Dco/requestDetails/${id}` } })}>
+                            Generate ROA
+                        </button>
                         <button type='button' className="btn btn-danger text-white fw-bold" onClick={() => navigate(backRoute)}>
                             <span className='text-white fw-bold ps-4 pe-4'>Back</span>
                         </button>
