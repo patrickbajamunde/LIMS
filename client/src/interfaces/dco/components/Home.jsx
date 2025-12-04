@@ -4,10 +4,10 @@ import { FaCartArrowDown, FaUserAlt, FaSafari, FaTasks, FaCar } from 'react-icon
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
-import image2 from '../Components/images/goverment.png';
+import image2 from '../components/images/goverment.png';
 import image3 from '../components/images/corn.png';
-import image4 from '../Components/images/search.png';
-import image5 from '../Components/images/walk.png';
+import image4 from '../components/images/search.png';
+import image5 from '../components/images/walk.png';
 import Dashboard from '../DataTable/Dashboard';
 import axios from "axios";
 
@@ -26,28 +26,28 @@ function Home() {
   useEffect(() => {
     const fetchRegCount = async () => {
       try {
-        const resReg = await axios.get("http://localhost:8001/api/dbcontrol/countReg", {
+        const resReg = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countReg", {
           withCredentials: true,
         })
-        const resCorn = await axios.get("http://localhost:8001/api/dbcontrol/countCorn", {
+        const resCorn = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countCorn", {
           withCredentials: true,
         })
-        const resLgu = await axios.get("http://localhost:8001/api/dbcontrol/countLgu", {
+        const resLgu = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countLgu", {
           withCredentials: true,
         })
-        const resResearch = await axios.get("http://localhost:8001/api/dbcontrol/countResearch", {
+        const resResearch = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countResearch", {
           withCredentials: true,
         })
-        const resWalk = await axios.get("http://localhost:8001/api/dbcontrol/countWalkin", {
+        const resWalk = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countWalkin", {
           withCredentials: true,
         })
-        const resHVC = await axios.get("http://localhost:8001/api/dbcontrol/countHVC", {
+        const resHVC = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countHVC", {
           withCredentials: true,
         })
-        const resRice = await axios.get("http://localhost:8001/api/dbcontrol/countRice",{
+        const resRice = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countRice",{
           withCredentials: true,
         })
-        const resGovtAgency = await axios.get("http://localhost:8001/api/dbcontrol/countGovtAgency",{
+        const resGovtAgency = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countGovtAgency",{
           withCredentials: true,
         })
 

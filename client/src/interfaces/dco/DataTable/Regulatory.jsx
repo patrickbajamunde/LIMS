@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
-import TestPdf from "../generatePdf/testPdf";
+import TestPdf from "../generatePdf/TestPdf";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -21,7 +21,7 @@ export default function Regulatory() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8001/api/client/userRequest", {
+                const response = await axios.get("http://192.168.100.177:8001/api/client/userRequest", {
                     withCredentials: true,
                 });
 
@@ -42,7 +42,7 @@ export default function Regulatory() {
             if (!confirmDelete) return;
 
             //if confirmDelete is true send a DELETE request from the API
-            await axios.delete(`http://localhost:8001/api/client/delete/arf/${arfId}`, {
+            await axios.delete(`http://192.168.100.177:8001/api/client/delete/arf/${arfId}`, {
                 withCredentials: true,
             });
 

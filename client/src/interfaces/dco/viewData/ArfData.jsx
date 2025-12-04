@@ -2,9 +2,8 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
-import image1 from '../Components/images/ILD.png';
 import './styles/arfData.css'
-import TestPdf from "../generatePdf/testPdf";
+import TestPdf from "../generatePdf/TestPdf";
 
 
 function ArfData() {
@@ -16,7 +15,7 @@ function ArfData() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://localhost:8001/api/client/getClient/${id}`)
+        axios.get(`http://192.168.100.177:8001/api/client/getClient/${id}`)
             .then((response) => {
                 setRequestData(response.data)
             })

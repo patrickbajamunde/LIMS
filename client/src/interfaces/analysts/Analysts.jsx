@@ -1,9 +1,9 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Outlet} from 'react-router-dom';
-import './Analysts.css'
+import './analysts.css'
 import Header from './components/Header'
-import Sidebar from '../Analysts/Components/Sidebar'
+import Sidebar from '../analysts/components/Sidebar'
 
 function Analysts() {
   return (

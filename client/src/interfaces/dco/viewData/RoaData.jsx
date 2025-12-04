@@ -16,7 +16,7 @@ function RoaData() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8001/api/report/reportData/${id}`)
+        axios.get(`http://192.168.100.177:8001/api/report/reportData/${id}`)
             .then((response) => {
                 setReportDetails(response.data)
             })

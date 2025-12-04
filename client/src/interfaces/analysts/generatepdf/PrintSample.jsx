@@ -2,9 +2,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
-import { font } from '../../../Fonts/Cam'
-import { ital } from '../../../Fonts/CamItalic'
-import { fontBold } from '../../../Fonts/Cam'
+import { font } from '../../../fonts/Cam'
+import { ital } from '../../../fonts/CamItalic'
+import { fontBold } from '../../../fonts/Cam'
 import { DAV } from '../components/images/DA5'
 
 function PrintSample({ sampleId }) { // Accept sampleId as a prop

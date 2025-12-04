@@ -1,8 +1,8 @@
 import {StyleSheet, Font} from '@react-pdf/renderer';
 
-import Cambria from '../../../Fonts/cambria.ttf';
-import CambriaItalic from '../../../Fonts/cambria-italic.ttf';
-import CambriaBold from '../../../Fonts/cambria-bold.ttf';
+import Cambria from '../../../fonts/cambria.ttf';
+import CambriaItalic from '../../../fonts/cambria-italic.ttf';
+import CambriaBold from '../../../fonts/cambria-bold.ttf';
 
 
 Font.register({
