@@ -18,6 +18,7 @@ function RoaForm() {
     const numberSeries = '0000';
     return `${year}-${month}-${rfcal}-${roa}-${numberSeries}`
   }
+  
   const report = {
     customerName: "",
     customerAddress: "",

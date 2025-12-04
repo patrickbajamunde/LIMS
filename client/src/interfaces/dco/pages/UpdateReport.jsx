@@ -18,6 +18,7 @@ function UpdateReport() {
     analyzedBy: ""
   }
 
+
   const [result, setResult] = useState(report);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
@@ -206,6 +207,7 @@ function UpdateReport() {
         setResult(null)
       })
   }, [id]);
+
   function formatDateForInput(dateStr) {
     if (!dateStr) return "";
     const date = new Date(dateStr);
@@ -256,7 +258,7 @@ function UpdateReport() {
                     <label className='col-md-6 col-form-label '>Date Issued: </label>
                     <div className='col-md-6'>
                       <div className="row-sm">
-                        <input type="date" className="date form-control" name='dateIssued' onChange={inputHandler} value={result.dateIssued} placeholder="" />
+                        <input type="date" className="date form-control" name='dateIssued' onChange={inputHandler} value={formatDateForInput(result.dateIssued)} placeholder="" />
                       </div>
                     </div>
                   </div>
@@ -266,7 +268,7 @@ function UpdateReport() {
                     <label className='col-md-6 col-form-label '>Date Received: </label>
                     <div className='col-md-6'>
                       <div className="row-sm">
-                        <input type="date" className="date form-control" name='dateReceived' onChange={inputHandler} value={result.dateReceived} placeholder="" />
+                        <input type="date" className="date form-control" name='dateReceived' onChange={inputHandler} value={formatDateForInput(result.dateReceived)} placeholder="" />
                       </div>
                     </div>
                   </div>
