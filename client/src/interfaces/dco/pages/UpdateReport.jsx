@@ -18,7 +18,14 @@ function UpdateReport() {
     analyzedBy: ""
   }
 
-
+  const analystPRC = (analyzedBy) => {
+        const PrcTable = {
+            "Katrina Louise C. Gonzales": "0015522",
+            "Danica Mae B. Rodriguez": "0015235",
+            "Mellen B. Perion": "0015215",
+        }
+        return PrcTable[analyzedBy] || "";
+  }
   const [result, setResult] = useState(report);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');

@@ -191,7 +191,7 @@ function GenerateRoa() {
     const submitForm = async (e) => {
         e.preventDefault();
         const form = { ...result, roaDetails: roaReport };
-        await axios.post("http://localhost:8001/api/report/newReport", form, {
+        await axios.post("http://192.168.100.177:8001/api/report/newReport", form, {
             withCredentials: true,
         })
             .then((response) => {
@@ -215,7 +215,7 @@ function GenerateRoa() {
 
 
     useEffect(() => {
-        axios.get(`http://localhost:8001/api/client/getClient/${id}`)
+        axios.get(`http://192.168.100.177:8001/api/client/getClient/${id}`)
             .then((response) => {
                 const clientData = response.data;
                 const mapSampleDetails = clientData.sampleDetails.map(index => ({
