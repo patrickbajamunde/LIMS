@@ -28,6 +28,7 @@ function GenerateRoa() {
         dateIssued: "",
         reportId: defReportId(),
         analyzedBy: "",
+        analyzedBy2: "",
         status: "For release"
     }
 
@@ -45,6 +46,7 @@ function GenerateRoa() {
     const [dateTo, setDateTo] = useState('');
     const [showModal, setShowModal] = useState(false)
     const [roaReport, setRoaReport] = useState([]) //holds sample details in an array
+    const [attachmentData, setAttachmentData] = useState([]);
     const [reportDetails, setReportDetails] = useState({
         labCode: '',
         sampleCode: '',
@@ -70,7 +72,16 @@ function GenerateRoa() {
                 [name]: value,
                 analystPRC: prc,
             });
-        } else if (name === 'datePerformedFrom') {
+        } else if (name === 'analyzedBy2') {
+            const prc = analystPRC(value);
+            setResult({
+                ...result,
+                [name]: value,
+                analystPRC2: prc,
+            });
+        }
+
+        else if (name === 'datePerformedFrom') {
             setDateFrom(value);
         }
         else if (name === 'datePerformedTo') {
@@ -226,6 +237,19 @@ function GenerateRoa() {
                     testMethod: index.methodReq
                 }))
 
+                const arfAttachmentData = clientData.ArfAttachment.map(index => ({
+                    labCode: index.labCode,
+                    sampleCode: index.sampleCode,
+                    sampleDescription: index.sampleDescription,
+                    sampleParam: index.parameterReq,
+                    testMethod: index.methodReq,
+                    Barangay: index.Barangay,
+                    Municipality: index.Municipality,
+                    Province: index.Province,
+                }))
+
+                const combineData = [...mapSampleDetails, ...arfAttachmentData]
+
                 setResult(prevResult => ({
                     ...prevResult,
                     customerName: clientData.clientName,
@@ -233,19 +257,13 @@ function GenerateRoa() {
                     customerContact: clientData.clientEmail,
                 }))
 
-                setRoaReport(mapSampleDetails);
+                setRoaReport(combineData);
             })
             .catch((error) => {
                 console.error("Error fetching report details", error)
                 setResult(null)
             })
     }, [id]);
-
-    function formatDateForInput(dateStr) {
-        if (!dateStr) return "";
-        const date = new Date(dateStr);
-        return date.toISOString().split("T")[0];
-    }
 
     return (
         <div className='d-flex mt-3'>
@@ -278,6 +296,16 @@ function GenerateRoa() {
                                 <div className="col-md-6">
                                     <label className='form-label '>Date Issued: </label>
                                     <input type="date" className="date form-control border border-dark" name='dateIssued' onChange={inputHandler} value={result.dateIssued} placeholder="" />
+                                </div>
+
+                                <div className="col-md-6">
+                                    <label className='form-label '>Analyzed By: </label>
+                                    <select className='form-select border border-dark' name='analyzedBy2' onChange={inputHandler} value={result.analyzedBy2}>
+                                        <option defaultValue="Choose...">Choose...</option>
+                                        <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
+                                        <option value="Mellen B. Perion">Mellen B. Perion</option>
+                                        <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
+                                    </select>
                                 </div>
                                 <div className="col-md-6">
                                     <label className='form-label '>Date Received: </label>
@@ -440,6 +468,9 @@ function GenerateRoa() {
 
 
                         <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
+                            <button type='button' className="btn btn-primary text-white fw-bold" onClick={() => navigate(backRoute)}>
+                                <span className='text-white fw-bold ps-4 pe-4'>Back</span>
+                            </button>
                             <button className="btn btn-primary col-md-2">Save</button>
                         </div>
                     </form>

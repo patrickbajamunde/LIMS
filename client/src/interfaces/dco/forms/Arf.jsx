@@ -1,7 +1,8 @@
-import React, { use, useState } from 'react'
+import React, { useState } from 'react'
 import './styles/arf.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ArfAttachment } from '../components/modal/Modal';
 
 function Arf() {
 
@@ -38,6 +39,7 @@ function Arf() {
   const [request, setRequest] = useState(client); // State to hold request data
 
   const [showModal, setShowModal] = useState(false);// state to modal activity
+  const [ArfAttachmentModal, setArfAttachmentModal] = useState(false);
   const [sample, setSample] = useState([]); // State to hold sample details in an array
   const [sampleDetail, setSampleDetail] = useState({
     sampleDescription: "",
@@ -47,7 +49,76 @@ function Arf() {
     sampleCode: "",
   }); // State to hold current state of sample details in the modal
 
+  const [arfAttachmentDetails, setArfAttachmentDetails] = useState([]);
+  const [arfAttachment, setArfAttachment] = useState({
+    sampleDescription: "",
+    parameterReq: "",
+    methodReq: "",
+    labCode: "",
+    sampleCode: "",
+    Barangay: "",
+    Municipality: "",
+    Province: "",
+  })
 
+  // Available parameters list
+  const availableParameters = [
+    "Crude Protein",
+    "Moisture",
+    "Crude Fiber",
+    "Crude Fat",
+    "Crude Ash",
+    "Calcium",
+    "Total Phosphorus",
+    "Salt as Sodium Chloride",
+    "AFLATOXIN"
+  ];
+
+  // Build methods string from selected parameters
+  const methodList = (parameterReq) => {
+    const methodTable = {
+      "Crude Protein": "KJELDAHL (AOAC 2001.11)",
+      "Moisture": "GRAVIMETRIC METHOD (AOAC 930.15)",
+      "Crude Fiber": "GRAVIMETRIC METHOD (AOAC 962.09)",
+      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 2003.06)",
+      "Crude Ash": "GRAVIMETRIC METHOd (AOAC 942.05)",
+      "Calcium": "TITRIMETRIC METHOD (AOAC 927.05)",
+      "Total Phosphorus": "MOLYBDOVANADATE METHOD",
+      "Salt as Sodium Chloride": "MOHR (AOAC 971.27)",
+      "AFLATOXIN": "ELISA VERTOX KIT (AOAC 990.34)"
+    }
+
+    return methodTable[parameterReq] || "";
+  }
+
+  const getMethodsForParameters = (parametersArray) => {
+    return parametersArray.map(p => methodList(p)).filter(Boolean).join(", ");
+  }
+
+  const [selectedParameters, setSelectedParameters] = useState([]);
+
+  // checkbox handler — toggles selection and updates sampleDetail.parameterReq & methodReq
+  const checkboxHandler = (e) => {
+    const { value, checked } = e.target;
+    setSelectedParameters(prev => {
+      const next = checked ? [...prev, value] : prev.filter(p => p !== value);
+
+      // update the modal draft sampleDetail so the inputs show current selection
+      setSampleDetail(prevDetail => ({
+        ...prevDetail,
+        parameterReq: next.join(", "),
+        methodReq: getMethodsForParameters(next)
+      }));
+
+      setArfAttachment(prev => ({
+        ...prev,
+        parameterReq: next.join(", "),
+        methodReq: getMethodsForParameters(next)
+      }))
+
+      return next;
+    });
+  }
 
   const [successMessage, setSuccessMessage] = useState("")
 
@@ -88,9 +159,27 @@ function Arf() {
     setSampleDetail({ ...sampleDetail, [name]: value });
   }
 
+  const arfAttachmentInputHandler = (name, value) => {
+    setArfAttachment({ ...arfAttachment, [name]: value });
+  }
+  const arfAttachmentSubmit = (e) => {
+    e.preventDefault();
+    setArfAttachmentDetails(prev => [...prev, arfAttachment]);
+    setArfAttachmentModal(false);
+  }
+
   // Handler for submitting sample details
   const sampleSubmit = (e) => {
-    setSample([...sample, sampleDetail]); // add new sampleDetail to samples array
+    e.preventDefault();
+
+    // ensure parameterReq/methodReq are taken from selectedParameters if not manually set
+    const finalSample = {
+      ...sampleDetail,
+      parameterReq: sampleDetail.parameterReq || selectedParameters.join(", "),
+      methodReq: sampleDetail.methodReq || getMethodsForParameters(selectedParameters)
+    };
+
+    setSample(prev => [...prev, finalSample]); // add new sampleDetail to samples array
     setSampleDetail({
       sampleDescription: "",
       parameterReq: "",
@@ -98,12 +187,13 @@ function Arf() {
       labCode: "",
       sampleCode: "",
     }); // reset the inputs of sampleDetails
+    setSelectedParameters([]); // reset checkbox selections
     setShowModal(false); // close modal after adding sample
   }
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const form = { ...request, sampleDetails: sample };
+    const form = { ...request, sampleDetails: sample, ArfAttachment: arfAttachmentDetails };
     await axios.post("http://localhost:8001/api/client/newClient", form,
       {
         withCredentials: true,
@@ -111,6 +201,7 @@ function Arf() {
     )
       .then((response) => {
         setSample([]); // Clear sample details after submission
+        setArfAttachmentDetails([]);
         setRequest({
           requestId: "",
           clientType: "",
@@ -159,7 +250,7 @@ function Arf() {
                 <div className="col-md-6">
                   <label className='form-label '>Type Of Client: </label>
                   <select id='clientType' name="clientType" onChange={inputHandler} value={request.clientType} className='form-select border border-dark'>
-                    <option selected>Choose...</option>
+                    <option defaultValue>Choose...</option>
                     <option value="Regulatory">Regulatory</option>
                     <option value="Corn Program">Corn Program</option>
                     <option value="Rice Program">Rice Program</option>
@@ -186,7 +277,7 @@ function Arf() {
                 <div className="col-md-6">
                   <label className='form-label '>Recevied By: </label>
                   <select id='receivedBy' name='receivedBy' onChange={inputHandler} value={request.receivedBy} className='form-select border border-dark'>
-                    <option selected>Choose...</option>
+                    <option defaultValue>Choose...</option>
                     <option value="Susan P. Bergantin">Susan P. Bergantin</option>
                     <option value="Jessa Mae M. Luces">Jessa Mae M. Luces</option>
                   </select>
@@ -220,7 +311,7 @@ function Arf() {
                 <div className="col-md-6">
                   <label className='form-label '>Gender: </label>
                   <select id='clientGender' name="clientGender" onChange={inputHandler} value={request.clientGender} className='form-select border border-dark'>
-                    <option selected>Choose...</option>
+                    <option defaultValue>Choose...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
@@ -242,6 +333,7 @@ function Arf() {
 
 
             <div className='card p-4 mb-3 shadow-sm border'>
+              <h5 className='mb-4 text-primary fw-bold'>Sample Details</h5>
               <div className='d-flex justify-content-end'>
                 <button
                   type="button"
@@ -285,12 +377,76 @@ function Arf() {
               </div>
               {/* ...existing form fields below... */}
             </div>
+
+            {/*ARF Attachment Form */}
+            <div className='card p-4 mb-3 shadow-sm border'>
+              <h5 className='mb-4 text-primary fw-bold'>Analysis Request Form Attachment</h5>
+              <div className='d-flex justify-content-end'>
+                <button
+                  type="button"
+                  className="btn btn-primary" onClick={() => setArfAttachmentModal(true)}>
+                  <i className="bi bi-plus-lg me-2 fs-6"></i>Add Sample Details
+                </button>
+              </div>
+
+              {/* Table for displaying sample info */}
+              <div className="row mt-2">
+                <div className="col-12">
+                  <table className="table table-bordered">
+                    <thead className="table-primary">
+                      <tr>
+                        <th>Lab Code</th>
+                        <th>Sample Code</th>
+                        <th>Sample Description</th>
+                        <th>Barangay</th>
+                        <th>Municipality</th>
+                        <th>Province</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {arfAttachmentDetails.length > 0 ? (
+                        arfAttachmentDetails.map((sampleItem, index) => (
+                          <tr key={index}>
+                            <td>{sampleItem.labCode}</td>
+                            <td>{sampleItem.sampleCode}</td>
+                            <td>{sampleItem.sampleDescription}</td>
+                            <td>{sampleItem.Barangay}</td>
+                            <td>{sampleItem.Municipality}</td>
+                            <td>{sampleItem.Province}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="6" className="text-center">No samples added yet.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              {/* ...existing form fields below... */}
+            </div>
+
+
             <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
               <button type="button" className="btn btn-primary col-md-2" onClick={submitForm}>Save</button>
             </div>
           </form>
         </div>
       </div>
+
+      <ArfAttachment
+        show={ArfAttachmentModal}
+        onClose={() => setArfAttachmentModal(false)}
+        ArfAttachment={arfAttachment}
+        onChange={arfAttachmentInputHandler}
+        onSubmit={arfAttachmentSubmit}
+        availableParameters={availableParameters}
+        selectedParameters={selectedParameters}
+        checkboxHandler={checkboxHandler}
+      />
+
+
       {showModal && (
         <div className="modal fade show" style={{ display: 'block', background: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog">
@@ -339,6 +495,35 @@ function Arf() {
                   </div>
 
                   <div className="mb-3">
+                    <label className="form-label fw-bold">Test Parameters</label>
+                    <div className="row g-1">
+                      {availableParameters.map((parameter, index) => (
+                        <div className="form-check col-4 mb-2 " key={index}>
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id={`parameter-${index}`}
+                            value={parameter}
+                            checked={selectedParameters.includes(parameter)}
+                            onChange={checkboxHandler}
+                            style={{
+                              width: '1.15rem',
+                              height: '1.15rem',
+                              WebkitAppearance: 'checkbox',
+                              MozAppearance: 'checkbox',
+                              appearance: 'auto',
+                              accentColor: '#0d6efd'
+                            }}
+                          />
+                          <label className="form-check-label" htmlFor={`parameter-${index}`}>
+                            {parameter}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="mb-3">
                     <label className="form-label">Test Parameter Requested</label>
                     <input
                       type="text"
@@ -376,6 +561,7 @@ function Arf() {
         </div>
       )}
     </div>
+
   )
 }
 

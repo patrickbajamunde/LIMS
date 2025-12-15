@@ -6,7 +6,7 @@ import image2 from '../../dco/components/images/unnamed.png'
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
 
-const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType }) => {
+const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }) => {
 
     const [report, setReport] = useState(null)
 
@@ -55,7 +55,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType }) => {
                                 <Text>Contact Number: <Text style={{ fontWeight: 'normal' }}>{report.customerContact}</Text></Text>
                             </View>
                             <View style={{ width: '40%' }}>
-                                <Text>Report ID: <Text style={{ fontWeight: 'normal' }}>{report.reportId}</Text></Text>
+                                <Text>Report ID: <Text style={{ fontWeight: 'normal' }}>{report.reportId}-{copyCode}</Text></Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
@@ -107,6 +107,11 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType }) => {
                         <Text style={{ fontWeight: 'bold', bottom: 35 }}>Analyzed/Examined By:</Text>
                         <Text style={{ fontWeight: 'bold' }}>{report.analyzedBy}, RCh</Text>
                         <Text>Chemist, PRC License No. {report.analystPRC}</Text>
+                    </View>
+
+                    <View style={[styles.font, { paddingLeft: 335, bottom: 180, position: 'absolute' }]} fixed>
+                        <Text style={{ fontWeight: 'bold' }}>{report.analyzedBy2}, RCh</Text>
+                        <Text>Chemist, PRC License No. {report.analystPRC2}</Text>
                     </View>
 
                     <View style={[styles.row, { position: 'absolute', bottom: 95, gap: 35 }]} fixed>

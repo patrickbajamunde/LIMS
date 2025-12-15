@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import '../forms/styles/arf.css'
 import axios from 'axios';
 import { useNavigate, useParams, Link, useLocation } from 'react-router-dom';
+import { ArfAttachment } from '../components/modal/Modal';
 
 function UpdateRequest() {
 
@@ -18,10 +19,68 @@ function UpdateRequest() {
     receivedBy: "",
   }
 
+   const availableParameters = [
+    "Crude Protein",
+    "Moisture",
+    "Crude Fiber",
+    "Crude Fat",
+    "Crude Ash",
+    "Calcium",
+    "Total Phosphorus",
+    "Salt as Sodium Chloride",
+    "AFLATOXIN"
+  ];
+
+  const methodList = (parameterReq) => {
+    const methodTable = {
+      "Crude Protein": "KJELDAHL (AOAC 2001.11)",
+      "Moisture": "GRAVIMETRIC METHOD (AOAC 930.15)",
+      "Crude Fiber": "GRAVIMETRIC METHOD (AOAC 962.09)",
+      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 2003.06)",
+      "Crude Ash": "GRAVIMETRIC METHOd (AOAC 942.05)",
+      "Calcium": "TITRIMETRIC METHOD (AOAC 927.05)",
+      "Total Phosphorus": "MOLYBDOVANADATE METHOD",
+      "Salt as Sodium Chloride": "MOHR (AOAC 971.27)",
+      "AFLATOXIN": "ELISA VERTOX KIT (AOAC 990.34)"
+    }
+
+    return methodTable[parameterReq] || "";
+  }
+
+  const checkboxHandler = (e) => {
+    const { value, checked } = e.target;
+    setSelectedParameters(prev => {
+      const next = checked ? [...prev, value] : prev.filter(p => p !== value);
+
+      // update the modal draft sampleDetail so the inputs show current selection
+      setSampleDetail(prevDetail => ({
+        ...prevDetail,
+        parameterReq: next.join(", "),
+        methodReq: getMethodsForParameters(next)
+      }));
+
+      setArfAttachment(prev => ({
+        ...prev,
+        parameterReq: next.join(", "),
+        methodReq: getMethodsForParameters(next)
+      }))
+
+      return next;
+    });
+  }
+
+  const getMethodsForParameters = (parametersArray) => {
+    return parametersArray.map(p => methodList(p)).filter(Boolean).join(", ");
+  }
+
+
   const navigate = useNavigate();
+
+  const [selectedParameters, setSelectedParameters] = useState([]);
 
   const [request, setRequest] = useState(client);// State to hold request data
   const [showModal, setShowModal] = useState(false);// state to modal activity
+  const [ArfAttachmentModal, setArfAttachmentModal] = useState(false);
   const [sample, setSample] = useState([]);// State to hold sample details in an array
   const [sampleDetail, setSampleDetail] = useState({
     sampleDescription: "",
@@ -30,6 +89,16 @@ function UpdateRequest() {
     labCode: "",
     sampleCode: "",
   });// State to hold current state of sample details in the modal
+  const [arfAttachment, setArfAttachment] = useState({
+    sampleDescription: "",
+    parameterReq: "",
+    methodReq: "",
+    labCode: "",
+    sampleCode: "",
+    Barangay: "",
+    Municipality: "",
+    Province: "",
+  })
   const [successMessage, setSuccessMessage] = useState("")
   const [editingIndex, setEditingIndex] = useState(null); // Track which sample is being edited
   const [isEditing, setIsEditing] = useState(false); // Track if we're in edit mode
@@ -49,6 +118,23 @@ function UpdateRequest() {
     setSampleDetail({ ...sampleDetail, [name]: value });
   }
 
+
+  const arfAttachmentInputHandler = (name, value) => {
+    setArfAttachment({ ...arfAttachment, [name]: value });
+  }
+
+  const arfAttachmentSubmit = (e) => {
+    e.preventDefault();
+    setArfAttachmentDetails(prev => [...prev, arfAttachment]);
+    setArfAttachment({
+      sampleDescription: "",
+      parameterReq: "",
+      methodReq: "",
+      labCode: "",
+      sampleCode: "",
+    })
+    setArfAttachmentModal(false);
+  }
   // Handler for opening modal to add new sample
   const openAddModal = () => {
     setSampleDetail({
@@ -78,6 +164,24 @@ function UpdateRequest() {
     setShowModal(true);
   };
 
+  const editAttachment = (index) => {
+    const attachmentToEdit = request.ArfAttachment[index];
+    setArfAttachment({
+      sampleDescription: attachmentToEdit.sampleDescription,
+      Barangay: attachmentToEdit.Barangay,
+      Municipality: attachmentToEdit.Municipality,
+      Province: attachmentToEdit.Province,
+      labCode: attachmentToEdit.labCode,
+      sampleCode: attachmentToEdit.sampleCode,
+      parameterReq: attachmentToEdit.parameterReq,
+      methodReq: attachmentToEdit.methodReq,
+    })
+    setEditingIndex(index);
+    setIsEditing(true);
+    setArfAttachmentModal(true);
+
+  }
+
   // Handler for deleting a sample
   const deleteSample = (index) => {
     if (window.confirm("Are you sure you want to delete this sample?")) {
@@ -85,6 +189,16 @@ function UpdateRequest() {
       setRequest({
         ...request,
         sampleDetails: updatedSamples
+      });
+    }
+  };
+
+  const deleteAttachmententry = (index) => {
+    if (window.confirm("Are you sure you want to delete this sample?")) {
+      const updatedAttachmentData = request.ArfAttachment.filter((_, i) => i !== index);
+      setRequest({
+        ...request,
+        ArfAttachment: updatedAttachmentData
       });
     }
   };
@@ -119,6 +233,43 @@ function UpdateRequest() {
       sampleCode: "",
     });
     setShowModal(false);
+    setIsEditing(false);
+    setEditingIndex(null);
+    setSelectedParameters([]); // reset checkbox selections
+  }
+
+  const submitUpdateAttachment = (e) => {
+    e.preventDefault();
+
+    if (isEditing && editingIndex !== null) {
+      // Update existing sample
+      const updatedAttachment = [...request.ArfAttachment];
+      updatedAttachment[editingIndex] = arfAttachment;
+      setRequest({
+        ...request,
+        ArfAttachment: updatedAttachment
+      });
+    } else {
+      // Add new sample
+      const updatedAttachment = request.ArfAttachment ? [...request.ArfAttachment, arfAttachment] : [arfAttachment];
+      setRequest({
+        ...request,
+        ArfAttachment: updatedAttachment
+      });
+    }
+
+    // Reset and close modal
+    setArfAttachment({
+      sampleDescription: "",
+      parameterReq: "",
+      methodReq: "",
+      labCode: "",
+      sampleCode: "",
+      Barangay: "",
+      Municipality: "",
+      Province: "",
+    });
+    setArfAttachmentModal(false);
     setIsEditing(false);
     setEditingIndex(null);
   }
@@ -171,8 +322,8 @@ function UpdateRequest() {
 
   return (
 
-    <div className='d-flex reg-analysis'>
-      <div className=' analysis container-fluid shadow-sm border bordered-darker mb-5'>
+    <div className='d-flex mt-3 '>
+      <div className=' analysis card container-fluid shadow-sm border bordered-darker  mb-5'>
         <div className='row g-6'>
           <div className='message col-md-4'>
             {successMessage && (
@@ -181,8 +332,7 @@ function UpdateRequest() {
               </div>
             )}
           </div>
-          <div className='head bg-dark container'>
-
+          <div className='head container rounded-top' style={{ backgroundColor: '#003e8fff' }}>
             <div className='mt-1'>
               <i className='bi bi-info-circle text-white fs-5 ms-1 me-1' />
               <span className='ms-2 fs-5 text-white'>Receiving Form</span>
@@ -190,12 +340,13 @@ function UpdateRequest() {
           </div>
 
           <form className='mt-4 mb-4' onSubmit={submitForm}>
-            <div className='container-fluid mt-3 '>
-              <div className='row mt-4'>
-                <label for="clientType" className='col-md-3 col-form-label '>Type Of Client: </label>
-                <div className='col-md-3'>
-                  <select id='clientType' name="clientType" onChange={inputHandler} value={request.clientType} className='form-select'>
-                    <option selected>Choose...</option>
+            <div className='card p-4 mb-3 shadow-sm border'>
+              <h5 className='mb-4 text-primary fw-bold'>Request Details</h5>
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <label className='form-label '>Type Of Client: </label>
+                  <select id='clientType' name="clientType" onChange={inputHandler} value={request.clientType} className='form-select border border-dark'>
+                    <option defaultValue>Choose...</option>
                     <option value="Regulatory">Regulatory</option>
                     <option value="Corn Program">Corn Program</option>
                     <option value="Rice Program">Rice Program</option>
@@ -206,81 +357,70 @@ function UpdateRequest() {
                     <option value="Government Agency">Government Agency</option>
                     <option value="High Value Crops Program">High Value Crops Program</option>
                     <option value="Research">Research</option>
-
                   </select>
                 </div>
 
-                <label for="clientType" className='ItemNum col-md-3 col-form-label'>Request ID: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="text" className="form-control" id="requestId" name="requestId" onChange={inputHandler} value={request.requestId} placeholder="" />
-                </div>
-              </div>
-
-              <div className='row mt-4'>
-                <label for="clientType" className='col-md-3 col-form-label '>Transaction Date: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="date" className="form-control" id="transactionDate" name='transactionDate' value={formatDateForInput(request.transactionDate)} onChange={inputHandler} placeholder="" />
-                  </div>
+                <div className="col-md-6">
+                  <label className='form-label'>Request ID: </label>
+                  <input type="text" className="form-control border border-dark" id="requestId" name="requestId" onChange={inputHandler} value={request.requestId} placeholder="" />
                 </div>
 
-                <label for="clientType" className='testMethod col-md-3 col-form-label '>Received By: </label>
-                <div className='col-md-3 '>
-                  <select id='receivedBy' name='receivedBy' onChange={inputHandler} value={request.receivedBy} className='form-select'>
-                    <option selected>Choose...</option>
+                <div className="col-md-6">
+                  <label className='form-label '>Transaction Date: </label>
+                  <input type="date" className="form-control border border-dark" id="transactionDate" name='transactionDate' value={request.transactionDate} onChange={inputHandler} placeholder="" />
+                </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Recevied By: </label>
+                  <select id='receivedBy' name='receivedBy' onChange={inputHandler} value={request.receivedBy} className='form-select border border-dark'>
+                    <option defaultValue>Choose...</option>
                     <option value="Susan P. Bergantin">Susan P. Bergantin</option>
                     <option value="Jessa Mae M. Luces">Jessa Mae M. Luces</option>
                   </select>
                 </div>
+
+                <div className="col-md-6"></div>
               </div>
             </div>
 
             <div className='container-fluid shadow-sm border border-secondary border-1 mt-3'>
             </div>
 
-            <div className='container-fluid mt-3 '>
-              <div className='row mt-4'>
-
-                <label for="clientType" className='col-md-3 col-form-label '>Customer Name: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="text" className="form-control" id="clientName" name='clientName' value={request.clientName} onChange={inputHandler} placeholder="" />
-                  </div>
+            <div className='card p-4 mb-3 shadow-sm border mt-3'>
+              <h5 className='mb-4 text-primary fw-bold'>Customer Details</h5>
+              <div className='row g-4'>
+                <div className="col-md-6">
+                  <label className='form-label '>Customer Name: </label>
+                  <input type="text" className="form-control border border-dark" id="clientName" name='clientName' value={request.clientName} onChange={inputHandler} placeholder="" />
                 </div>
 
-                <label for="clientType" className='ItemNum col-md-3 col-form-label'>Contact No./Email: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="tel" className="form-control" id="mobile" name='clientEmail' value={request.clientEmail} onChange={inputHandler} placeholder="" />
-                </div>
-              </div>
-              <div className='row mt-4'>
-                <label for="clientType" className='col-md-3 col-form-label '>Address: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="tel" className="form-control" id="clientAddress" name='clientAddress' value={request.clientAddress} onChange={inputHandler} placeholder="" />
-                  </div>
+                <div className="col-md-6">
+                  <label className='form-label'>Contact No./Email: </label>
+                  <input type="tel" className="form-control border border-dark" id="mobile" name='clientEmail' value={request.clientEmail} onChange={inputHandler} placeholder="" />
                 </div>
 
-                <label for="clientType" className='testMethod col-md-3 col-form-label '>Gender: </label>
-                <div className='col-md-3 '>
-                  <select id='clientGender' name="clientGender" onChange={inputHandler} value={request.clientGender} className='form-select'>
-                    <option selected>Choose...</option>
+                <div className="col-md-6">
+                  <label className='form-label '>Address: </label>
+                  <input type="tel" className="form-control border border-dark" id="clientAddress" name='clientAddress' value={request.clientAddress} onChange={inputHandler} placeholder="" />
+                </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Gender: </label>
+                  <select id='clientGender' name="clientGender" onChange={inputHandler} value={request.clientGender} className='form-select border border-dark'>
+                    <option defaultValue>Choose...</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                   </select>
                 </div>
-              </div>
-              <div className='row mt-4'>
-                <label for="clientType" className='col-md-3 col-form-label '>Date of Sample Disposal: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="date" className="form-control" id="sampleDisposal" name='sampleDisposal' value={formatDateForInput(request.sampleDisposal)} onChange={inputHandler} placeholder="" />
-                  </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Date of Sample Disposal: </label>
+                  <input type="date" className="form-control border border-dark" id="sampleDisposal" name='sampleDisposal' value={request.sampleDisposal} onChange={inputHandler} placeholder="" />
                 </div>
 
-                <label for="clientType" className='ItemNum col-md-3 col-form-label'>Report due date: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="date" className="form-control" id="reportDue" name='reportDue' value={formatDateForInput(request.reportDue)} onChange={inputHandler} placeholder="" />
+                <div className="col-md-6">
+                  <label className='form-label'>Report due date: </label>
+                  <input type="date" className="form-control border border-dark" id="reportDue" name='reportDue' value={request.reportDue} onChange={inputHandler} placeholder="" />
                 </div>
               </div>
             </div>
@@ -288,7 +428,8 @@ function UpdateRequest() {
             <div className='container-fluid border border-secondary border-1 mt-3'></div>
 
 
-            <div className='container-fluid mt-3 mb-5'>
+            <div className='card p-4 mb-3 shadow-sm border mt-3'>
+              <h5 className='mb-4 text-primary fw-bold'>Sample Details</h5>
               <div className='d-flex justify-content-end'>
                 <button
                   type="button"
@@ -350,6 +491,74 @@ function UpdateRequest() {
                 </div>
               </div>
             </div>
+
+            <div className='card p-4 mb-3 shadow-sm border mt-3'>
+              <h5 className='mb-4 text-primary fw-bold'>Analysis Request Form Attachment</h5>
+              <div className='d-flex justify-content-end'>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => setArfAttachmentModal(true)}>
+                  <i className="bi bi-plus-lg me-2 fs-6"></i>Add Sample Details
+                </button>
+              </div>
+              {/* Enhanced table with edit and delete buttons */}
+              <div className="row mt-2">
+                <div className="col-12">
+                  <table className="table table-bordered">
+                    <thead className="table-primary">
+                      <tr>
+                        <th>Lab Code</th>
+                        <th>Sample Code</th>
+                        <th>Sample Description</th>
+                        <th>Barangay</th>
+                        <th>Municipality</th>
+                        <th>Province</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {request.ArfAttachment && request.ArfAttachment.length > 0 ? (
+                        request.ArfAttachment.map((sampleItem, index) => (
+                          <tr key={index}>
+                            <td>{sampleItem.labCode}</td>
+                            <td>{sampleItem.sampleCode}</td>
+                            <td>{sampleItem.sampleDescription}</td>
+                            <td>{sampleItem.Barangay}</td>
+                            <td>{sampleItem.Municipality}</td>
+                            <td>{sampleItem.Province}</td>
+                            <td>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-outline-primary me-2"
+                                onClick={() => editAttachment(index)}
+                                title="Edit Sample"
+                              >
+                                <i className="bi bi-pencil"></i>
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-outline-danger"
+                                onClick={() => deleteAttachmententry(index)}
+                                title="Delete Sample"
+                              >
+                                <i className="bi bi-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="7" className="text-center">No samples added yet.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
             <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
               <Link to={backRoute} type="button" className="btn btn-primary col-md-2">Back</Link>
               <button type="button" className="btn btn-primary col-md-2" onClick={submitForm}>Save</button>
@@ -357,6 +566,17 @@ function UpdateRequest() {
           </form>
         </div>
       </div>
+
+      <ArfAttachment
+        show={ArfAttachmentModal}
+        onClose={() => setArfAttachmentModal(false)}
+        ArfAttachment={arfAttachment}
+        onChange={arfAttachmentInputHandler}
+        onSubmit={submitUpdateAttachment}
+        checkboxHandler={checkboxHandler}
+        availableParameters={availableParameters}
+        selectedParameters={selectedParameters}
+      />
 
       {/* Enhanced modal with dynamic title */}
       {showModal && (
@@ -408,6 +628,36 @@ function UpdateRequest() {
                       onChange={sampleInputHandler}
                       required
                     />
+                  </div>
+
+
+                  <div className="mb-3">
+                    <label className="form-label fw-bold">Test Parameters</label>
+                    <div className="row g-1">
+                      {availableParameters.map((parameter, index) => (
+                        <div className="form-check col-4 mb-2 " key={index}>
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id={`parameter-${index}`}
+                            value={parameter}
+                            checked={selectedParameters.includes(parameter)}
+                            onChange={checkboxHandler}
+                            style={{
+                              width: '1.15rem',
+                              height: '1.15rem',
+                              WebkitAppearance: 'checkbox',
+                              MozAppearance: 'checkbox',
+                              appearance: 'auto',
+                              accentColor: '#0d6efd'
+                            }}
+                          />
+                          <label className="form-check-label" htmlFor={`parameter-${index}`}>
+                            {parameter}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="mb-3">

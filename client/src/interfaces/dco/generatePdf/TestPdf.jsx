@@ -31,7 +31,7 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
     };
 
     const generatePdf = () => {
-        if (!request || !request.sampleDetails) return;
+        if (!request || !request.sampleDetails || !request.ArfAttachment) return;
         return (
             <Document>
                 <Page style={[styles.body, { marginTop: 5 }]} size="A4">
@@ -66,11 +66,11 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
                         <Text>Date of Sample Disposal: {formatDate(request.sampleDisposal)}</Text>
                         <View style={[styles.row]}>
                             <Text>Document Type: </Text>
-                            <View style={[styles.row, {alignItems:'center', marginLeft: 15}]}>
+                            <View style={[styles.row, { alignItems: 'center', marginLeft: 15 }]}>
                                 <Text style={styles.checkbox}></Text>
                                 <Text>Hard Copy</Text>
                             </View>
-                            <View style={[styles.row, {alignItems:'center', marginLeft: 20}]}>
+                            <View style={[styles.row, { alignItems: 'center', marginLeft: 20 }]}>
                                 <Text style={styles.checkbox}></Text>
                                 <Text>E-copy</Text>
                             </View>
@@ -159,7 +159,7 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
                     </View>
                     <Text
                         style={styles.pageNumber}
-                        render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
+                        render={({ pageNumber, totalPages }) => pageNumber <= 2 ? `Page ${pageNumber} of 2` : ''}
                         fixed />
                     <Text style={[styles.termsBold, { marginLeft: 72, marginRight: 72, marginTop: 72 }]}>Terms & Conditions</Text>
                     {terms.map((term, index) => (

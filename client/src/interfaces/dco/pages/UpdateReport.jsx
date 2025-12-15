@@ -49,7 +49,16 @@ function UpdateReport() {
         [name]: value,
         analystPRC: prc,
       });
-    } else if (name === 'datePerformedFrom') {
+
+    } else if (name === 'analyzedBy2') {
+      const prc = analystPRC(value);
+      setResult({
+        ...result,
+        [name]: value,
+        analystPRC2: prc,
+      });
+    }
+    else if (name === 'datePerformedFrom') {
       setDateFrom(value);
     }
     else if (name === 'datePerformedTo') {
@@ -215,234 +224,226 @@ function UpdateReport() {
   }
 
   return (
-    <div className='d-flex reg-analysis'>
-      <div className=' analysis container-fluid shadow-sm border bordered-darker mb-5'>
-        <div className='row g-6'>
-          <div className='head bg-dark container'>
-
-            <div className='mt-1'>
-              <i className='bi bi-info-circle text-white fs-5 ms-1 me-1' />
-              <span className='ms-2 fs-5 text-white'>ROA Form</span>
-            </div>
+          <div className='d-flex mt-3'>
+              <div className=' analysis card container-fluid shadow-sm border bordered-darker mb-5'>
+                  <div className='row g-6'>
+                      <div className='head container rounded-top' style={{ backgroundColor: '#003e8fff' }}>
+                          <div className='mt-1'>
+                              <i className='bi bi-info-circle text-white fs-5 ms-1 me-1' />
+                              <span className='ms-2 fs-5 text-white'>ROA Form</span>
+                          </div>
+                      </div>
+  
+                      <form className='mt-4 mb-4' onSubmit={submitForm}>
+                          <div className='card p-4 mb-3 shadow-sm border'>
+                              <h5 className='mb-4 text-primary fw-bold'>Report Details</h5>
+                              <div className="row g-4">
+                                  <div className="col-md-6">
+                                      <label className='form-label'>Report Id: </label>
+                                      <input type="tel" className="date form-control border border-dark" name='reportId' id='reportId' onChange={inputHandler} value={result.reportId} placeholder="" />
+                                  </div>
+                                  <div className="col-md-6">
+                                      <label className='form-label '>Analyzed By: </label>
+                                      <select className='form-select border border-dark' name='analyzedBy' onChange={inputHandler} value={result.analyzedBy}>
+                                          <option defaultValue="Choose...">Choose...</option>
+                                          <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
+                                          <option value="Mellen B. Perion">Mellen B. Perion</option>
+                                          <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
+                                      </select>
+                                  </div>
+                                  <div className="col-md-6">
+                                      <label className='form-label '>Date Issued: </label>
+                                      <input type="date" className="date form-control border border-dark" name='dateIssued' onChange={inputHandler} value={formatDateForInput(result.dateIssued)} placeholder="" />
+                                  </div>
+  
+                                  <div className="col-md-6">
+                                      <label className='form-label '>Analyzed By: </label>
+                                      <select className='form-select border border-dark' name='analyzedBy2' onChange={inputHandler} value={result.analyzedBy2}>
+                                          <option defaultValue="Choose...">Choose...</option>
+                                          <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
+                                          <option value="Mellen B. Perion">Mellen B. Perion</option>
+                                          <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
+                                      </select>
+                                  </div>
+                                  <div className="col-md-6">
+                                      <label className='form-label '>Date Received: </label>
+                                      <input type="date" className="date form-control border border-dark" name='dateReceived' onChange={inputHandler} value={formatDateForInput(result.dateReceived)} placeholder="" />
+                                  </div>
+                                  <div className="col-md-6">
+                                      <div className="col">
+                                          <div className='col-md'>
+                                              <div className='row'>
+                                                  <label className="col-md-3 col-form-label">Date Performed:</label>
+                                                  <div className='col-md-9'>
+                                                      <input type="text" className="date form-control border border-dark" id="datePerformed" name="datePerformed" onChange={inputHandler} value={result.datePerformed} placeholder="" />
+                                                  </div>
+                                              </div>
+                                          </div>
+  
+                                          <div className=" row mt-4">
+  
+                                              {/*FROM*/}
+                                              <div className="col-sm-5">
+                                                  <div className="row ">
+                                                      <label className="col-sm-4 col-form-label">From</label>
+                                                      <div className="col-md-8">
+                                                          <input
+                                                              type="date"
+                                                              className="form-control border border-dark"
+                                                              id="datePerformedFrom"
+                                                              name="datePerformedFrom"
+                                                              onChange={inputHandler}
+                                                              value={dateFrom}
+  
+                                                          />
+                                                      </div>
+                                                  </div>
+                                              </div>
+  
+                                              {/*TO*/}
+                                              <div className="col-sm-5">
+                                                  <div className="row ">
+                                                      <label className="col-sm-4 col-form-label">To</label>
+                                                      <div className="col-md-8">
+                                                          <input
+                                                              type="date"
+                                                              className="form-control border border-dark"
+                                                              id="datePerformedTo"
+                                                              name="datePerformedTo"
+                                                              onChange={inputHandler}
+                                                              value={dateTo}
+  
+                                                          />
+                                                      </div>
+                                                  </div>
+                                              </div>
+  
+                                              {/*BUTTON*/}
+                                              <div className='col-sm d-flex align-items-center justify-content-center'>
+                                                  <button type='button' className='btn btn-primary' onClick={addDateRange}><i className="bi bi-plus-lg fs-8"></i></button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+  
+  
+  
+                          </div>
+  
+                          {/*BORDER*/}
+                          <div className='container-fluid shadow-sm border border-secondary border-1 mt-3 mb-3'>
+                          </div>
+  
+                          {/*Customer Details*/}
+                          <div className='card p-4 mb-3 shadow-sm border'>
+                              <h5 className='mb-4 text-primary fw-bold'>Customer Details</h5>
+                              <div className='row g-4'>
+                                  <div className="col-md-6">
+                                      <label htmlFor="clientType" className='form-label'>Client/Customer Name: </label>
+                                      <input type="tel" className="date form-control border border-dark" name='customerName' onChange={inputHandler} value={result.customerName} placeholder="" />
+                                  </div>
+                                  <div className="col-md-6">
+                                      <label className='form-label'>Contact No./Email: </label>
+                                      <input type="tel" className="form-control border border-dark" id="mobile" name='customerContact' onChange={inputHandler} value={result.customerContact} placeholder="" />
+                                  </div>
+                                  <div className="col-md-6">
+                                      <label htmlFor="clientType" className='form-label '>Address: </label>
+                                      <input type="tel" className="date form-control border border-dark" name='customerAddress' onChange={inputHandler} value={result.customerAddress} placeholder="" />
+                                  </div>
+                              </div>
+                          </div>
+  
+                          {/*BORDER*/}
+                          <div className='container-fluid border border-secondary border-1 mt-3 mb-3'></div>
+  
+                          {/*ROA Details*/}
+  
+                          <div className='card p-4 mb-3 shadow-sm border'>
+                              <div className='d-flex justify-content-end mt-3'>
+                                  <button
+                                      type="button"
+                                      className="btn btn-primary" onClick={() => setShowModal(true)}>
+                                      <i className="bi bi-plus-lg me-2 fs-6"></i>Add Sample Details
+                                  </button>
+                              </div>
+  
+                              {/*Table for ROA Details */}
+                              <div className="row mt-2">
+                                  <div className="col-12">
+                                      <table className="table table-bordered">
+                                          <thead className="table-primary">
+                                              <tr className='text-center'>
+                                                  <th>LAB CODE</th>
+                                                  <th>SAMPLE CODE</th>
+                                                  <th>SAMPLE DESCRIPTION</th>
+                                                  <th>PARAMETER</th>
+                                                  <th>RESULT</th>
+                                                  <th>TEST METHOD</th>
+                                                  <th>ACTION</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              {result.roaDetails && result.roaDetails.length > 0 ? (
+                                                  result.roaDetails.map((reportItem, index) => (
+                                                      <tr key={index}>
+                                                          <td>{reportItem.labCode}</td>
+                                                          <td>{reportItem.sampleCode}</td>
+                                                          <td>{reportItem.sampleDescription}</td>
+                                                          <td>{reportItem.sampleParam}</td>
+                                                          <td>{reportItem.result}</td>
+                                                          <td>{reportItem.testMethod}</td>
+                                                          <td>
+                                                              <button
+                                                                  type="button"
+                                                                  className="btn btn-sm btn-outline-primary me-2"
+                                                                  onClick={() => openEditModal(index)}
+                                                                  title="Edit Sample"
+                                                              >
+                                                                  <i className="bi bi-pencil"></i>
+                                                              </button>
+                                                              <button
+                                                                  type="button"
+                                                                  className="btn btn-sm btn-outline-danger"
+                                                                  onClick={() => deleteReport(index)}
+                                                                  title="Delete Sample"
+                                                              >
+                                                                  <i className="bi bi-trash"></i>
+                                                              </button>
+                                                          </td>
+                                                      </tr>
+                                                  ))
+                                              ) : (
+                                                  <tr>
+                                                      <td colSpan="7" className="text-center">No samples added yet.</td>
+                                                  </tr>
+                                              )}
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div>
+                          </div>
+  
+  
+                          <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
+                              <button type='button' className="btn btn-primary text-white fw-bold" onClick={() => navigate(backRoute)}>
+                                  <span className='text-white fw-bold ps-4 pe-4'>Back</span>
+                              </button>
+                              <button className="btn btn-primary col-md-2">Save</button>
+                          </div>
+                      </form>
+  
+                  </div>
+              </div>
+              <RoaModal
+                  show={showModal}
+                  onClose={() => setShowModal(false)}
+                  reportDetails={reportDetails}
+                  onChange={reportInputHandler}
+                  onSubmit={submitReport}
+              />
           </div>
-          <form className='mt-4 mb-4' onSubmit={submitForm}>
-            <div className='container-fluid mt-3 '>
-              <div className='row mt-4'>
-                <label htmlFor="clientType" className='col-md-3 col-form-label'>Report Id: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="tel" className="date form-control" name='reportId' onChange={inputHandler} value={result.reportId} placeholder="" />
-                </div>
-
-                <label htmlFor="clientType" className='testMethod col-md-3 col-form-label '>Analyzed By: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <select className='form-select' name='analyzedBy' onChange={inputHandler} value={result.analyzedBy}>
-                    <option defaultValue="Choose...">Choose...</option>
-                    <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
-                    <option value="Mellen B. Perion">Mellen B. Perion</option>
-                    <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
-                  </select>
-                </div>
-              </div>
-
-
-
-
-
-              <div className='row mt-4'>
-
-
-                <div className='col-md '>
-
-                  {/*Date Issued*/}
-                  <div className='row'>
-                    <label className='col-md-6 col-form-label '>Date Issued: </label>
-                    <div className='col-md-6'>
-                      <div className="row-sm">
-                        <input type="date" className="date form-control" name='dateIssued' onChange={inputHandler} value={formatDateForInput(result.dateIssued)} placeholder="" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/*Date Received*/}
-                  <div className='row mt-4'>
-                    <label className='col-md-6 col-form-label '>Date Received: </label>
-                    <div className='col-md-6'>
-                      <div className="row-sm">
-                        <input type="date" className="date form-control" name='dateReceived' onChange={inputHandler} value={formatDateForInput(result.dateReceived)} placeholder="" />
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/*Date Performed*/}
-                <div className="col">
-                  <div className='col-md'>
-                    <div className='row'>
-                      <label className="datePerformed col-md-6 col-form-label">Date Performed:</label>
-                      <div className='col-md-6'>
-                        <input type="text" className="date form-control" id="datePerformed" name="datePerformed" onChange={inputHandler} value={result.datePerformed} placeholder="" />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="fromTo row mt-4">
-
-                    {/*FROM*/}
-                    <div className="col-sm-5">
-                      <div className="row ">
-                        <label className="col-sm-4 col-form-label">From</label>
-                        <div className="col-md-8">
-                          <input
-                            type="date"
-                            className="form-control"
-                            id="datePerformedFrom"
-                            name="datePerformedFrom"
-                            onChange={inputHandler}
-                            value={dateFrom}
-
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/*TO*/}
-                    <div className="col-sm-5">
-                      <div className="row ">
-                        <label className="col-sm-4 col-form-label ">To</label>
-                        <div className="col-md-8">
-                          <input
-                            type="date"
-                            className="form-control"
-                            id="datePerformedTo"
-                            name="datePerformedTo"
-                            onChange={inputHandler}
-                            value={dateTo}
-
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/*BUTTON*/}
-                    <div className='col-sm d-flex align-items-center justify-content-center'>
-                      <button type='button' className='btn btn-primary' onClick={addDateRange}><i className="bi bi-plus-lg fs-8"></i></button>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div className='container-fluid shadow-sm border border-secondary border-1 mt-3'>
-            </div>
-
-            <div className='container-fluid mt-3 '>
-              <div className='row mt-4'>
-                <label htmlFor="clientType" className='col-md-3 col-form-label '>Client/Customer Name: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="tel" className="date form-control" name='customerName' onChange={inputHandler} value={result.customerName} placeholder="" />
-                  </div>
-                </div>
-                <label className='ItemNum col-md-3 col-form-label'>Contact No./Email: </label>
-                <div className='col-md-3 d-flex justify-content-end'>
-                  <input type="tel" className="form-control" id="mobile" name='customerContact' onChange={inputHandler} value={result.customerContact} placeholder="" />
-                </div>
-              </div>
-              <div className='row mt-4'>
-                <label htmlFor="clientType" className='col-md-3 col-form-label '>Address: </label>
-                <div className='col-md-3'>
-                  <div className="col-sm">
-                    <input type="tel" className="date form-control" name='customerAddress' onChange={inputHandler} value={result.customerAddress} placeholder="" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className='container-fluid border border-secondary border-1 mt-3'></div>
-
-
-            <div className='d-flex justify-content-end mt-3'>
-              <button
-                type="button"
-                className="btn btn-primary" onClick={() => setShowModal(true)}>
-                <i className="bi bi-plus-lg me-2 fs-6"></i>Add Sample Details
-              </button>
-            </div>
-
-            {/*Table for ROA Details */}
-            <div className="row mt-2">
-              <div className="col-12">
-                <table className="table table-bordered">
-                  <thead className="table-primary">
-                    <tr className='text-center'>
-                      <th>LAB CODE</th>
-                      <th>SAMPLE CODE</th>
-                      <th>SAMPLE DESCRIPTION</th>
-                      <th>PARAMETER</th>
-                      <th>RESULT</th>
-                      <th>TEST METHOD</th>
-                      <th>ACTION</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {result.roaDetails && result.roaDetails.length > 0 ? (
-                      result.roaDetails.map((reportItem, index) => (
-                        <tr key={index}>
-                          <td>{reportItem.labCode}</td>
-                          <td>{reportItem.sampleCode}</td>
-                          <td>{reportItem.sampleDescription}</td>
-                          <td>{reportItem.sampleParam}</td>
-                          <td>{reportItem.result}</td>
-                          <td>{reportItem.testMethod}</td>
-                          <td>
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-outline-primary me-2"
-                              onClick={() => openEditModal(index)}
-                              title="Edit Sample"
-                            >
-                              <i className="bi bi-pencil"></i>
-                            </button>
-                            <button
-                              type="button"
-                              className="btn btn-sm btn-outline-danger"
-                              onClick={() => deleteReport(index)}
-                              title="Delete Sample"
-                            >
-                              <i className="bi bi-trash"></i>
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="7" className="text-center">No samples added yet.</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-            <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
-              <button type="button" className="btn btn-primary col-md-2" onClick={() => navigate(backRoute)}>Back</button>
-              <button type="submit" className="btn btn-primary col-md-2" onClick={submitForm}>Save</button>
-            </div>
-          </form>
-
-        </div>
-      </div>
-      <RoaModal
-        show={showModal}
-        onClose={closeModal}
-        reportDetails={reportDetails}
-        onChange={reportInputHandler}
-        onSubmit={submitReport}
-      />
-    </div>
-  )
+      )
 }
 
 export default UpdateReport

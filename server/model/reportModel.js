@@ -61,7 +61,14 @@ const reportSchema = new mongoose.Schema({
         type: String,
     },  
 
+    analyzedBy2:{
+        type: String,
+    }, 
+
     analystPRC:{
+        type: String,
+    },
+    analystPRC2:{
         type: String,
     },
 

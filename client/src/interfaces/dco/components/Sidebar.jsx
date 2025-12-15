@@ -63,7 +63,7 @@ function Sidebar() {
                         <li className='nav-item mt-2'>
                             <button className='btn btn-link sidebar-link ms-2 text-white text-decoration-none w-100 text-start' type='button' data-bs-toggle='collapse' data-bs-target='#homeSubmenu' aria-expanded='false' aria-controls='homeSubmenu'>
                                 <i className='bi bi-archive-fill text-white fs-5 me-3 ms-1' />
-                                Reports
+                                ARF
                                 <i className='bi bi-caret-down-fill float-end me-3 mt-1' />
                             </button>
                             <div className='collapse' id='homeSubmenu'>
