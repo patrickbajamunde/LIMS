@@ -259,16 +259,7 @@ function UpdateRequest() {
     }
 
     // Reset and close modal
-    setArfAttachment({
-      sampleDescription: "",
-      parameterReq: "",
-      methodReq: "",
-      labCode: "",
-      sampleCode: "",
-      Barangay: "",
-      Municipality: "",
-      Province: "",
-    });
+    
     setArfAttachmentModal(false);
     setIsEditing(false);
     setEditingIndex(null);

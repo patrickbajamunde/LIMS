@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const RoaModal = ({ show, onClose, reportDetails, onChange, onSubmit }) => {
+export const RoaModal = ({ show, onClose, reportDetails, onChange, onSubmit, checkboxHandler, availableParameters, selectedParameters }) => {
 
   if (!show) return null;
 
@@ -52,6 +52,35 @@ export const RoaModal = ({ show, onClose, reportDetails, onChange, onSubmit }) =
               </div>
 
               <div className="mb-3">
+                <label className="form-label fw-bold">Test Parameters</label>
+                <div className="row g-1">
+                  {availableParameters.map((parameter, index) => (
+                    <div className="form-check col-4 mb-2 " key={index}>
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id={`parameter-${index}`}
+                        value={parameter}
+                        checked={selectedParameters.includes(parameter)}
+                        onChange={checkboxHandler}
+                        style={{
+                          width: '1.15rem',
+                          height: '1.15rem',
+                          WebkitAppearance: 'checkbox',
+                          MozAppearance: 'checkbox',
+                          appearance: 'auto',
+                          accentColor: '#0d6efd'
+                        }}  
+                      />
+                      <label className="form-check-label" htmlFor={`parameter-${index}`}>
+                        {parameter}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-3">
                 <label className="form-label">Parameter</label>
                 <input
                   type="text"
@@ -70,15 +99,14 @@ export const RoaModal = ({ show, onClose, reportDetails, onChange, onSubmit }) =
                   name="result"
                   value={reportDetails.result}
                   onChange={(e) => onChange('result', e.target.value)}
-
                 />
               </div>
 
               <div className="mb-3">
                 <label className="form-label">Test Method</label>
-                <input
+                <textarea
                   type="text"
-                  className="form-control border border-dark"
+                  className="form-control border border-dark text-start"
                   name="testMethod"
                   value={reportDetails.testMethod}
                   onChange={(e) => onChange('testMethod', e.target.value)}

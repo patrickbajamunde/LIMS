@@ -18,7 +18,36 @@ function RoaForm() {
     const numberSeries = '0000';
     return `${year}-${month}-${rfcal}-${roa}-${numberSeries}`
   }
-  
+
+  const availableParameters = [
+    "Crude Protein",
+    "Moisture",
+    "Crude Fiber",
+    "Crude Fat",
+    "Crude Ash",
+    "Calcium",
+    "Total Phosphorus",
+    "Salt as Sodium Chloride",
+  ]
+
+  const methodList = (sampleParam) => {
+    const methodTable = {
+      "Crude Protein": "KJELDAHL (AOAC 2001.11)",
+      "Moisture": "GRAVIMETRIC METHOD (AOAC 930.15)",
+      "Crude Fiber": "GRAVIMETRIC METHOD (AOAC 962.09)",
+      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 2003.06)",
+      "Crude Ash": "GRAVIMETRIC METHOd (AOAC 942.05)",
+      "Calcium": "TITRIMETRIC METHOD (AOAC 927.05)",
+      "Total Phosphorus": "MOLYBDOVANADATE METHOD",
+      "Salt as Sodium Chloride": "MOHR (AOAC 971.27)",
+      "AFLATOXIN": "ELISA VERTOX KIT (AOAC 990.34)"
+    }
+
+    return methodTable[sampleParam] || "";
+  }
+
+  const [selectedParameters, setSelectedParameters] = useState([]);
+
   const report = {
     customerName: "",
     customerAddress: "",
@@ -74,6 +103,26 @@ function RoaForm() {
     else {
       setResult({ ...result, [name]: value });
     }
+  }
+
+  const checkboxHandler = (e) => {
+    const { value, checked } = e.target;
+    setSelectedParameters(prev => {
+      const next = checked ? [...prev, value] : prev.filter(p => p !== value);
+
+      // update the modal draft sampleDetail so the inputs show current selection
+      setReportDetails(prevDetail => ({
+        ...prevDetail,
+        sampleParam: next.join(", "),
+        testMethod: getMethodsForParameters(next)
+      }));
+
+      return next;
+    });
+  }
+
+  const getMethodsForParameters = (parametersArray) => {
+    return parametersArray.map(p => methodList(p)).filter(Boolean).join(", ");
   }
 
   const formatDateRange = (fromDate, toDate) => {
@@ -184,9 +233,11 @@ function RoaForm() {
                     <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
                     <option value="Mellen B. Perion">Mellen B. Perion</option>
                     <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
+                    <option value="Maria Coleen G. Lorbes">Maria Coleen G. Lorbes</option>
+                    <option value="Mary June M. Cadag">Mary June M. Cadag</option>
                   </select>
                 </div>
-                
+
                 <div className="col-md-6">
                   <label className='form-label '>Date Issued: </label>
                   <input type="date" className="date form-control border border-dark" name='dateIssued' onChange={inputHandler} value={result.dateIssued} placeholder="" />
@@ -355,6 +406,9 @@ function RoaForm() {
         reportDetails={reportDetails}
         onChange={reportInputHandler}
         onSubmit={reportSubmit}
+        availableParameters={availableParameters}
+        selectedParameters={selectedParameters}
+        checkboxHandler={checkboxHandler}
       />
     </div>
   )
