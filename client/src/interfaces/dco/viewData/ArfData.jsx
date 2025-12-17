@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
 import './styles/arfData.css'
 import TestPdf from "../generatePdf/TestPdf";
+import GenerateAttachment from '../generatePdf/GenerateAttachment';
 
 
 function ArfData() {
@@ -166,10 +167,51 @@ function ArfData() {
                         </div>
                     </div>
 
+                    <div className='col-12 p-4 '>
+                        <div className="table-responsive rounded">
+                            <table className='table table-striped table-borderless table-hover'>
+                                <thead className='tableHead'>
+                                    <tr className='text-center'>
+                                        <th>Lab Code</th>
+                                        <th>Sample Code</th>
+                                        <th>Sample Description</th>
+                                        <th>Barangay</th>
+                                        <th>Municipality</th>
+                                        <th>Province</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {requestData && requestData.ArfAttachment.length > 0 ? (
+                                        requestData.ArfAttachment.map((requestItems, index) => (
+                                            <tr className="text-center" key={index}>
+                                                <td className='text-primary fw-bold'>{requestItems.labCode}</td>
+                                                <td className='text-success fw-bold'>{requestItems.sampleCode}</td>
+                                                <td>{requestItems.sampleDescription}</td>
+                                                <td className='col-1 text-center'>{requestItems.Barangay}</td>
+                                                <td className='col-5'>{requestItems.Municipality}</td>
+                                                <td className='col-5'>{requestItems.Province}</td>
+                                            </tr>
+                                        ))
+                                    ) :
+                                        (
+                                            <tr>
+                                                <td colSpan="6" className="text-center">No data available</td>
+                                            </tr>
+                                        )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <div className="d-flex flex-wrap gap-2 justify-content-center pb-4">
                         <TestPdf requestId={requestData ? requestData._id : null}
                             icon={<button type='button' className=' btn btn-primary text-white fw-bold'>Generate PDF</button>}
                         />
+                        <GenerateAttachment
+                            requestId={requestData ? requestData._id : null}
+                            icon={<button type='button' className=' btn btn-primary text-white fw-bold'>ARF Attachment</button>}
+                        />
+
                         <button type='button' className="btn btn-success fw-bold text-white" onClick={() => navigate(`/Dco/updateArf/${id}`, { state: { from: `/Dco/requestDetails/${id}` } })}>
                             Edit Request
                         </button>

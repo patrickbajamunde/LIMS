@@ -28,6 +28,7 @@ function RoaForm() {
     dateIssued: "",
     reportId: defReportId(),
     analyzedBy: "",
+    analyzedBy2: "",
     status: "For release"
   }
 
@@ -185,9 +186,20 @@ function RoaForm() {
                     <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
                   </select>
                 </div>
+                
                 <div className="col-md-6">
                   <label className='form-label '>Date Issued: </label>
                   <input type="date" className="date form-control border border-dark" name='dateIssued' onChange={inputHandler} value={result.dateIssued} placeholder="" />
+                </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Analyzed By: </label>
+                  <select className='form-select border border-dark' name='analyzedBy2' onChange={inputHandler} value={result.analyzedBy2}>
+                    <option defaultValue="Choose...">Choose...</option>
+                    <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
+                    <option value="Mellen B. Perion">Mellen B. Perion</option>
+                    <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
+                  </select>
                 </div>
                 <div className="col-md-6">
                   <label className='form-label '>Date Received: </label>

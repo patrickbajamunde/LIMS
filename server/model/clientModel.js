@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const sampleModel = new mongoose.Schema({
-    
+
     sampleDescription: {
         type: String,
     },
@@ -10,21 +10,50 @@ const sampleModel = new mongoose.Schema({
         type: String,
     },
 
-    methodReq:{
+    methodReq: {
         type: String,
     },
     sampleCode: {
         type: String,
-    }, 
-    labCode:{
+    },
+    labCode: {
         type: String,
     }
-});
+})
+
+const ArfAttachment = new mongoose.Schema({
+    sampleDescription: {
+        type: String,
+    },
+
+    parameterReq: {
+        type: String,
+    },
+
+    methodReq: {
+        type: String,
+    },
+    sampleCode: {
+        type: String,
+    },
+    labCode: {
+        type: String,
+    },
+    Barangay:{
+        type: String,
+    },
+    Municipality:{
+        type: String,
+    },
+    Province:{
+        type: String,
+    }
+})
 
 
-const clientSchema = new mongoose.Schema ({
+const clientSchema = new mongoose.Schema({
 
-    requestId:{
+    requestId: {
         type: String,
         required: true,
         unique: true,
@@ -59,7 +88,7 @@ const clientSchema = new mongoose.Schema ({
         required: true,
     },
 
-    reportDue :{
+    reportDue: {
         type: Date,
         required: true,
     },
@@ -70,16 +99,17 @@ const clientSchema = new mongoose.Schema ({
         required: true,
     },
 
-    receivedBy:{
+    receivedBy: {
         type: String,
-        required: true, 
+        required: true,
     },
 
-    status:{
+    status: {
         type: String,
     },
 
     sampleDetails: [sampleModel],
+    ArfAttachment: [ArfAttachment],
 
     user: {
         type: mongoose.Schema.Types.ObjectId,

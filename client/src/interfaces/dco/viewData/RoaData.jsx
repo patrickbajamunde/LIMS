@@ -49,7 +49,7 @@ function RoaData() {
                                     <div className="row">
                                         <span className='fw-bold fs-2'>Report of Analysis</span>
                                         <span className='fs-5 text-decoration-underline'>Report ID: {reportDetails.reportId}</span>
-                                        <span className='fs-5 text-decoration-underline'>Analyzed By: {reportDetails.analyzedBy}</span>
+                                        <span className='fs-5 text-decoration-underline'>Analyzed By: {reportDetails.analyzedBy}, {reportDetails.analyzedBy2}</span>
                                     </div>
                                 </div>
                             </div>
@@ -173,11 +173,13 @@ function RoaData() {
                     <div className="d-flex flex-wrap gap-2 justify-content-center pb-4">
                         <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
                             copyType="CUSTOMER COPY"
+                            copyCode="C"
                             fileType='_Customer_Copy'
                             icon={<button type='button' className='btn btn-primary text-white fw-bold'>Customer Copy</button>}
                         />
                         <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
                             copyType="LABORATORY COPY"
+                            copyCode="L"
                             fileType='_Laboratory_Copy'
                             icon={<button type='button' className='btn btn-primary text-white fw-bold'>Laboratory Copy</button>}
                         />
