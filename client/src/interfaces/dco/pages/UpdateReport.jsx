@@ -18,6 +18,54 @@ function UpdateReport() {
     analyzedBy: ""
   }
 
+  const availableParameters = [
+    "Crude Protein",
+    "Moisture",
+    "Crude Fiber",
+    "Crude Fat",
+    "Crude Ash",
+    "Calcium",
+    "Total Phosphorus",
+    "Salt as Sodium Chloride",
+  ]
+
+  const methodList = (sampleParam) => {
+    const methodTable = {
+      "Crude Protein": "KJELDAHL (AOAC 2001.11)",
+      "Moisture": "GRAVIMETRIC METHOD (AOAC 930.15)",
+      "Crude Fiber": "GRAVIMETRIC METHOD (AOAC 962.09)",
+      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 2003.06)",
+      "Crude Ash": "GRAVIMETRIC METHOd (AOAC 942.05)",
+      "Calcium": "TITRIMETRIC METHOD (AOAC 927.05)",
+      "Total Phosphorus": "MOLYBDOVANADATE METHOD",
+      "Salt as Sodium Chloride": "MOHR (AOAC 971.27)",
+      "AFLATOXIN": "ELISA VERTOX KIT (AOAC 990.34)"
+    }
+
+    return methodTable[sampleParam] || "";
+  }
+
+  const checkboxHandler = (e) => {
+    const { value, checked } = e.target;
+    setSelectedParameters(prev => {
+      const next = checked ? [...prev, value] : prev.filter(p => p !== value);
+
+      // update the modal draft sampleDetail so the inputs show current selection
+      setReportDetails(prevDetail => ({
+        ...prevDetail,
+        sampleParam: next.join(", "),
+        testMethod: getMethodsForParameters(next)
+      }));
+
+      return next;
+    });
+  }
+
+  const getMethodsForParameters = (parametersArray) => {
+    return parametersArray.map(p => methodList(p)).filter(Boolean).join(", ");
+  }
+
+  const [selectedParameters, setSelectedParameters] = useState([]);
 
   const [result, setResult] = useState(report);
   const [dateFrom, setDateFrom] = useState('');
@@ -224,226 +272,229 @@ function UpdateReport() {
   }
 
   return (
-          <div className='d-flex mt-3'>
-              <div className=' analysis card container-fluid shadow-sm border bordered-darker mb-5'>
-                  <div className='row g-6'>
-                      <div className='head container rounded-top' style={{ backgroundColor: '#003e8fff' }}>
-                          <div className='mt-1'>
-                              <i className='bi bi-info-circle text-white fs-5 ms-1 me-1' />
-                              <span className='ms-2 fs-5 text-white'>ROA Form</span>
-                          </div>
-                      </div>
-  
-                      <form className='mt-4 mb-4' onSubmit={submitForm}>
-                          <div className='card p-4 mb-3 shadow-sm border'>
-                              <h5 className='mb-4 text-primary fw-bold'>Report Details</h5>
-                              <div className="row g-4">
-                                  <div className="col-md-6">
-                                      <label className='form-label'>Report Id: </label>
-                                      <input type="tel" className="date form-control border border-dark" name='reportId' id='reportId' onChange={inputHandler} value={result.reportId} placeholder="" />
-                                  </div>
-                                  <div className="col-md-6">
-                                      <label className='form-label '>Analyzed By: </label>
-                                      <select className='form-select border border-dark' name='analyzedBy' onChange={inputHandler} value={result.analyzedBy}>
-                                          <option defaultValue="Choose...">Choose...</option>
-                                          <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
-                                          <option value="Mellen B. Perion">Mellen B. Perion</option>
-                                          <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
-                                      </select>
-                                  </div>
-                                  <div className="col-md-6">
-                                      <label className='form-label '>Date Issued: </label>
-                                      <input type="date" className="date form-control border border-dark" name='dateIssued' onChange={inputHandler} value={formatDateForInput(result.dateIssued)} placeholder="" />
-                                  </div>
-  
-                                  <div className="col-md-6">
-                                      <label className='form-label '>Analyzed By: </label>
-                                      <select className='form-select border border-dark' name='analyzedBy2' onChange={inputHandler} value={result.analyzedBy2}>
-                                          <option defaultValue="Choose...">Choose...</option>
-                                          <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
-                                          <option value="Mellen B. Perion">Mellen B. Perion</option>
-                                          <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
-                                      </select>
-                                  </div>
-                                  <div className="col-md-6">
-                                      <label className='form-label '>Date Received: </label>
-                                      <input type="date" className="date form-control border border-dark" name='dateReceived' onChange={inputHandler} value={formatDateForInput(result.dateReceived)} placeholder="" />
-                                  </div>
-                                  <div className="col-md-6">
-                                      <div className="col">
-                                          <div className='col-md'>
-                                              <div className='row'>
-                                                  <label className="col-md-3 col-form-label">Date Performed:</label>
-                                                  <div className='col-md-9'>
-                                                      <input type="text" className="date form-control border border-dark" id="datePerformed" name="datePerformed" onChange={inputHandler} value={result.datePerformed} placeholder="" />
-                                                  </div>
-                                              </div>
-                                          </div>
-  
-                                          <div className=" row mt-4">
-  
-                                              {/*FROM*/}
-                                              <div className="col-sm-5">
-                                                  <div className="row ">
-                                                      <label className="col-sm-4 col-form-label">From</label>
-                                                      <div className="col-md-8">
-                                                          <input
-                                                              type="date"
-                                                              className="form-control border border-dark"
-                                                              id="datePerformedFrom"
-                                                              name="datePerformedFrom"
-                                                              onChange={inputHandler}
-                                                              value={dateFrom}
-  
-                                                          />
-                                                      </div>
-                                                  </div>
-                                              </div>
-  
-                                              {/*TO*/}
-                                              <div className="col-sm-5">
-                                                  <div className="row ">
-                                                      <label className="col-sm-4 col-form-label">To</label>
-                                                      <div className="col-md-8">
-                                                          <input
-                                                              type="date"
-                                                              className="form-control border border-dark"
-                                                              id="datePerformedTo"
-                                                              name="datePerformedTo"
-                                                              onChange={inputHandler}
-                                                              value={dateTo}
-  
-                                                          />
-                                                      </div>
-                                                  </div>
-                                              </div>
-  
-                                              {/*BUTTON*/}
-                                              <div className='col-sm d-flex align-items-center justify-content-center'>
-                                                  <button type='button' className='btn btn-primary' onClick={addDateRange}><i className="bi bi-plus-lg fs-8"></i></button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-  
-  
-  
-                          </div>
-  
-                          {/*BORDER*/}
-                          <div className='container-fluid shadow-sm border border-secondary border-1 mt-3 mb-3'>
-                          </div>
-  
-                          {/*Customer Details*/}
-                          <div className='card p-4 mb-3 shadow-sm border'>
-                              <h5 className='mb-4 text-primary fw-bold'>Customer Details</h5>
-                              <div className='row g-4'>
-                                  <div className="col-md-6">
-                                      <label htmlFor="clientType" className='form-label'>Client/Customer Name: </label>
-                                      <input type="tel" className="date form-control border border-dark" name='customerName' onChange={inputHandler} value={result.customerName} placeholder="" />
-                                  </div>
-                                  <div className="col-md-6">
-                                      <label className='form-label'>Contact No./Email: </label>
-                                      <input type="tel" className="form-control border border-dark" id="mobile" name='customerContact' onChange={inputHandler} value={result.customerContact} placeholder="" />
-                                  </div>
-                                  <div className="col-md-6">
-                                      <label htmlFor="clientType" className='form-label '>Address: </label>
-                                      <input type="tel" className="date form-control border border-dark" name='customerAddress' onChange={inputHandler} value={result.customerAddress} placeholder="" />
-                                  </div>
-                              </div>
-                          </div>
-  
-                          {/*BORDER*/}
-                          <div className='container-fluid border border-secondary border-1 mt-3 mb-3'></div>
-  
-                          {/*ROA Details*/}
-  
-                          <div className='card p-4 mb-3 shadow-sm border'>
-                              <div className='d-flex justify-content-end mt-3'>
-                                  <button
-                                      type="button"
-                                      className="btn btn-primary" onClick={() => setShowModal(true)}>
-                                      <i className="bi bi-plus-lg me-2 fs-6"></i>Add Sample Details
-                                  </button>
-                              </div>
-  
-                              {/*Table for ROA Details */}
-                              <div className="row mt-2">
-                                  <div className="col-12">
-                                      <table className="table table-bordered">
-                                          <thead className="table-primary">
-                                              <tr className='text-center'>
-                                                  <th>LAB CODE</th>
-                                                  <th>SAMPLE CODE</th>
-                                                  <th>SAMPLE DESCRIPTION</th>
-                                                  <th>PARAMETER</th>
-                                                  <th>RESULT</th>
-                                                  <th>TEST METHOD</th>
-                                                  <th>ACTION</th>
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                              {result.roaDetails && result.roaDetails.length > 0 ? (
-                                                  result.roaDetails.map((reportItem, index) => (
-                                                      <tr key={index}>
-                                                          <td>{reportItem.labCode}</td>
-                                                          <td>{reportItem.sampleCode}</td>
-                                                          <td>{reportItem.sampleDescription}</td>
-                                                          <td>{reportItem.sampleParam}</td>
-                                                          <td>{reportItem.result}</td>
-                                                          <td>{reportItem.testMethod}</td>
-                                                          <td>
-                                                              <button
-                                                                  type="button"
-                                                                  className="btn btn-sm btn-outline-primary me-2"
-                                                                  onClick={() => openEditModal(index)}
-                                                                  title="Edit Sample"
-                                                              >
-                                                                  <i className="bi bi-pencil"></i>
-                                                              </button>
-                                                              <button
-                                                                  type="button"
-                                                                  className="btn btn-sm btn-outline-danger"
-                                                                  onClick={() => deleteReport(index)}
-                                                                  title="Delete Sample"
-                                                              >
-                                                                  <i className="bi bi-trash"></i>
-                                                              </button>
-                                                          </td>
-                                                      </tr>
-                                                  ))
-                                              ) : (
-                                                  <tr>
-                                                      <td colSpan="7" className="text-center">No samples added yet.</td>
-                                                  </tr>
-                                              )}
-                                          </tbody>
-                                      </table>
-                                  </div>
-                              </div>
-                          </div>
-  
-  
-                          <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
-                              <button type='button' className="btn btn-primary text-white fw-bold" onClick={() => navigate(backRoute)}>
-                                  <span className='text-white fw-bold ps-4 pe-4'>Back</span>
-                              </button>
-                              <button className="btn btn-primary col-md-2">Save</button>
-                          </div>
-                      </form>
-  
-                  </div>
-              </div>
-              <RoaModal
-                  show={showModal}
-                  onClose={() => setShowModal(false)}
-                  reportDetails={reportDetails}
-                  onChange={reportInputHandler}
-                  onSubmit={submitReport}
-              />
+    <div className='d-flex mt-3'>
+      <div className=' analysis card container-fluid shadow-sm border bordered-darker mb-5'>
+        <div className='row g-6'>
+          <div className='head container rounded-top' style={{ backgroundColor: '#003e8fff' }}>
+            <div className='mt-1'>
+              <i className='bi bi-info-circle text-white fs-5 ms-1 me-1' />
+              <span className='ms-2 fs-5 text-white'>ROA Form</span>
+            </div>
           </div>
-      )
+
+          <form className='mt-4 mb-4' onSubmit={submitForm}>
+            <div className='card p-4 mb-3 shadow-sm border'>
+              <h5 className='mb-4 text-primary fw-bold'>Report Details</h5>
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <label className='form-label'>Report Id: </label>
+                  <input type="tel" className="date form-control border border-dark" name='reportId' id='reportId' onChange={inputHandler} value={result.reportId} placeholder="" />
+                </div>
+                <div className="col-md-6">
+                  <label className='form-label '>Analyzed By: </label>
+                  <select className='form-select border border-dark' name='analyzedBy' onChange={inputHandler} value={result.analyzedBy}>
+                    <option defaultValue="Choose...">Choose...</option>
+                    <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
+                    <option value="Mellen B. Perion">Mellen B. Perion</option>
+                    <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
+                  </select>
+                </div>
+                <div className="col-md-6">
+                  <label className='form-label '>Date Issued: </label>
+                  <input type="date" className="date form-control border border-dark" name='dateIssued' onChange={inputHandler} value={formatDateForInput(result.dateIssued)} placeholder="" />
+                </div>
+
+                <div className="col-md-6">
+                  <label className='form-label '>Analyzed By: </label>
+                  <select className='form-select border border-dark' name='analyzedBy2' onChange={inputHandler} value={result.analyzedBy2}>
+                    <option defaultValue="Choose...">Choose...</option>
+                    <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
+                    <option value="Mellen B. Perion">Mellen B. Perion</option>
+                    <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
+                  </select>
+                </div>
+                <div className="col-md-6">
+                  <label className='form-label '>Date Received: </label>
+                  <input type="date" className="date form-control border border-dark" name='dateReceived' onChange={inputHandler} value={formatDateForInput(result.dateReceived)} placeholder="" />
+                </div>
+                <div className="col-md-6">
+                  <div className="col">
+                    <div className='col-md'>
+                      <div className='row'>
+                        <label className="col-md-3 col-form-label">Date Performed:</label>
+                        <div className='col-md-9'>
+                          <input type="text" className="date form-control border border-dark" id="datePerformed" name="datePerformed" onChange={inputHandler} value={result.datePerformed} placeholder="" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className=" row mt-4">
+
+                      {/*FROM*/}
+                      <div className="col-sm-5">
+                        <div className="row ">
+                          <label className="col-sm-4 col-form-label">From</label>
+                          <div className="col-md-8">
+                            <input
+                              type="date"
+                              className="form-control border border-dark"
+                              id="datePerformedFrom"
+                              name="datePerformedFrom"
+                              onChange={inputHandler}
+                              value={dateFrom}
+
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/*TO*/}
+                      <div className="col-sm-5">
+                        <div className="row ">
+                          <label className="col-sm-4 col-form-label">To</label>
+                          <div className="col-md-8">
+                            <input
+                              type="date"
+                              className="form-control border border-dark"
+                              id="datePerformedTo"
+                              name="datePerformedTo"
+                              onChange={inputHandler}
+                              value={dateTo}
+
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/*BUTTON*/}
+                      <div className='col-sm d-flex align-items-center justify-content-center'>
+                        <button type='button' className='btn btn-primary' onClick={addDateRange}><i className="bi bi-plus-lg fs-8"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+            {/*BORDER*/}
+            <div className='container-fluid shadow-sm border border-secondary border-1 mt-3 mb-3'>
+            </div>
+
+            {/*Customer Details*/}
+            <div className='card p-4 mb-3 shadow-sm border'>
+              <h5 className='mb-4 text-primary fw-bold'>Customer Details</h5>
+              <div className='row g-4'>
+                <div className="col-md-6">
+                  <label htmlFor="clientType" className='form-label'>Client/Customer Name: </label>
+                  <input type="tel" className="date form-control border border-dark" name='customerName' onChange={inputHandler} value={result.customerName} placeholder="" />
+                </div>
+                <div className="col-md-6">
+                  <label className='form-label'>Contact No./Email: </label>
+                  <input type="tel" className="form-control border border-dark" id="mobile" name='customerContact' onChange={inputHandler} value={result.customerContact} placeholder="" />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="clientType" className='form-label '>Address: </label>
+                  <input type="tel" className="date form-control border border-dark" name='customerAddress' onChange={inputHandler} value={result.customerAddress} placeholder="" />
+                </div>
+              </div>
+            </div>
+
+            {/*BORDER*/}
+            <div className='container-fluid border border-secondary border-1 mt-3 mb-3'></div>
+
+            {/*ROA Details*/}
+
+            <div className='card p-4 mb-3 shadow-sm border'>
+              <div className='d-flex justify-content-end mt-3'>
+                <button
+                  type="button"
+                  className="btn btn-primary" onClick={() => setShowModal(true)}>
+                  <i className="bi bi-plus-lg me-2 fs-6"></i>Add Sample Details
+                </button>
+              </div>
+
+              {/*Table for ROA Details */}
+              <div className="row mt-2">
+                <div className="col-12">
+                  <table className="table table-bordered">
+                    <thead className="table-primary">
+                      <tr className='text-center'>
+                        <th>LAB CODE</th>
+                        <th>SAMPLE CODE</th>
+                        <th>SAMPLE DESCRIPTION</th>
+                        <th>PARAMETER</th>
+                        <th>RESULT</th>
+                        <th>TEST METHOD</th>
+                        <th>ACTION</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {result.roaDetails && result.roaDetails.length > 0 ? (
+                        result.roaDetails.map((reportItem, index) => (
+                          <tr key={index}>
+                            <td>{reportItem.labCode}</td>
+                            <td>{reportItem.sampleCode}</td>
+                            <td>{reportItem.sampleDescription}</td>
+                            <td>{reportItem.sampleParam}</td>
+                            <td>{reportItem.result}</td>
+                            <td>{reportItem.testMethod}</td>
+                            <td>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-outline-primary me-2"
+                                onClick={() => openEditModal(index)}
+                                title="Edit Sample"
+                              >
+                                <i className="bi bi-pencil"></i>
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-sm btn-outline-danger"
+                                onClick={() => deleteReport(index)}
+                                title="Delete Sample"
+                              >
+                                <i className="bi bi-trash"></i>
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan="7" className="text-center">No samples added yet.</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+
+            <div className='col-md-6 gap-3 offset-md-6 d-flex justify-content-end pe-3'>
+              <button type='button' className="btn btn-primary text-white fw-bold" onClick={() => navigate(backRoute)}>
+                <span className='text-white fw-bold ps-4 pe-4'>Back</span>
+              </button>
+              <button className="btn btn-primary col-md-2">Save</button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+      <RoaModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        reportDetails={reportDetails}
+        onChange={reportInputHandler}
+        onSubmit={submitReport}
+        availableParameters={availableParameters}
+        selectedParameters={selectedParameters}
+        checkboxHandler={checkboxHandler}
+      />
+    </div>
+  )
 }
 
 export default UpdateReport
