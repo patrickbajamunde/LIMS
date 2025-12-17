@@ -92,6 +92,55 @@ function GenerateRoa() {
         }
     }
 
+    const availableParameters = [
+        "Crude Protein",
+        "Moisture",
+        "Crude Fiber",
+        "Crude Fat",
+        "Crude Ash",
+        "Calcium",
+        "Total Phosphorus",
+        "Salt as Sodium Chloride",
+    ]
+
+    const methodList = (sampleParam) => {
+        const methodTable = {
+            "Crude Protein": "KJELDAHL (AOAC 2001.11)",
+            "Moisture": "GRAVIMETRIC METHOD (AOAC 930.15)",
+            "Crude Fiber": "GRAVIMETRIC METHOD (AOAC 962.09)",
+            "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 2003.06)",
+            "Crude Ash": "GRAVIMETRIC METHOd (AOAC 942.05)",
+            "Calcium": "TITRIMETRIC METHOD (AOAC 927.05)",
+            "Total Phosphorus": "MOLYBDOVANADATE METHOD",
+            "Salt as Sodium Chloride": "MOHR (AOAC 971.27)",
+            "AFLATOXIN": "ELISA VERTOX KIT (AOAC 990.34)"
+        }
+
+        return methodTable[sampleParam] || "";
+    }
+
+    const checkboxHandler = (e) => {
+        const { value, checked } = e.target;
+        setSelectedParameters(prev => {
+            const next = checked ? [...prev, value] : prev.filter(p => p !== value);
+
+            // update the modal draft sampleDetail so the inputs show current selection
+            setReportDetails(prevDetail => ({
+                ...prevDetail,
+                sampleParam: next.join(", "),
+                testMethod: getMethodsForParameters(next)
+            }));
+
+            return next;
+        });
+    }
+
+    const getMethodsForParameters = (parametersArray) => {
+        return parametersArray.map(p => methodList(p)).filter(Boolean).join(", ");
+    }
+
+    const [selectedParameters, setSelectedParameters] = useState([]);
+
     const formatDateRange = (fromDate, toDate) => {
         const from = new Date(fromDate);
         const to = new Date(toDate);
@@ -483,6 +532,9 @@ function GenerateRoa() {
                 reportDetails={reportDetails}
                 onChange={reportInputHandler}
                 onSubmit={reportSubmit}
+                availableParameters={availableParameters}
+                selectedParameters={selectedParameters}
+                checkboxHandler={checkboxHandler}
             />
         </div>
     )
