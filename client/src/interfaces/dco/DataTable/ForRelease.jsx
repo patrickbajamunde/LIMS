@@ -101,10 +101,10 @@ export default function ForRelease() {
                 <div style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
+                    whiteSpace: "nowrap",
                     maxWidth: "200px"
                 }}>
-                    {row.roaDetails.map(param => param.sampleDescription)}
+                    {row.roaDetails?.map(param => param.sampleDescription).join(", ") || ""}
                 </div>
             ),
         },
@@ -114,10 +114,10 @@ export default function ForRelease() {
                 <div style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
+                    whiteSpace: "nowrap",
                     maxWidth: "200px"
                 }}>
-                    {row.roaDetails.map(param => param.sampleParam)}
+                    {row.roaDetails?.map(param => param.sampleParam).join(", ") || ""}
                 </div>
             ),
             sortable: true,
@@ -128,10 +128,10 @@ export default function ForRelease() {
                 <div style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
+                    whiteSpace: "nowrap",
                     maxWidth: "200px"
                 }}>
-                    {row.roaDetails.map(param => param.testMethod)}
+                    {row.roaDetails?.map(param => param.testMethod).join(", ") || ""}
                 </div>
             ),
             sortable: true,

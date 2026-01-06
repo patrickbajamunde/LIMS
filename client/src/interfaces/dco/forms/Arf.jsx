@@ -432,7 +432,7 @@ function Arf() {
               <button type="button" className="btn btn-primary col-md-2" onClick={submitForm}>Save</button>
             </div>
           </form>
-        </div>
+        </div>  
       </div>
 
       <ArfAttachment

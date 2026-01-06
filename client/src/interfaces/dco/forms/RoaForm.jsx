@@ -70,6 +70,15 @@ function RoaForm() {
     return PrcTable[analyzedBy] || "";
   }
 
+  const designation = (analyzedBy) => {
+    const DesignationTable = {
+      "Katrina Louise C. Gonzales": "Chemist",
+      "Danica Mae B. Rodriguez": "Chemist",
+      "Mellen B. Perion": "Chemist",
+    }
+    return DesignationTable[analyzedBy] || "";
+  }
+
 
   const [result, setResult] = useState(report);
   const [dateFrom, setDateFrom] = useState('');
@@ -89,10 +98,21 @@ function RoaForm() {
     const { name, value } = e.target;
     if (name === 'analyzedBy' || name === 'datePerformed') {
       const prc = analystPRC(value);
+      const position = designation(value);
       setResult({
         ...result,
         [name]: value,
         analystPRC: prc,
+        position: position
+      });
+    } else if (name === 'analyzedBy2') {
+      const prc = analystPRC(value);
+      const position = designation(value);
+      setResult({
+        ...result,
+        [name]: value,
+        analystPRC2: prc,
+        position2: position
       });
     } else if (name === 'datePerformedFrom') {
       setDateFrom(value);
@@ -198,7 +218,8 @@ function RoaForm() {
           datePerformed: "",
           dateIssued: "",
           reportId: "",
-          analyzedBy: ""
+          analyzedBy: "",
+          analyzedBy2: ""
         })
         console.log("Report created successfully.")
       })
@@ -233,8 +254,6 @@ function RoaForm() {
                     <option value="Katrina Louise C. Gonzales">Katrina Louise C. Gonzales</option>
                     <option value="Mellen B. Perion">Mellen B. Perion</option>
                     <option value="Danica Mae B. Rodriguez">Danica Mae B. Rodriguez</option>
-                    <option value="Maria Coleen G. Lorbes">Maria Coleen G. Lorbes</option>
-                    <option value="Mary June M. Cadag">Mary June M. Cadag</option>
                   </select>
                 </div>
 

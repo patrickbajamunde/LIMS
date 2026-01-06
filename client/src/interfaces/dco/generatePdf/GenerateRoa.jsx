@@ -106,12 +106,12 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                     <View style={[styles.font, { paddingLeft: 55, bottom: 180, position: 'absolute' }]} fixed>
                         <Text style={{ fontWeight: 'bold', bottom: 35 }}>Analyzed/Examined By:</Text>
                         <Text style={{ fontWeight: 'bold' }}>{report.analyzedBy}, RCh</Text>
-                        <Text>Chemist, PRC License No. {report.analystPRC}</Text>
+                        <Text>{report.position}, PRC License No. {report.analystPRC}</Text>
                     </View>
 
                     <View style={[styles.font, { paddingLeft: 335, bottom: 180, position: 'absolute' }]} fixed>
                         <Text style={{ fontWeight: 'bold' }}>{report.analyzedBy2}, RCh</Text>
-                        <Text>Chemist, PRC License No. {report.analystPRC2}</Text>
+                        <Text>{report.position2}, PRC License No. {report.analystPRC2}</Text>
                     </View>
 
                     <View style={[styles.row, { position: 'absolute', bottom: 95, gap: 35 }]} fixed>

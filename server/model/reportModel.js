@@ -60,15 +60,20 @@ const reportSchema = new mongoose.Schema({
     analyzedBy:{
         type: String,
     },  
-
-    analyzedBy2:{
-        type: String,
-    }, 
-
     analystPRC:{
         type: String,
     },
+    position :{
+        type: String,
+    },
+    analyzedBy2:{
+        type: String,
+    }, 
     analystPRC2:{
+        type: String,
+    },
+
+    position2 :{
         type: String,
     },
 

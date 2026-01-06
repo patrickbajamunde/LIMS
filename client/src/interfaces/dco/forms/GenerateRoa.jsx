@@ -41,6 +41,15 @@ function GenerateRoa() {
         return PrcTable[analyzedBy] || "";
     }
 
+    const designation = (analyzedBy) => {
+        const DesignationTable = {
+            "Katrina Louise C. Gonzales": "Chemist",
+            "Danica Mae B. Rodriguez": "Chemist",
+            "Mellen B. Perion": "Chemist",
+        }
+        return DesignationTable[analyzedBy] || "";
+    }
+
     const [result, setResult] = useState(report);
     const [dateFrom, setDateFrom] = useState('');
     const [dateTo, setDateTo] = useState('');
@@ -67,17 +76,21 @@ function GenerateRoa() {
         const { name, value } = e.target;
         if (name === 'analyzedBy' || name === 'datePerformed') {
             const prc = analystPRC(value);
+            const position = designation(value);
             setResult({
                 ...result,
                 [name]: value,
                 analystPRC: prc,
+                position: position
             });
         } else if (name === 'analyzedBy2') {
             const prc = analystPRC(value);
+            const position = designation(value);
             setResult({
                 ...result,
                 [name]: value,
                 analystPRC2: prc,
+                position2: position
             });
         }
 
