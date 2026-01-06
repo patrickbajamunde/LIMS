@@ -18,7 +18,6 @@ function UpdateReport() {
     analyzedBy: ""
   }
 
-<<<<<<< HEAD
   const analystPRC = (analyzedBy) => {
         const PrcTable = {
             "Katrina Louise C. Gonzales": "0015522",
@@ -27,7 +26,6 @@ function UpdateReport() {
         }
         return PrcTable[analyzedBy] || "";
   }
-=======
   const availableParameters = [
     "Crude Protein",
     "Moisture",
@@ -77,7 +75,6 @@ function UpdateReport() {
 
   const [selectedParameters, setSelectedParameters] = useState([]);
 
->>>>>>> refs/remotes/origin/master
   const [result, setResult] = useState(report);
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
