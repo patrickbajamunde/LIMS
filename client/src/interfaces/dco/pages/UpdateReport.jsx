@@ -18,6 +18,23 @@ function UpdateReport() {
     analyzedBy: ""
   }
 
+  const analystPRC = (analyzedBy) => {
+    const PrcTable = {
+      "Katrina Louise C. Gonzales": "0015522",
+      "Danica Mae B. Rodriguez": "0015235",
+      "Mellen B. Perion": "0015215",
+    }
+    return PrcTable[analyzedBy] || "";
+  }
+
+  const designation = (analyzedBy) => {
+    const DesignationTable = {
+      "Katrina Louise C. Gonzales": "Chemist",
+      "Danica Mae B. Rodriguez": "Chemist",
+      "Mellen B. Perion": "Chemist",
+    }
+    return DesignationTable[analyzedBy] || "";
+  }
   const availableParameters = [
     "Crude Protein",
     "Moisture",
@@ -92,18 +109,21 @@ function UpdateReport() {
     const { name, value } = e.target;
     if (name === 'analyzedBy' || name === 'datePerformed') {
       const prc = analystPRC(value);
+      const position = designation(value);
       setResult({
         ...result,
         [name]: value,
         analystPRC: prc,
+        position: position
       });
-
     } else if (name === 'analyzedBy2') {
       const prc = analystPRC(value);
+      const position = designation(value);
       setResult({
         ...result,
         [name]: value,
         analystPRC2: prc,
+        position2: position
       });
     }
     else if (name === 'datePerformedFrom') {
