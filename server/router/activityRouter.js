@@ -4,6 +4,6 @@ import { authMiddleware } from "../controller/authController.js";
 
 const activityRouter = express.Router();
 
-activityRouter.get("/recentActivities", authMiddleware, getAllActivities);
+activityRouter.get("/recentActivities", getAllActivities);
 
 export default activityRouter;

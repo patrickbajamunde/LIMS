@@ -24,6 +24,9 @@ const activitiesSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    userName: {
+        type: String
+    }
 
 })
 

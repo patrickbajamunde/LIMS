@@ -26,6 +26,7 @@ function Home() {
   useEffect(() => {
     const fetchRegCount = async () => {
       try {
+<<<<<<< HEAD
         const resReg = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countReg", {
           withCredentials: true,
         })
@@ -49,6 +50,31 @@ function Home() {
         })
         const resGovtAgency = await axios.get("http://192.168.100.177:8001/api/dbcontrol/countGovtAgency",{
           withCredentials: true,
+=======
+        const resReg = await axios.get("http://localhost:8001/api/dbcontrol/countReg", {
+          
+        })
+        const resCorn = await axios.get("http://localhost:8001/api/dbcontrol/countCorn", {
+          
+        })
+        const resLgu = await axios.get("http://localhost:8001/api/dbcontrol/countLgu", {
+          
+        })
+        const resResearch = await axios.get("http://localhost:8001/api/dbcontrol/countResearch", {
+          
+        })
+        const resWalk = await axios.get("http://localhost:8001/api/dbcontrol/countWalkin", {
+          
+        })
+        const resHVC = await axios.get("http://localhost:8001/api/dbcontrol/countHVC", {
+          
+        })
+        const resRice = await axios.get("http://localhost:8001/api/dbcontrol/countRice",{
+          
+        })
+        const resGovtAgency = await axios.get("http://localhost:8001/api/dbcontrol/countGovtAgency",{
+          
+>>>>>>> refs/remotes/origin/master
         })
 
         setRegCount(resReg.data.count);

@@ -95,43 +95,17 @@ export default function ForRelease() {
             selector: (row) => row.reportId,
             sortable: true,
         },
-        {
-            name: "Sample Description",
-            cell: (row) => (
-                <div style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    maxWidth: "200px"
-                }}>
-                    {row.roaDetails?.map(param => param.sampleDescription).join(", ") || ""}
-                </div>
-            ),
-        },
-        {
-            name: "Parameter",
-            cell: (row) => (
-                <div style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    maxWidth: "200px"
-                }}>
-                    {row.roaDetails?.map(param => param.sampleParam).join(", ") || ""}
-                </div>
-            ),
-            sortable: true,
-        },
+        
         {
             name: "Test Method",
             cell: (row) => (
                 <div style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
+                    whiteSpace: "pre-wrap",
                     maxWidth: "200px"
                 }}>
-                    {row.roaDetails?.map(param => param.testMethod).join(", ") || ""}
+                    {row.roaDetails?.map(param => param.testMethod).join(",").replace(",",'\n ')}
                 </div>
             ),
             sortable: true,
@@ -148,6 +122,10 @@ export default function ForRelease() {
             )
         },
         {
+            name:"Created by",
+            selector: (row) => row.userName
+        },
+        {
             name: "Action",
             cell: (row) => (
                 <div className="d-flex align-items-center gap-2">
@@ -156,10 +134,6 @@ export default function ForRelease() {
                         to={`/Dco/updateRoa/${row._id}`}
                         type="button"
                         className="btn p-0 border-0" state={{ from: '/Dco/ForRelease/' }}><i className="bi bi-pencil-square text-success "></i></Link>
-                    <GenerateRoa roaId={row._id}
-                        icon={<i className="bi bi-box-arrow-down text-primary"></i>}
-                        disabledIcon={<i className="bi bi-box-arrow-down text-secondary"></i>}
-                    />
                     <Link to={`/Dco/reportDetails/${row._id}`} state={{ from: '/Dco/ForRelease/' }} type="button" className="btn p-0 border-0"><i class="bi bi-eye"></i></Link>
                 </div>
             ),

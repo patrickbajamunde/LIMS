@@ -43,7 +43,10 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                         </View>
                     </View>
 
-                    <View style={[styles.row, { position: 'absolute', right: 10, color: 'red', fontSize: 8, border: '2 solid red', padding: 5, marginTop: 8 }]} fixed>
+                    <View style={[styles.row, { position: 'absolute', right: 50, top: 25 }]}>
+                        <Image src={report.qrCode} style={{ width: 80, height: 80 }} />
+                    </View>
+                    <View style={[styles.row, { position: 'absolute', right: 45, top: 5, color: 'red', fontSize: 8, border: '2 solid red', padding: 5 }]}>
                         <Text>{copyType}</Text>
                     </View>
 

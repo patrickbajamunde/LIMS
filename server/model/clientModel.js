@@ -106,6 +106,9 @@ const clientSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
+    userName: {
+        type: String,
+    },
 
 })
 
