@@ -21,7 +21,6 @@ export default function CornProgram() {
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://localhost:8001/api/client/userRequest", {
-                    withCredentials: true,
                 });
 
                 const regOnly = response.data.filter(clientData => clientData.clientType === "Corn Program");
@@ -41,7 +40,6 @@ export default function CornProgram() {
 
             //if confirmDelete is true send a DELETE request from the API
             await axios.delete(`http://localhost:8001/api/client/delete/arf/${arfId}`, {
-                withCredentials: true,
             });
 
 
@@ -74,45 +72,23 @@ export default function CornProgram() {
             sortable: true,
         },
         {
-            name: "Sample Description",
-            cell: (row) => (
-                <div style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
-                    maxWidth: "200px"
-                }}>
-                    {row.sampleDetails.map(s => s.sampleDescription)}
-                </div>
-            )
-        },
-        {
-            name: "Parameter",
-            cell: (row) => (
-                <div style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
-                    maxWidth: "200px"
-                }}>
-                    {row.sampleDetails.map(s => s.parameterReq)}
-                </div>
-            ),
-            sortable: true,
-        },
-        {
             name: "Test Method",
             cell: (row) => (
                 <div style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
+                    whiteSpace: "pre-wrap",
                     maxWidth: "200px"
                 }}>
-                    {row.sampleDetails.map(s => s.methodReq)}
+                    {row.sampleDetails.map(s => s.methodReq).join(',').trim().replace(',', '\n')}
                 </div>
             ),
             sortable: true,
+        },
+        {
+            name: "Created By",
+            selector: (row) => row.userName,
+            sortable: true
         },
         {
             name: "Action",

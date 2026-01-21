@@ -1,12 +1,15 @@
 import Report from '../model/reportModel.js';
 import Activities from "../model/recentActModel.js";
+import User from '../model/userModel.js'
 
 
 export const createReport = async (req, res) => {
     try {
+        const userExist = await User.findOne({name: req.user.name})
         const newReport = new Report({
             ...req.body,
-            user: req.user.id
+            user: req.user.id,
+            userName: userExist.name
         })
         const savedData = await newReport.save();
 
@@ -14,7 +17,8 @@ export const createReport = async (req, res) => {
             user: req.user.id,
             action: "Create new",
             fileType: "ROA",
-            itemId: savedData.reportId
+            itemId: savedData.reportId,
+            userName: userExist.name
         })
 
         await newActivity.save();
@@ -67,6 +71,7 @@ export const deleteReports = async (req, res) => {
     try {
         const reportId = req.params.id
         const userId = req.user.id
+        const userExist = await User.findOne({name: req.user.name})
         
         const reportExists = await Report.findOne({
             user: userId,
@@ -83,7 +88,8 @@ export const deleteReports = async (req, res) => {
             user: req.user.id,
             action: "Deleted",
             fileType: "ROA",
-            itemId: deletedReport.reportId
+            itemId: deletedReport.reportId,
+            userName: userExist.name
         })
 
         await newActivity.save();
@@ -98,6 +104,7 @@ export const updateReports = async (req, res) => {
     try {
         const reportId = req.params.id
         const userId = req.user.id
+        const userExist = await User.findOne({name: req.user.name})
 
         const reportExists = await Report.findOne({
             user: userId,
@@ -116,7 +123,8 @@ export const updateReports = async (req, res) => {
             user: userId,
             action: "Updated",
             fileType: "ROA",
-            itemId: newReportData.reportId
+            itemId: newReportData.reportId,
+            userName: userExist.name
         })
 
         await newActivity.save();

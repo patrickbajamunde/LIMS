@@ -19,9 +19,7 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8001/api/activity/recentActivities", {
-                    withCredentials: true,
-                });
+                const response = await axios.get("http://localhost:8001/api/activity/recentActivities");
                 setActivities(response.data);   
                 setFilteredData(response.data);
             } catch (error) {
@@ -55,6 +53,11 @@ export default function Dashboard() {
             sortable: true,
         },
 
+        {
+            name: "User",
+            selector: (row) => row.userName,
+            sortable: true,
+        },
         {
             name: "Status",
             selector: (row) => row.action,

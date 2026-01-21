@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import TestPdf from "../generatePdf/testPdf";
 import UpdateRequest from "../pages/UpdateRequest";
 import axios from "axios";
@@ -24,7 +24,6 @@ export default function Walkin() {
         const fetchData = async () => {
             try {
                 const response = await axios.get("http://localhost:8001/api/client/userRequest", {
-                    withCredentials: true,
                 });
 
                 const walkinOnly = response.data.filter(clientData => clientData.clientType === "Student" || clientData.clientType === "Private" || clientData.clientType === "Farmer");
@@ -79,55 +78,33 @@ export default function Walkin() {
             sortable: true,
         },
         {
-            name: "Sample Description",
-            cell: (row) => (
-                <div style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
-                    maxWidth: "200px"
-                }}>
-                    {row.sampleDetails.map(s => s.sampleDescription)}
-                </div>
-            ),
-        },
-        {
-            name: "Parameter",
-            cell: (row) => (
-                <div style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap", // This is the key change: prevents text from wrapping
-                    maxWidth: "200px"
-                }}>
-                    {row.sampleDetails.map(s => s.parameterReq)}
-                </div>
-            ),
-            sortable: true,
-        },
-        {
             name: "Test Method",
             cell: (row) => (
                 <div style={{
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
+                    whiteSpace: "pre-wrap",
                     maxWidth: "200px"
                 }}>
-                    {row.sampleDetails.map(s => s.methodReq)}
+                    {row.sampleDetails.map(s => s.methodReq).join(',').trim().replace(',', '\n')}
                 </div>
             ),
             sortable: true,
         },
-        
+        {
+            name: "Created By",
+            selector: (row) => row.userName,
+            sortable: true
+        },
+
         {
             name: "Action",
             cell: (row) => (
                 <div className="d-flex align-items-center gap-2">
                     <button type="button" className="btn p-0 border-0 " onClick={() => deletRequest(row._id)}><i className="bi bi-trash text-danger "></i></button>
                     <Link
-                        to={`/Dco/updateArf/${row._id}` }
-                        state={{from: '/Dco/Walkin/'}}
+                        to={`/Dco/updateArf/${row._id}`}
+                        state={{ from: '/Dco/Walkin/' }}
                         type="button"
                         className="btn p-0 border-0"><i className="bi bi-pencil-square text-success "></i></Link>
 
@@ -137,7 +114,7 @@ export default function Walkin() {
                         icon={<i className="bi bi-box-arrow-down text-primary"></i>}
                         disabledIcon={<i className="bi bi-box-arrow-down text-secondary"></i>}
                     />
-                    <Link to={`/Dco/requestDetails/${row._id}`} state={{from: '/Dco/Walkin/'}} type="button" className="btn p-0 border-0"><i class="bi bi-eye"></i></Link>
+                    <Link to={`/Dco/requestDetails/${row._id}`} state={{ from: '/Dco/Walkin/' }} type="button" className="btn p-0 border-0"><i class="bi bi-eye"></i></Link>
                 </div>
             ),
         },

@@ -81,12 +81,23 @@ const reportSchema = new mongoose.Schema({
         type: String,
     },
 
+    url: {
+        type: String
+    },
+
+    qrCode: {
+        type: String
+    },
+
     roaDetails: [roaModel],
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
+    userName: {
+        type: String
+    }
 
 
 })
