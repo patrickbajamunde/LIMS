@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
-<<<<<<< HEAD
-import { useNavigate, useParams } from "react-router-dom";
-import TestPdf from "../generatePdf/TestPdf";
-=======
 import { useNavigate} from "react-router-dom";
-import TestPdf from "../generatePdf/testPdf";
+import TestPdf from "../generatePdf/TestPdf";
 import UpdateRequest from "../pages/UpdateRequest";
->>>>>>> refs/remotes/origin/master
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -28,12 +23,7 @@ export default function Walkin() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-<<<<<<< HEAD
-                const response = await axios.get("http://192.168.100.177:8001/api/client/userRequest", {
-                    withCredentials: true,
-=======
                 const response = await axios.get("http://localhost:8001/api/client/userRequest", {
->>>>>>> refs/remotes/origin/master
                 });
 
                 const walkinOnly = response.data.filter(clientData => clientData.clientType === "Student" || clientData.clientType === "Private" || clientData.clientType === "Farmer");

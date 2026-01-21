@@ -19,13 +19,7 @@ export default function Dashboard() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-<<<<<<< HEAD
-                const response = await axios.get("http://192.168.100.177:8001/api/activity/recentActivities", {
-                    withCredentials: true,
-                });
-=======
                 const response = await axios.get("http://localhost:8001/api/activity/recentActivities");
->>>>>>> refs/remotes/origin/master
                 setActivities(response.data);   
                 setFilteredData(response.data);
             } catch (error) {
