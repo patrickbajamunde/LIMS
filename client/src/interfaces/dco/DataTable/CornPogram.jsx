@@ -20,7 +20,7 @@ export default function CornProgram() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:8001/api/client/userRequest", {
+                const response = await axios.get("http://192.168.100.177:8001/api/client/userRequest", {
                 });
 
                 const regOnly = response.data.filter(clientData => clientData.clientType === "Corn Program");

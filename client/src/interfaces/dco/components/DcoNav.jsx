@@ -7,7 +7,7 @@ function DcoNav() {
     const [user, setUser] = useState(null);
 
     const handleLogout = () => {
-    fetch('http://localhost:8001/api/auth/logout', {
+    fetch('http://192.168.100.177:8001/api/auth/logout', {
       method: 'POST',
       credentials: 'include',
     })
