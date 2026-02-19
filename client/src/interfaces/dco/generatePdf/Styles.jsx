@@ -14,6 +14,8 @@ Font.register({
     ],
 });
 
+
+
 const styles = StyleSheet.create({
 
     font: {
@@ -235,8 +237,9 @@ const styles = StyleSheet.create({
         borderLeftWidth: 0,
         borderTopWidth: 0,
         borderBottomWidth: 1,
-        padding: 2
+        padding: 2,
     },
+<<<<<<< HEAD
     roaCell2: {
         fontFamily: 'Cambria',
         fontSize: 11,
@@ -247,6 +250,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         padding: 2
     },
+=======
+
+    textWrap: {
+        flexWrap: 'wrap',
+        flexShrink: 1,
+    },
+
+>>>>>>> refs/remotes/origin/master
     roaImage: {
         marginLeft: 20,
         height: 90,
