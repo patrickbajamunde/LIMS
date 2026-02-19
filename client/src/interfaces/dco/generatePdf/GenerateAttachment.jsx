@@ -33,8 +33,8 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
         if (!request || !request.sampleDetails || !request.ArfAttachment) return;
         return (
             <Document>
-                <Page style={[styles.body, { marginTop: 5 }]} size="A4" orientation='landscape'>
-                    <View style={styles.headerContainer2}>
+                <Page style={[styles.body, { marginTop: 5, paddingBottom: 105 }]} size="A4" orientation='landscape'>
+                    <View style={styles.headerContainer2} fixed>
                         <Image style={styles.image2} src={image1} />
                         <View style={{ alignItems: 'justify', }} >
                             <Text style={styles.normalFont} >Republic of the Philippines</Text>
@@ -43,11 +43,11 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                             <Text style={styles.normalFont} >San Agustin, Pili, Camarines Sur</Text>
                         </View>
                     </View>
-                    <View style={styles.title} >
+                    <View style={styles.title} fixed>
                         <Text style={[styles.titleBold, { fontSize: 14 }]}>ANALYSIS REQUEST FORM ATTACHMENT</Text>
                     </View>
 
-                    <View style={[styles.normalFont, { fontSize: 11, marginTop: 8 }]}>
+                    <View style={[styles.normalFont, { fontSize: 11, marginTop: 8 }]} fixed>
                         <View style={[styles.row, { alignItems: 'center' }]}>
                             <Text style={[{ marginLeft: 45, paddingBottom: 12, paddingRight: 5 }]}>Request ID: (to filled up by RFCAL)</Text>
                             <View style={styles.requestBox}>
@@ -58,14 +58,14 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                         </View>
                     </View>
 
-                    <View style={styles.table2}>
-                        <View style={styles.row}>
-                            <Text style={[styles.header, { width: "25%", paddingTop: 0, backgroundColor: '#ffffff' }]}>CODE NO. {'\n'} (For Lab Use ONLY)</Text>
-                            <Text style={[styles.header, { width: "43%", backgroundColor: '#ffffff', paddingHorizontal: 18, paddingBottom: 15 }]}>SAMPLE DESCRIPTION {'\n'} (Province-District No.-Number Sample Collection-Name of Sample) {'\n'} e.g., CS-2-001-Premium Hag Starter Pellet</Text>
-                            <Text style={[styles.header, { width: "35%", paddingTop: 0, backgroundColor: '#ffffff' }]}>ADDRESS</Text>
+                    <View style={[styles.table2, { borderLeftWidth:0, borderTopWidth:0}]}>
+                        <View style={styles.row}fixed>
+                            <Text style={[styles.header2, { width: "25%", paddingTop: 0, backgroundColor: '#ffffff', borderTopWidth: 1 }]}>CODE NO. {'\n'} (For Lab Use ONLY)</Text>
+                            <Text style={[styles.header, { width: "43%", backgroundColor: '#ffffff', paddingHorizontal: 18, paddingBottom: 15, borderTopWidth: 1 }]}>SAMPLE DESCRIPTION {'\n'} (Province-District No.-Number Sample Collection-Name of Sample) {'\n'} e.g., CS-2-001-Premium Hag Starter Pellet</Text>
+                            <Text style={[styles.header, { width: "35%", paddingTop: 0, backgroundColor: '#ffffff', borderTopWidth: 1 }]}>ADDRESS</Text>
                         </View>
-                        <View style={[styles.row, { textAlign: 'center' }]}>
-                            <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>Lab Code</Text>
+                        <View style={[styles.row, { textAlign: 'center' }]} fixed>
+                            <Text style={[styles.roaCell2, { width: "12%", paddingVertical: 0}]}>Lab Code</Text>
                             <Text style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>Sample Code</Text>
                             <Text style={[styles.roaCell, { width: "43%", paddingVertical: 0 }]}></Text>
                             <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>Barangay</Text>
@@ -74,7 +74,7 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                         </View>
 
                         {request.ArfAttachment.map((item, index) => (
-                            <View style={[styles.row, { textAlign: 'center'}]} key={index} wrap={false}>
+                            <View style={[styles.row, { textAlign: 'center', borderLeftWidth: 1 }]} key={index} wrap={false}>
                                 <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.labCode}</Text>
                                 <Text style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>{item.sampleCode}</Text>
                                 <Text style={[styles.roaCell, { width: "43%", paddingVertical: 0 }]}>{item.sampleDescription}</Text>
@@ -85,7 +85,7 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                         ))}
                     </View>
 
-                    <View style={[styles.footer2]}>
+                    <View style={[styles.footer2]} fixed>
                         <View style={[styles.font, { flex: 1, marginLeft: 45, marginTop: 40, justifyContent: 'flex-end' }]}>
                             <Text>ILD-RFCAL-056-0</Text>
                             <Text>Effectivity Date: September 22,2025</Text>
@@ -95,7 +95,7 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                     </View>
                     <Text
                         style={styles.pageNumber}
-                        render={({ pageNumber, totalPages }) => pageNumber === 1 ? `Page 1 of 1` : ''}
+                        render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}
                         fixed />
 
                 </Page>

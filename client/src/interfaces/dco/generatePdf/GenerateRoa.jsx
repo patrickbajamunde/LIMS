@@ -43,12 +43,16 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                         </View>
                     </View>
 
-                    <View style={[styles.row, { position: 'absolute', right: 50, top: 25 }]}>
+                    <View style={[styles.row, { position: 'absolute', right: 50, top: 25 }]} fixed>
                         <Image src={report.qrCode} style={{ width: 80, height: 80 }} />
                     </View>
-                    <View style={[styles.row, { position: 'absolute', right: 45, top: 5, color: 'red', fontSize: 8, border: '2 solid red', padding: 5 }]}>
-                        <Text>{copyType}</Text>
-                    </View>
+
+                    {copyType === "CUSTOMER COPY" && (
+                        <View style={[styles.row, { position: 'absolute', right: 45, top: 5, color: 'red', fontSize: 8, border: '2 solid red', padding: 5 }]} fixed>
+                            <Text>{copyType}</Text>
+                        </View>
+                    )}
+
 
                     <View style={[styles.boldFont, { marginLeft: 35, marginTop: 15 }]} fixed>
                         <Text>Customer Name: <Text style={{ fontWeight: 'normal' }}>{report.customerName}</Text></Text>
@@ -57,8 +61,8 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                             <View style={{ width: '50%' }}>
                                 <Text>Contact Number: <Text style={{ fontWeight: 'normal' }}>{report.customerContact}</Text></Text>
                             </View>
-                            <View style={{ width: '40%' }}>
-                                <Text>Report ID: <Text style={{ fontWeight: 'normal' }}>{report.reportId}-{copyCode}</Text></Text>
+                            <View style={{ width: '50%' }}>
+                                <Text>Report Number: <Text style={{ fontWeight: 'normal' }}>{report.reportId}-{copyCode}</Text></Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
@@ -89,9 +93,9 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                         </View>
                         {report.roaDetails.map((row, index) => (
                             <View style={styles.row} key={index} wrap={false}>
-                                <Text style={[styles.roaCell, styles.specificCell, { width: "20%", textAlign: 'center' }]}>{row.labCode}</Text>
-                                <Text style={[styles.roaCell, { width: "20%", textAlign: 'center' }]}>{row.sampleCode}</Text>
-                                <Text style={[styles.roaCell, { width: "28%", textAlign: 'center' }]}>{row.sampleDescription}</Text>
+                                <Text style={[styles.roaCell, styles.specificCell, { width: "20%", textAlign: 'left', paddingHorizontal: 0}]}>{row.labCode}</Text>
+                                <Text style={[styles.roaCell, { width: "20%", textAlign: 'center', paddingHorizontal: 0 }]}>{row.sampleCode}</Text>
+                                <Text style={[styles.roaCell, { width: "28%", textAlign:'left'}]}>{row.sampleDescription}</Text>
                                 <Text style={[styles.roaCell, { width: "20%", textAlign: 'center' }]}>{row.sampleParam}</Text>
                                 <Text style={[styles.roaCell, { width: "13%", textAlign: 'center' }]}>{row.result}</Text>
                                 <Text style={[styles.roaCell, { width: "29%", flexWrap: 'wrap' }]}>{row.testMethod}</Text>
@@ -120,7 +124,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                     <View style={[styles.row, { position: 'absolute', bottom: 95, gap: 35 }]} fixed>
                         <View style={[styles.font, { paddingLeft: 55 }]}>
                             <Text style={{ fontWeight: 'bold', bottom: 30 }}>Certified By:</Text>
-                            <Text style={{ fontWeight: 'bold' }}>CORREN HOLLY M. MONSALVE, Rch</Text>
+                            <Text style={{ fontWeight: 'bold' }}>COREN HOLLY M. MONSALVE, RCh</Text>
                             <Text>Laboratory Head, Chemist III</Text>
                             <Text>PRC License No. 0011021</Text>
                         </View>

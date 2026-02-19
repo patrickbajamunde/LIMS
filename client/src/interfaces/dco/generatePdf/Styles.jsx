@@ -91,6 +91,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingBottom: 0
     },
+    header2: {
+        fontFamily: 'Cambria',
+        fontSize: 11,
+        width: '20%', // You can adjust widths here
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderLeftWidth: 1,
+        borderTopWidth: 1,
+        backgroundColor: '#D9D9D9',
+        textAlign: 'center',
+        paddingBottom: 0
+    },
     cell: {
         fontFamily: 'Cambria',
         fontSize: 11,
@@ -221,6 +233,16 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderWidth: 1,
         borderLeftWidth: 0,
+        borderTopWidth: 0,
+        borderBottomWidth: 1,
+        padding: 2
+    },
+    roaCell2: {
+        fontFamily: 'Cambria',
+        fontSize: 11,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderLeftWidth: 1,
         borderTopWidth: 0,
         borderBottomWidth: 1,
         padding: 2
