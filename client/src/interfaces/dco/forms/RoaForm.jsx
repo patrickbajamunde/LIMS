@@ -119,7 +119,7 @@ function RoaForm() {
 
   const inputHandler = (e) => {
     const { name, value } = e.target;
-    if (name === 'analyzedBy' || name === 'datePerformed') {
+    if (name === 'analyzedBy') {
       const prc = analystPRC(value);
       const position = designation(value);
       setResult({

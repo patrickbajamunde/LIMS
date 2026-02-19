@@ -14,6 +14,8 @@ Font.register({
     ],
 });
 
+
+
 const styles = StyleSheet.create({
 
     font: {
@@ -223,8 +225,14 @@ const styles = StyleSheet.create({
         borderLeftWidth: 0,
         borderTopWidth: 0,
         borderBottomWidth: 1,
-        padding: 2
+        padding: 2,
     },
+
+    textWrap: {
+        flexWrap: 'wrap',
+        flexShrink: 1,
+    },
+
     roaImage: {
         marginLeft: 20,
         height: 90,
