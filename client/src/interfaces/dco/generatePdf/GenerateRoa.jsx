@@ -92,13 +92,6 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                             <Text style={[styles.roaHeader, { width: "29%", paddingTop: 0 }]}>TEST METHOD</Text>
                         </View>
                         {report.roaDetails.map((row, index) => (
-<<<<<<< HEAD
-                            <View style={styles.row} key={index} wrap={false}>
-                                <Text style={[styles.roaCell, styles.specificCell, { width: "20%", textAlign: 'left', paddingHorizontal: 0}]}>{row.labCode}</Text>
-                                <Text style={[styles.roaCell, { width: "20%", textAlign: 'center', paddingHorizontal: 0 }]}>{row.sampleCode}</Text>
-                                <Text style={[styles.roaCell, { width: "28%", textAlign:'left'}]}>{row.sampleDescription}</Text>
-                                <Text style={[styles.roaCell, { width: "20%", textAlign: 'center' }]}>{row.sampleParam}</Text>
-=======
                             <View style={[styles.row, { alignItems: "stretch" }]} wrap={false} key={index}>
                                 <View style={[styles.roaCell, styles.specificCell, { width: "20%", alignItems: 'center' }]}>
                                     <Text style={{ textAlign: 'center' }}>
@@ -118,7 +111,6 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                                 </View>
                                 <Text style={[styles.roaCell, styles.textWrap, { width: "28%", textAlign: 'left' }]} hyphenationCallback={word => [word]}>{row.sampleDescription}</Text>
                                 <Text style={[styles.roaCell, { width: "20%", textAlign: 'left' }]} hyphenationCallback={word => [word]}>{row.sampleParam?.trim().replace(/,\s*/g, '\n')}</Text>
->>>>>>> refs/remotes/origin/master
                                 <Text style={[styles.roaCell, { width: "13%", textAlign: 'center' }]}>{row.result}</Text>
                                 <Text style={[styles.roaCell, { width: "29%" }]}>{row.testMethod}</Text>
                             </View>
