@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     },
     title: {
         textAlign: 'center',
-        marginTop: 15,
         marginLeft: 14,
 
     },
@@ -97,7 +96,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Cambria',
         fontSize: 11,
         width: '20%', // You can adjust widths here
-        height: 155,
+        height: 175,
         borderStyle: 'solid',
         borderWidth: 1,
         borderLeftWidth: 0,
@@ -110,12 +109,13 @@ const styles = StyleSheet.create({
     table: {
         display: 'table',
         width: '81%',
-        marginTop: 20,
+        marginTop: 12,
         borderStyle: 'solid',
         borderWidth: 1,
         borderRightWidth: 0,
         borderBottomWidth: 0,
         marginLeft: 67,
+
     },
 
     table2: {

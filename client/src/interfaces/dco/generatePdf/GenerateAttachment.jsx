@@ -76,8 +76,14 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
 
                         {request.ArfAttachment.map((item, index) => (
                             <View style={[styles.row, { textAlign: 'center'}]} key={index} wrap={false}>
-                                <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.labCode}</Text>
-                                <Text style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>{item.sampleCode}</Text>
+                                <View style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>
+                                    <Text>{item.labCode?.substring(0,14)}</Text>
+                                    <Text>{item.labCode?.substring(14)}</Text>
+                                </View>
+                                <View style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>
+                                    <Text>{item.sampleCode?.substring(0,11)}</Text>
+                                    <Text>{item.sampleCode?.substring(11)}</Text>
+                                </View> 
                                 <Text style={[styles.roaCell, { width: "43%", paddingVertical: 0 }]}>{item.sampleDescription}</Text>
                                 <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.Barangay}</Text>
                                 <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.Municipality}</Text>

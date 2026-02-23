@@ -84,14 +84,44 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
                             <Text style={[styles.header, { width: "22%", paddingTop: 0 }]}>TEST PARAMETER REQUESTED</Text>
                             <Text style={[styles.header, { width: "20%", paddingTop: 0 }]}>TEST METHOD</Text>
                         </View>
-                        <View style={styles.row}>
-                            <Text style={[styles.cell, { width: "18%" }]}>{request.sampleDetails.map(s => s.labCode).join(", ")}</Text>
-                            <Text style={[styles.cell, { width: "20%" }]}>{request.sampleDetails.map(s => s.sampleCode).join(", ")}</Text>
-                            <Text style={[styles.cell, { width: "29%" }]}>{request.sampleDetails.map(s => s.sampleDescription).join(", ")}</Text>
-                            <Text style={[styles.cell, { width: "22%" }]}>{request.sampleDetails.map(s => s.parameterReq).join(", ")}</Text>
-                            <Text style={[styles.cell, { width: "20%" }]}>{request.sampleDetails.map(s => s.methodReq).join(", ")}</Text>
-                        </View>
 
+                        <View style={styles.row}>
+                            <View style={[styles.cell, { width: "18%", fontSize: 10 }]}>
+                                {request.sampleDetails.map((s, index) => (
+                                    <View key={index} style={{ paddingBottom: 23 }}>
+                                        <Text>{s.labCode?.substring(0, 14)}</Text>
+                                        <Text>{s.labCode?.substring(14)}</Text>
+                                    </View>
+                                ))}
+                            </View>
+                            <View style={[styles.cell, { width: "20%", fontSize: 10 }]}>
+                                {request.sampleDetails.map((s, index) => (
+                                    <View key={index} style={{ paddingBottom: 23 }}>
+                                        <Text>{s.sampleCode?.substring(0, 11)}</Text>
+                                        <Text>{s.sampleCode?.substring(11)}</Text>
+                                    </View>
+                                ))}
+                            </View>
+
+                            <View style={[styles.cell, { width: "29%", fontSize: 10, textAlign: 'left' }]}>
+                                {request.sampleDetails.map((row, index) => (
+                                    <View key={index} style={{ paddingBottom: 23, flexDirection: "row" }} >
+                                        <Text style={{ marginRight: 4 }}>{index + 1}.</Text>
+                                        <Text style={{ flex: 1 }} hyphenationCallback={word => [word]}>{row.sampleDescription}</Text>
+                                    </View>
+                                ))}
+                            </View>
+
+                            <View style={[styles.cell, { width: "22%", fontSize: 10 }]}>
+                                {request.sampleDetails.map((row, index) => (
+                                    <View key={index} style={{ paddingBottom: 23 }} >
+                                        <Text hyphenationCallback={word => [word]}>{row.parameterReq}</Text>
+                                    </View>
+                                ))}
+                            </View>
+
+                            <Text style={[styles.cell, { width: "20%", fontSize: 10, textAlign: 'left' }]} >{request.sampleDetails.map(s => s.methodReq).join("\n")}</Text>
+                        </View>
                     </View>
                     <Text style={[styles.font, { marginLeft: 72, marginTop: 3 }]}>Discussed with customer:</Text>
                     <View style={[styles.row, { paddingLeft: 72, marginTop: 5, textAlign: 'justify' }]}>
