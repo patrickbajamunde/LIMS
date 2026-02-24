@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { Page, Text, View, Document, StyleSheet, Image, PDFViewer } from '@react-pdf/renderer';
+import { Page, Text, View, Document, Image, pdf } from '@react-pdf/renderer';
 import styles from './Styles';
 import image1 from '../../analysts/components/images/DA5.jpg';
 import image2 from '../../dco/components/images/unnamed.png'
-import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
+import { PDFDocument, StandardFonts } from 'pdf-lib';
 
 const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }) => {
 
@@ -53,8 +53,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                         </View>
                     )}
 
-
-                    <View style={[styles.boldFont, { marginLeft: 35, marginTop: 15 }]} fixed>
+                    <View style={[styles.boldFont, { position: 'absolute',marginLeft: 35, top: 105 }]} fixed>
                         <Text>Customer Name: <Text style={{ fontWeight: 'normal' }}>{report.customerName}</Text></Text>
                         <Text>Address: <Text style={{ fontWeight: 'normal' }}>{report.customerAddress}</Text></Text>
                         <View style={{ flexDirection: 'row' }}>
@@ -73,16 +72,17 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                                 <Text>Date Issued: <Text style={{ fontWeight: 'normal' }}>{formatDate(report.dateIssued)}</Text></Text>
                             </View>
                         </View>
-                        <Text>Date Performed: <Text style={{ fontWeight: 'normal' }}>{report.datePerformed}</Text></Text>
+                        {/* datePerformed is left blank here — pdf-lib will overlay the editable field */}
+                        <Text>Date Performed: </Text>
                     </View>
 
-                    <View style={[styles.roaTitle]} fixed>
+                    <View style={[styles.roaTitle, {marginTop:85}]} fixed>
                         <View style={[styles.row, styles.boldFont]}>
                             <Text style={[{ width: "100%", textAlign: 'center', fontSize: 20 }]}>REPORT OF ANALYSIS</Text>
                         </View>
                     </View>
 
-                    <View style={[styles.roaTable]}>
+                    <View style={[styles.roaTable,]}>
                         <View style={[styles.row, styles.boldFont]} fixed>
                             <Text style={[styles.roaHeader, styles.specificCell, { width: "20%", paddingTop: 0 }]}>LAB CODE</Text>
                             <Text style={[styles.roaHeader, { width: "20%", paddingTop: 0 }]}>SAMPLE CODE</Text>
@@ -115,9 +115,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                                 <Text style={[styles.roaCell, { width: "29%" }]}>{row.testMethod}</Text>
                             </View>
                         ))}
-
                     </View>
-
 
                     <View style={[styles.row, { fontSize: 9, textAlign: 'justify', marginTop: 5, paddingHorizontal: 20 }]} fixed>
                         <Text style={styles.italicFont}>Note: The result is based on the sample received and analyzed by the laboratory. This report shall not be reproduced without full approval of the Department of Agriculture Regional Field Office 5 - Integrated Laboratories Division.</Text>
@@ -150,8 +148,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                         </View>
                     </View>
 
-
-                    <View style={[styles.footer, { position: 'absolute', bottom: 20, left: 20, }]} fixed>
+                    <View style={[styles.footer, { position: 'absolute', bottom: 20, left: 20 }]} fixed>
                         <View style={[styles.font]}>
                             <Text>ILD-RFCAL-005-1</Text>
                             <Text>Effectivity Date: April 14,2025</Text>
@@ -167,22 +164,67 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
         )
     }
 
+    const handleDownload = async () => {
+        if (!report) return;
+
+        // Step 1: Generate PDF bytes from react-pdf
+        const blob = await pdf(generatePdf()).toBlob();
+        const arrayBuffer = await blob.arrayBuffer();
+        const pdfDoc = await PDFDocument.load(arrayBuffer);
+
+        const customFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+
+        // Step 2: Load into pdf-lib
+
+        const form = pdfDoc.getForm();
+        const pages = pdfDoc.getPages();
+        
+        
+
+        const fixedY = 668
+
+        // Step 3: Add editable text field for datePerformed
+        // Adjust x and y until it aligns with "Date Performed:" label
+        pages.forEach((page, index) => {
+            const { height } = page.getSize();
+            const dateField = form.createTextField(`datePerformed_${index}`);
+            dateField.addToPage(page, {
+                x: 120,
+                y: fixedY,
+                width: 450,
+                height: 13,
+                borderWidth: 0,
+            });
+            // addToPage FIRST, then set text and appearances
+            dateField.setFontSize(11);
+            dateField.setText(report.datePerformed || '');
+            dateField.updateAppearances(customFont);
+        }); 
+
+        // Step 4: Save and download
+        const pdfBytes = await pdfDoc.save();
+        const editableBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(editableBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `${report.reportId}${fileType}`;
+        link.click();
+        URL.revokeObjectURL(url);
+    };
+
     return (
         <>
             {report ? (
-                <PDFDownloadLink document={generatePdf()} fileName={`${report.reportId}${fileType}`} style={{ padding: 0 }}>
-                    <button className="btn p-0 border-0">
-                        {icon}
-                    </button>
-                </PDFDownloadLink>
+                <button className="btn p-0 border-0" onClick={handleDownload}>
+                    {icon}
+                </button>
             ) : (
                 <button className="btn p-0 border-0" disabled>
                     {disabledIcon}
                 </button>
             )}
         </>
-    )
-
+    );
 }
 
-export default GenerateRoa
+export default GenerateRoa;
