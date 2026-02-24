@@ -36,7 +36,7 @@ function RoaForm() {
       "Crude Protein": "KJELDAHL (AOAC 2001.11)",
       "Moisture": "GRAVIMETRIC METHOD (AOAC 930.15)",
       "Crude Fiber": "GRAVIMETRIC METHOD (AOAC 962.09)",
-      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 2003.06)",
+      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 920.39)",
       "Crude Ash": "GRAVIMETRIC METHOd (AOAC 942.05)",
       "Calcium": "TITRIMETRIC METHOD (AOAC 927.05)",
       "Total Phosphorus": "MOLYBDOVANADATE METHOD",

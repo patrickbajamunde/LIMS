@@ -6,7 +6,7 @@ export const RoaModal = ({ show, onClose, reportDetails, onChange, onSubmit, che
 
   return (
     <div className="modal fade show" style={{ display: 'block', background: 'rgba(0,0,0,0.5)' }}>
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <form onSubmit={onSubmit}>
             <div className="modal-header bg-primary text-white">
@@ -135,7 +135,7 @@ export const ArfAttachment = ({ show, onClose, ArfAttachment, onChange, onSubmit
 
   return (
     <div className="modal fade show" style={{ display: 'block', background: 'rgba(0,0,0,0.5)' }}>
-      <div className="modal-dialog">
+      <div className="modal-dialog modal-lg">
         <div className="modal-content">
           <form onSubmit={onSubmit}>
             <div className="modal-header bg-primary text-white">

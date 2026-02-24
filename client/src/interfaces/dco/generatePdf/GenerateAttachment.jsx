@@ -3,7 +3,6 @@ import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/render
 import styles from './Styles';
 import image1 from '../../analysts/components/images/DA5.jpg';
 import image2 from '../../dco/components/images/unnamed.png'
-import terms from './data/Terms';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
 
@@ -74,9 +73,15 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                         </View>
 
                         {request.ArfAttachment.map((item, index) => (
-                            <View style={[styles.row, { textAlign: 'center', borderLeftWidth: 1 }]} key={index} wrap={false}>
-                                <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.labCode}</Text>
-                                <Text style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>{item.sampleCode}</Text>
+                            <View style={[styles.row, { textAlign: 'center'}]} key={index} wrap={false}>
+                                <View style={[styles.roaCell, { width: "12%", paddingVertical: 0, borderLeftWidth: 1 }]}>
+                                    <Text>{item.labCode?.substring(0,14)}</Text>
+                                    <Text>{item.labCode?.substring(14)}</Text>
+                                </View>
+                                <View style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>
+                                    <Text>{item.sampleCode?.substring(0,11)}</Text>
+                                    <Text>{item.sampleCode?.substring(11)}</Text>
+                                </View> 
                                 <Text style={[styles.roaCell, { width: "43%", paddingVertical: 0 }]}>{item.sampleDescription}</Text>
                                 <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.Barangay}</Text>
                                 <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.Municipality}</Text>

@@ -71,7 +71,8 @@ function Arf() {
     "Calcium",
     "Total Phosphorus",
     "Salt as Sodium Chloride",
-    "AFLATOXIN"
+    "Complete Proximate",
+    "AFLATOXIN",
   ];
 
   // Build methods string from selected parameters
@@ -80,12 +81,13 @@ function Arf() {
       "Crude Protein": "KJELDAHL (AOAC 2001.11)",
       "Moisture": "GRAVIMETRIC METHOD (AOAC 930.15)",
       "Crude Fiber": "GRAVIMETRIC METHOD (AOAC 962.09)",
-      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 2003.06)",
+      "Crude Fat": "SOXHLET PETROLEUM ETHER (AOAC 920.39)",
       "Crude Ash": "GRAVIMETRIC METHOd (AOAC 942.05)",
       "Calcium": "TITRIMETRIC METHOD (AOAC 927.05)",
       "Total Phosphorus": "MOLYBDOVANADATE METHOD",
       "Salt as Sodium Chloride": "MOHR (AOAC 971.27)",
-      "AFLATOXIN": "ELISA VERTOX KIT (AOAC 990.34)"
+      "AFLATOXIN": "ELISA VERTOX KIT (AOAC 990.34)",
+      "Complete Proximate": "KJELDAHL (AOAC 2001.11), GRAVIMETRIC METHOD (AOAC 930.15, 962.09, 942.05), SOXHLET PETROLEUM ETHER (AOAC 920.39) "
     }
 
     return methodTable[parameterReq] || "";
@@ -432,7 +434,7 @@ function Arf() {
               <button type="button" className="btn btn-primary col-md-2" onClick={submitForm}>Save</button>
             </div>
           </form>
-        </div>  
+        </div>
       </div>
 
       <ArfAttachment
@@ -449,7 +451,7 @@ function Arf() {
 
       {showModal && (
         <div className="modal fade show" style={{ display: 'block', background: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-lg">
             <div className="modal-content">
               <form onSubmit={sampleSubmit} method="post">
 
