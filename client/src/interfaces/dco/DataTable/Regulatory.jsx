@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
-import TestPdf from "../generatePdf/testPdf";
+import TestPdf from "../generatePdf/TestPdf";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -84,9 +84,32 @@ export default function Regulatory() {
                     whiteSpace: "pre-wrap",
                     maxWidth: "200px"
                 }}>
-                    {row.sampleDetails.map(s => s.methodReq).join(',').trim().replace(',', '\n')}
+                    {row.sampleDetails?.map(param => param.methodReq).join(",").replace(",",'\n ')}
                 </div>
             ),
+            sortable: true,
+        },
+        {
+            name: "Test Method",
+            selector: (row) => (row.sampleDetails ?? []).map(s => s.methodReq).join("\n"), // ← ADD THIS
+            cell: (row) => {
+                const methods = (row.sampleDetails ?? [])
+                    .map(s => s.methodReq)
+                    .join("\n");
+
+                return (
+                    <div
+                        style={{
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "pre-wrap",
+                            maxWidth: "200px"
+                        }}
+                    >
+                        {methods}
+                    </div>
+                );
+            },
             sortable: true,
         },
         {

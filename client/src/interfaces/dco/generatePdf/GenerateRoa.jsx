@@ -151,7 +151,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                     <View style={[styles.footer, { position: 'absolute', bottom: 20, left: 20 }]} fixed>
                         <View style={[styles.font]}>
                             <Text>ILD-RFCAL-005-1</Text>
-                            <Text>Effectivity Date: April 14,2025</Text>
+                            <Text>Effectivity Date: April 17,2025</Text>
                         </View>
                     </View>
                     <Image style={[styles.roaUkas, { position: 'absolute', bottom: 42, right: 15 }]} src={image2} fixed />

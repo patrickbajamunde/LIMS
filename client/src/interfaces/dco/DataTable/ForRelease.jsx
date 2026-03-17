@@ -105,7 +105,7 @@ export default function ForRelease() {
                     whiteSpace: "pre-wrap",
                     maxWidth: "200px"
                 }}>
-                    {row.roaDetails?.map(param => param.testMethod).join(",").replace(",",'\n ')}
+                    {row.roaDetails?.map(param => param.testMethod).join("\n")}
                 </div>
             ),
             sortable: true,

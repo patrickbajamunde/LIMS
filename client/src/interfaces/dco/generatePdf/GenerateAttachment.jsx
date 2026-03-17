@@ -35,17 +35,41 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
         return (
             <Document>
                 <Page style={[styles.body, { marginTop: 5 }]} size="A4" orientation='landscape'>
-                    <View style={styles.headerContainer2}>
-                        <Image style={styles.image2} src={image1} />
-                        <View style={{ alignItems: 'justify', }} >
-                            <Text style={styles.normalFont} >Republic of the Philippines</Text>
-                            <Text style={styles.boldFont} >DEPARTMENT OF AGRICULTURE</Text>
-                            <Text style={styles.boldFont} >REGIONAL FIELD OFFICE 5</Text>
-                            <Text style={styles.normalFont} >San Agustin, Pili, Camarines Sur</Text>
+                    <View style={[styles.headerContainer3, styles.row, {width: '90%', marginLeft: 43.5}]} >
+                        <View style={[styles.headerCell, { justifyContent: 'center' }]}>
+                            <Image style={styles.image} src={image1} />
                         </View>
-                    </View>
-                    <View style={styles.title} >
-                        <Text style={[styles.titleBold, { fontSize: 14 }]}>ANALYSIS REQUEST FORM ATTACHMENT</Text>
+
+                        <View style={[styles.headerOffice, styles.headerCell]}>
+                            <View style={{paddingRight: 35, paddingLeft: 3}}>
+                                <Text style={[styles.normalFont, { fontSize: 10 }]} >Republic of the Philippines</Text>
+                                <Text style={[styles.boldFont, { fontSize: 10 }]} >DEPARTMENT OF AGRICULTURE</Text>
+                                <Text style={[styles.boldFont, { fontSize: 10 }]} >REGIONAL FIELD OFFICE 5</Text>
+                                <Text style={[styles.boldFont, { fontSize: 10 }]} >INTEGRATED LABORATORIES DIVISION</Text>
+                                <Text style={[styles.normalFont, { fontSize: 10 }]} >San Agustin, Pili, Camarines Sur</Text>
+                            </View>
+                        </View>
+
+                        <View style={[styles.formTitle, styles.headerCell]} >
+                            <Text style={[styles.titleBold, { fontSize: 12, paddingLeft: 20, paddingRight: 20 }]}>ANALYSIS REQUEST FORM ATTACHMENT</Text>
+                        </View>
+
+                        <View style={[styles.headerCell, { flexDirection: 'column'}]}>
+                            <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 25, paddingRight: 25 }]}>Document Code</Text>
+                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5, paddingLeft: 20 }]}>ILD5-RFCAL-006-0</Text>
+                            <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 35 }]}>Record ID</Text>
+                            <Text style={[styles.normalFont, { fontSize: 10, paddingRight: 2, paddingLeft: 2 }]}>{request.requestId}</Text>
+                        </View>
+
+                        <View style={[styles.headerCell, { flexDirection: 'column', borderRightWidth: 0 }]}>
+                            <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 10, paddingRight: 10 }]}>Effectivity Date</Text>
+                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5, paddingLeft: 10 }]}>March 17, 2026</Text>
+                            <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 25 }]}>Page No.</Text>
+                            <Text
+                                style={{ fontFamily: 'Cambria', fontSize: 10, paddingLeft: 24 }}
+                                render={({ pageNumber, totalPages }) => pageNumber <= 2 ? ` ${pageNumber}   of   ${totalPages} ` : ''}
+                                fixed />
+                        </View>
                     </View>
 
                     <View style={[styles.normalFont, { fontSize: 11, marginTop: 8 }]}>
@@ -75,15 +99,15 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                         </View>
 
                         {request.ArfAttachment.map((item, index) => (
-                            <View style={[styles.row, { textAlign: 'center'}]} key={index} wrap={false}>
+                            <View style={[styles.row, { textAlign: 'center' }]} key={index} wrap={false}>
                                 <View style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>
-                                    <Text>{item.labCode?.substring(0,14)}</Text>
+                                    <Text>{item.labCode?.substring(0, 14)}</Text>
                                     <Text>{item.labCode?.substring(14)}</Text>
                                 </View>
                                 <View style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>
-                                    <Text>{item.sampleCode?.substring(0,11)}</Text>
+                                    <Text>{item.sampleCode?.substring(0, 11)}</Text>
                                     <Text>{item.sampleCode?.substring(11)}</Text>
-                                </View> 
+                                </View>
                                 <Text style={[styles.roaCell, { width: "43%", paddingVertical: 0 }]}>{item.sampleDescription}</Text>
                                 <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.Barangay}</Text>
                                 <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>{item.Municipality}</Text>
@@ -91,19 +115,6 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                             </View>
                         ))}
                     </View>
-
-                    <View style={[styles.footer2]}>
-                        <View style={[styles.font, { flex: 1, marginLeft: 45, marginTop: 40, justifyContent: 'flex-end' }]}>
-                            <Text>ILD-RFCAL-056-0</Text>
-                            <Text>Effectivity Date: September 22,2025</Text>
-                        </View>
-
-                        <Image style={[styles.ukas, { alignSelf: 'flex-end', marginRight: 30, marginBottom: 15 }]} src={image2} />
-                    </View>
-                    <Text
-                        style={styles.pageNumber}
-                        render={({ pageNumber, totalPages }) => pageNumber === 1 ? `Page 1 of 1` : ''}
-                        fixed />
 
                 </Page>
             </Document>

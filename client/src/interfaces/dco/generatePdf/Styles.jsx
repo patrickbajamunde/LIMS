@@ -22,16 +22,30 @@ const styles = StyleSheet.create({
         fontFamily: 'Cambria',
         fontSize: 11
     },
-    headerContainer: {
+    headerOffice: {
         flexDirection: 'row', // horizontal layout
         alignItems: 'center', // vertical alignment       
-        paddingRight: 160,
-        gap: 76,
     },
 
     headerContainer2: {
         flexDirection: 'row', // horizontal layout
         alignItems: 'center', // vertical alignment       
+    },
+
+    headerContainer3: {
+        fontFamily: 'Cambria',
+        borderStyle: 'solid',
+        display: 'table',
+        borderWidth: 1,
+    },
+
+    headerCell: {
+        fontFamily: 'Cambria',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderTopWidth: 0,
+        borderLeftWidth: 0,
+        borderBottomWidth: 0,
     },
 
     boldFont: {
@@ -50,17 +64,16 @@ const styles = StyleSheet.create({
     titleBold: {
         fontFamily: 'Cambria',
         fontWeight: 'bold',
-        fontSize: 11
+        fontSize: 13
     },
     contentNormal: {
         fontFamily: 'Cambria',
         fontSize: 11,
         textAlign: 'justify',
     },
-    title: {
+    formTitle: {
         textAlign: 'center',
-        marginLeft: 14,
-
+        justifyContent: 'center'
     },
     text: {
         margin: 12,
@@ -70,9 +83,8 @@ const styles = StyleSheet.create({
         padding: 72,
     },
     image: {
-        marginLeft: 48,
-        width: 96.39,
-        height: 86.5,
+        width: 54.93,
+        height: 53,
     },
 
     image2: {
@@ -108,13 +120,13 @@ const styles = StyleSheet.create({
 
     table: {
         display: 'table',
-        width: '81%',
+        width: '92%',
         marginTop: 12,
         borderStyle: 'solid',
         borderWidth: 1,
         borderRightWidth: 0,
         borderBottomWidth: 0,
-        marginLeft: 67,
+        marginLeft: 25,
 
     },
 
@@ -251,6 +263,12 @@ const styles = StyleSheet.create({
         paddingRight: 20,
         marginBottom: 5,
         alignSelf: 'flex-start'
+    },
+
+    testPdfpage: {
+        fontFamily: 'Cambria',
+        fontSize: 10,
+        paddingLeft: 18
     }
 
 });
