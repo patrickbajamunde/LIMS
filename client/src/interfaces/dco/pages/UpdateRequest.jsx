@@ -579,7 +579,7 @@ function UpdateRequest() {
             <div className="modal-content">
               <form onSubmit={sampleSubmit} method="post">
 
-                <div className="modal-header bg-primary text-white">
+                <div className="modal-header bg-primary text-white  ">
                   <h5 className="modal-title">
                     {isEditing ? 'Edit Sample Details' : 'Add Sample Details'}
                   </h5>
