@@ -204,8 +204,6 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
                         <Text style={styles.font}>_______________________________________</Text>
                         <Text style={[styles.font, { marginRight: 13 }]}>Signature of the Customer</Text>
                     </View>
-
-
                 </Page>
                 <Page>
                     <View style={[styles.headerContainer3, styles.row, { marginTop: 10 ,width: '92%', marginLeft: 25 }]}>

@@ -115,6 +115,11 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                                 <Text style={[styles.roaCell, { width: "29%" }]}>{row.testMethod}</Text>
                             </View>
                         ))}
+                        <View>
+                            <Text style={styles.boldFont}>
+                                --------------------------------------------------------------- Nothing Follows ------------------------------------------------------------------
+                            </Text>
+                        </View>
                     </View>
 
                     <View style={[styles.row, { fontSize: 9, textAlign: 'justify', marginTop: 5, paddingHorizontal: 20 }]} fixed>
@@ -135,9 +140,9 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                     <View style={[styles.row, { position: 'absolute', bottom: 95, gap: 35 }]} fixed>
                         <View style={[styles.font, { paddingLeft: 55 }]}>
                             <Text style={{ fontWeight: 'bold', bottom: 30 }}>Certified By:</Text>
-                            <Text style={{ fontWeight: 'bold' }}>CORREN HOLLY M. MONSALVE, Rch</Text>
-                            <Text>Laboratory Head, Chemist III</Text>
-                            <Text>PRC License No. 0011021</Text>
+                            <Text style={{ fontWeight: 'bold' }}>Danica Mae B. Rodriguez, RCh</Text>
+                            <Text>Chemist II</Text>
+                            <Text>PRC License No. 0015235</Text>
                         </View>
 
                         <View style={[styles.font, { paddingLeft: 72 }]}>
@@ -154,7 +159,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                             <Text>Effectivity Date: April 17,2025</Text>
                         </View>
                     </View>
-                    <Image style={[styles.roaUkas, { position: 'absolute', bottom: 42, right: 15 }]} src={image2} fixed />
+                    
                     <Text
                         style={[styles.pageNumber, { right: 30 }]}
                         render={({ pageNumber, totalPages }) => `Page ${pageNumber} of ${totalPages}`}

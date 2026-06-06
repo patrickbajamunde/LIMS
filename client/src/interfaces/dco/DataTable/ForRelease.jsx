@@ -95,7 +95,7 @@ export default function ForRelease() {
             selector: (row) => row.reportId,
             sortable: true,
         },
-        
+
         {
             name: "Test Method",
             cell: (row) => (
@@ -105,7 +105,7 @@ export default function ForRelease() {
                     whiteSpace: "pre-wrap",
                     maxWidth: "200px"
                 }}>
-                    {row.roaDetails?.map(param => param.testMethod).join("\n")}
+                    {row.roaDetails?.map(param => param.testMethod).join(",").replace(",", '\n ')}
                 </div>
             ),
             sortable: true,
@@ -122,7 +122,7 @@ export default function ForRelease() {
             )
         },
         {
-            name:"Created by",
+            name: "Created by",
             selector: (row) => row.userName
         },
         {
