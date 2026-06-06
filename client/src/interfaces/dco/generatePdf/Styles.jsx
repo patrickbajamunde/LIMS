@@ -145,7 +145,6 @@ const styles = StyleSheet.create({
     table2: {
         display: 'table',
         width: '90%',
-        marginTop: 15,
         borderStyle: 'solid',
         borderWidth: 1,
         borderRightWidth: 0,

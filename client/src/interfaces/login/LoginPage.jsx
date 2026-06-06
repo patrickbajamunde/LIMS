@@ -54,7 +54,7 @@ function LoginPage() {
           </div>
         </div>
         <label>Username</label>
-        <input type='email' value={email} onChange={e => setEmail(e.target.value)} required className='form-control mb-4'></input>
+        <input type='text' value={email} onChange={e => setEmail(e.target.value)} required className='form-control mb-4'></input>
         <label>Password</label>
         <input type='password' value={password} onChange={e => setPassword(e.target.value)} required className='form-control mb-4'></input>
 

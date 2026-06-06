@@ -45,7 +45,7 @@ function GenerateRoa() {
     const designation = (analyzedBy) => {
         const DesignationTable = {
             "Katrina Louise C. Gonzales": "Chemist",
-            "Danica Mae B. Rodriguez": "Chemist",
+            "Danica Mae B. Rodriguez": "Chemist II",
             "Mellen B. Perion": "Chemist",
         }
         return DesignationTable[analyzedBy] || "";

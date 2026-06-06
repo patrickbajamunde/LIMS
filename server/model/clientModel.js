@@ -55,8 +55,6 @@ const clientSchema = new mongoose.Schema({
 
     requestId: {
         type: String,
-        required: true,
-        unique: true,
     },
     clientType: {
         type: String,

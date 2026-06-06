@@ -54,7 +54,6 @@ const reportSchema = new mongoose.Schema({
 
     reportId:{
         type: String,
-        unique: true
     },
 
     analyzedBy:{
