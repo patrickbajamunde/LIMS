@@ -2,10 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom'
-import image1 from '../Components/images/ILD.png';
 import './styles/arfData.css'
-import TestPdf from "../generatePdf/testPdf";
-import GenerateAttachment from '../generatePdf/generateAttachment';
+import TestPdf from "../generatePdf/TestPdf";
+import GenerateAttachment from '../generatePdf/GenerateAttachment';
 
 
 function ArfData() {

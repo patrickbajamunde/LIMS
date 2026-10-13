@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
-import './styles/DataStyles.css'
+import './styles/dataStyles.css'
 import { useNavigate } from "react-router-dom";
 
 export default function TestReport() {

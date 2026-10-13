@@ -46,10 +46,20 @@ function RoaData() {
                                     <i className='bi bi-file-earmark-text fs-2' />
                                 </div>
                                 <div className="col">
-                                    <div className="row">
+                                    <div className="row ">
                                         <span className='fw-bold fs-2'>Report of Analysis</span>
-                                        <span className='fs-5 text-decoration-underline'>Report ID: {reportDetails.reportId}</span>
-                                        <span className='fs-5 text-decoration-underline'>Analyzed By: {reportDetails.analyzedBy}, {reportDetails.analyzedBy2}</span>
+                                    </div>
+
+                                    <div className="row">
+                                        <div className="col">
+                                            <div className="row">
+                                                <span className='fs-5 text-decoration-underline'>Report ID: {reportDetails.reportId}</span>
+                                                <span className='fs-5 text-decoration-underline'>Analyzed By: {reportDetails.analyzedBy}, {reportDetails.analyzedBy2}</span>
+                                            </div>
+                                        </div>
+                                        <div className='col border-start border-2 border-opacity-25 border-white'>
+                                            <span className='fs-5 text-decoration-underline'>Request ID: {reportDetails.requestNumber}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +188,6 @@ function RoaData() {
                             icon={<button type='button' className='btn btn-primary text-white fw-bold'>Customer Copy</button>}
                         />
                         <GenerateRoa roaId={reportDetails ? reportDetails._id : null}
-                            copyType="LABORATORY COPY"
                             copyCode="L"
                             fileType='_Laboratory_Copy'
                             icon={<button type='button' className='btn btn-primary text-white fw-bold'>Laboratory Copy</button>}

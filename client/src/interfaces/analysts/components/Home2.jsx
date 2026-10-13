@@ -1,9 +1,9 @@
 import React from 'react';
-import './styles/Home2.css';
+import './styles/home2.css';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
-import Dashboard from '../DataTable/Dashboard';
+import Dashboard from '../datatable/Dashboard';
 import  image5 from '../components/images/walk.png';
 
 function Home2() {

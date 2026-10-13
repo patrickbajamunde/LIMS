@@ -1,9 +1,9 @@
 import React from 'react'
-import "./styles/Sidebar.css"
+import "./styles/sidebar.css"
 import {Link } from 'react-router-dom';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
-import  image1 from '../Components/images/DA2.png';
+import  image1 from '../components/images/DA2.png';
 
 function Sidebar() {
   return (

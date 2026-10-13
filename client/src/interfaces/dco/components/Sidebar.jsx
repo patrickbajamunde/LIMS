@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import './styles/sidebar.css';
-import image1 from '../Components/images/DA2.png';
+import image1 from '../components/images/DA2.png';
 
 function Sidebar() {
     const navigate = useNavigate();

@@ -4,10 +4,10 @@ import { FaCartArrowDown, FaUserAlt, FaSafari, FaTasks, FaCar } from 'react-icon
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
-import image2 from '../Components/images/goverment.png';
+import image2 from '../components/images/goverment.png';
 import image3 from '../components/images/corn.png';
-import image4 from '../Components/images/search.png';
-import image5 from '../Components/images/walk.png';
+import image4 from '../components/images/search.png';
+import image5 from '../components/images/walk.png';
 import Dashboard from '../DataTable/Dashboard';
 import axios from "axios";
 

@@ -40,6 +40,7 @@ export default function CornProgram() {
 
             //if confirmDelete is true send a DELETE request from the API
             await axios.delete(`http://localhost:8001/api/client/delete/arf/${arfId}`, {
+                withCredentials: true,
             });
 
 

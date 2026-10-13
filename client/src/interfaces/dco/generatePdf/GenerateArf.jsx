@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react'
 import { jsPDF } from "jspdf";
 import autoTable from 'jspdf-autotable';
-import { font } from '../../../Fonts/Cam'
-import { ital } from '../../../Fonts/CamItalic'
-import { fontBold } from '../../../Fonts/Cam'
+import { font } from '../../../fonts/Cam'
+import { ital } from '../../../fonts/CamItalic'
+import { fontBold } from '../../../fonts/Cam'
 import { DAV } from '../../analysts/components/images/DA5'
 
 export default class GenerateArf extends PureComponent{

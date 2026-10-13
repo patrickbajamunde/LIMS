@@ -1,8 +1,8 @@
 import { StyleSheet, Font } from '@react-pdf/renderer';
 
-import Cambria from '../../../Fonts/cambria.ttf';
-import CambriaItalic from '../../../Fonts/cambria-italic.ttf';
-import CambriaBold from '../../../Fonts/cambria-bold.ttf';
+import Cambria from '../../../fonts/cambria.ttf';
+import CambriaItalic from '../../../fonts/cambria-italic.ttf';
+import CambriaBold from '../../../fonts/cambria-bold.ttf';
 
 
 Font.register({
@@ -104,6 +104,18 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         paddingBottom: 0
     },
+    header2: {
+        fontFamily: 'Cambria',
+        fontSize: 11,
+        width: '20%', // You can adjust widths here
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderLeftWidth: 1,
+        borderTopWidth: 1,
+        backgroundColor: '#D9D9D9',
+        textAlign: 'center',
+        paddingBottom: 0
+    },
     cell: {
         fontFamily: 'Cambria',
         fontSize: 11,
@@ -133,7 +145,6 @@ const styles = StyleSheet.create({
     table2: {
         display: 'table',
         width: '90%',
-        marginTop: 15,
         borderStyle: 'solid',
         borderWidth: 1,
         borderRightWidth: 0,
@@ -239,12 +250,16 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         padding: 2,
     },
-
-    textWrap: {
-        flexWrap: 'wrap',
-        flexShrink: 1,
+    roaCell2: {
+        fontFamily: 'Cambria',
+        fontSize: 11,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderLeftWidth: 1,
+        borderTopWidth: 0,
+        borderBottomWidth: 1,
+        padding: 2
     },
-
     roaImage: {
         marginLeft: 20,
         height: 90,

@@ -32,7 +32,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
         if (!report || !report.roaDetails) return;
         return (
             <Document>
-                <Page style={[styles.body, { marginTop: 5, paddingBottom: 250 }]} size="A4">
+                <Page style={[styles.body, { marginTop: 5, paddingBottom: 290 }]} size="A4">
                     <View style={styles.roaHeaderCont} fixed>
                         <Image style={styles.roaImage} src={image1} />
                         <View style={{ alignItems: 'justify', marginTop: -10 }} >
@@ -54,13 +54,13 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                     )}
 
                     <View style={[styles.boldFont, { position: 'absolute',marginLeft: 35, top: 105 }]} fixed>
-                        <Text>Customer Name: <Text style={{ fontWeight: 'normal' }}>{report.customerName}</Text></Text>
-                        <Text>Address: <Text style={{ fontWeight: 'normal' }}>{report.customerAddress}</Text></Text>
+                        <Text>Customer Name: <Text style={{ fontWeight: 'normal', color: '#2f5496'  }}>{report.customerName}</Text></Text>
+                        <Text>Address: <Text style={{ fontWeight: 'normal', color: '#2f5496'  }}>{report.customerAddress}</Text></Text>
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ width: '50%' }}>
-                                <Text>Contact Number: <Text style={{ fontWeight: 'normal' }}>{report.customerContact}</Text></Text>
+                                <Text>Contact Number: <Text style={{ fontWeight: 'normal', color: '#2f5496'  }}>{report.customerContact}</Text></Text>
                             </View>
-                            <View style={{ width: '40%' }}>
+                            <View style={{ width: '50%' }}>
                                 <Text>Report ID: <Text style={{ fontWeight: 'normal' }}>{report.reportId}-{copyCode}</Text></Text>
                             </View>
                         </View>
@@ -109,30 +109,35 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                                         {row.sampleCode.substring(row.sampleCode.lastIndexOf('-') + 1)}
                                     </Text>
                                 </View>
-                                <Text style={[styles.roaCell, styles.textWrap, { width: "28%", textAlign: 'left' }]} hyphenationCallback={word => [word]}>{row.sampleDescription}</Text>
+                                <Text style={[styles.roaCell, styles.textWrap, { width: "28%", textAlign: 'left', color: '#2f5496'  }]} hyphenationCallback={word => [word]}>{row.sampleDescription}</Text>
                                 <Text style={[styles.roaCell, { width: "20%", textAlign: 'left' }]} hyphenationCallback={word => [word]}>{row.sampleParam?.trim().replace(/,\s*/g, '\n')}</Text>
                                 <Text style={[styles.roaCell, { width: "13%", textAlign: 'center' }]}>{row.result}</Text>
                                 <Text style={[styles.roaCell, { width: "29%" }]}>{row.testMethod}</Text>
                             </View>
                         ))}
-                        <View>
-                            <Text style={styles.boldFont}>
-                                --------------------------------------------------------------- Nothing Follows ------------------------------------------------------------------
-                            </Text>
+                    </View>
+
+                    <View style={[{ fontSize: 9, textAlign: 'justify', marginTop: 5, paddingHorizontal: 20 }]} fixed>
+                        <Text style={styles.italicFont}>Note:</Text>
+                        <View style={[styles.row, {paddingLeft: 15}]}>
+                            <Text style={styles.italicFont}>{'\u2022'} </Text>
+                            <Text style={[styles.italicFont, {paddingLeft: 6}]} hyphenationCallback={word => [word]}>The result is based on the sample received and analyzed by the laboratory. This report shall not be reproduced without full approval of the Department of Agriculture Regional Field Office 5 - Integrated Laboratories Division. </Text>
                         </View>
+                        <Text style={[styles.italicFont, {paddingLeft: 15}]}>{'\u2022'}    Information in <Text style={{color: '#2f5496'}}>blue font</Text> is provided by the customers. </Text>
+                    </View>
+                    <View style={[{marginLeft: 15,}]}>
+                        <Text style={styles.boldFont}>
+                            ---------------------------------------------------------------- Nothing Follows -----------------------------------------------------------------
+                        </Text>
                     </View>
 
-                    <View style={[styles.row, { fontSize: 9, textAlign: 'justify', marginTop: 5, paddingHorizontal: 20 }]} fixed>
-                        <Text style={styles.italicFont}>Note: The result is based on the sample received and analyzed by the laboratory. This report shall not be reproduced without full approval of the Department of Agriculture Regional Field Office 5 - Integrated Laboratories Division.</Text>
-                    </View>
-
-                    <View style={[styles.font, { paddingLeft: 55, bottom: 175, position: 'absolute' }]} fixed>
-                        <Text style={{ fontWeight: 'bold', bottom: 35 }}>Analyzed/Examined By:</Text>
+                    <View style={[styles.font, { paddingLeft: 55, bottom: 180, position: 'absolute' }]} fixed>
+                        <Text style={{ fontWeight: 'bold', bottom: 32 }}>Analyzed/Examined By:</Text>
                         <Text style={{ fontWeight: 'bold' }}>{report.analyzedBy}, RCh</Text>
                         <Text>{report.position}, PRC License No. {report.analystPRC}</Text>
                     </View>
 
-                    <View style={[styles.font, { paddingLeft: 335, bottom: 180, position: 'absolute' }]} fixed>
+                    <View style={[styles.font, { paddingLeft: 330, bottom: 180, position: 'absolute' }]} fixed>
                         <Text style={{ fontWeight: 'bold' }}>{report.analyzedBy2}, RCh</Text>
                         <Text>{report.position2}, PRC License No. {report.analystPRC2}</Text>
                     </View>
@@ -155,8 +160,8 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
 
                     <View style={[styles.footer, { position: 'absolute', bottom: 20, left: 20 }]} fixed>
                         <View style={[styles.font]}>
-                            <Text>ILD-RFCAL-005-1</Text>
-                            <Text>Effectivity Date: April 17,2025</Text>
+                            <Text>ILD5-RFCAL-002-1</Text>
+                            <Text>Effectivity Date: June 23,2026</Text>
                         </View>
                     </View>
                     
@@ -172,7 +177,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
     const handleDownload = async () => {
         if (!report) return;
 
-        // Step 1: Generate PDF bytes from react-pdf
+        // Step 1: Generate PDF bytes from react-pdf    
         const blob = await pdf(generatePdf()).toBlob();
         const arrayBuffer = await blob.arrayBuffer();
         const pdfDoc = await PDFDocument.load(arrayBuffer);

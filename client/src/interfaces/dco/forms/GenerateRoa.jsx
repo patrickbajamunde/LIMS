@@ -45,7 +45,7 @@ function GenerateRoa() {
     const designation = (analyzedBy) => {
         const DesignationTable = {
             "Katrina Louise C. Gonzales": "Chemist",
-            "Danica Mae B. Rodriguez": "Chemist",
+            "Danica Mae B. Rodriguez": "Chemist II",
             "Mellen B. Perion": "Chemist",
         }
         return DesignationTable[analyzedBy] || "";
@@ -344,6 +344,7 @@ function GenerateRoa() {
                     customerName: clientData.clientName,
                     customerAddress: clientData.clientAddress,
                     customerContact: clientData.clientEmail,
+                    requestNumber: clientData.requestId,
                 }))
 
                 setRoaReport(combineData);
@@ -373,6 +374,10 @@ function GenerateRoa() {
                         <div className='card p-4 mb-3 shadow-sm border'>
                             <h5 className='mb-4 text-primary fw-bold'>Report Details</h5>
                             <div className="row g-4">
+                                <div className="col-md-6">
+                                    <label className='form-label'>Request Number: </label>
+                                    <input type="tel" className="date form-control border border-dark" name='requestNumber' id='requestNumber' onChange={inputHandler} value={result.requestNumber} placeholder="" />
+                                </div>
                                 <div className="col-md-6">
                                     <label className='form-label'>Report Id: </label>
                                     <input type="tel" className="date form-control border border-dark" name='reportId' id='reportId' onChange={inputHandler} value={result.reportId} placeholder="" />

@@ -3,7 +3,6 @@ import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/render
 import styles from './Styles';
 import image1 from '../../analysts/components/images/DA5.jpg';
 import image2 from '../../dco/components/images/unnamed.png'
-import terms from './data/Terms';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +11,6 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
     const [request, setRequest] = useState(null)
 
     useEffect(() => {
-        // Fetch request data using the requestId passed as a prop
         axios.get(`http://localhost:8001/api/client/getClient/${requestId}`)
             .then((response) => {
                 setRequest(response.data);
@@ -34,8 +32,8 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
         if (!request || !request.sampleDetails || !request.ArfAttachment) return;
         return (
             <Document>
-                <Page style={[styles.body, { marginTop: 5 }]} size="A4" orientation='landscape'>
-                    <View style={[styles.headerContainer3, styles.row, {width: '90%', marginLeft: 43.5}]} >
+                <Page style={[styles.body, { marginTop: 5, paddingBottom: 50 }]} size="A4" orientation='landscape'>
+                    <View style={[styles.headerContainer3, styles.row, {width: '90%', marginLeft: 43.5}]}fixed>
                         <View style={[styles.headerCell, { justifyContent: 'center' }]}>
                             <Image style={styles.image} src={image1} />
                         </View>
@@ -72,7 +70,7 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                         </View>
                     </View>
 
-                    <View style={[styles.normalFont, { fontSize: 11, marginTop: 8 }]}>
+                    <View style={[styles.normalFont, { fontSize: 11, marginTop: 8 }]} fixed>
                         <View style={[styles.row, { alignItems: 'center' }]}>
                             <Text style={[{ marginLeft: 45, paddingBottom: 12, paddingRight: 5 }]}>Request ID: (to filled up by RFCAL)</Text>
                             <View style={styles.requestBox}>
@@ -83,14 +81,14 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                         </View>
                     </View>
 
-                    <View style={styles.table2}>
-                        <View style={styles.row}>
-                            <Text style={[styles.header, { width: "25%", paddingTop: 0, backgroundColor: '#ffffff' }]}>CODE NO. {'\n'} (For Lab Use ONLY)</Text>
-                            <Text style={[styles.header, { width: "43%", backgroundColor: '#ffffff', paddingHorizontal: 18, paddingBottom: 15 }]}>SAMPLE DESCRIPTION {'\n'} (Province-District No.-Number Sample Collection-Name of Sample) {'\n'} e.g., CS-2-001-Premium Hag Starter Pellet</Text>
-                            <Text style={[styles.header, { width: "35%", paddingTop: 0, backgroundColor: '#ffffff' }]}>ADDRESS</Text>
+                    <View style={[styles.table2, { borderLeftWidth:0, borderTopWidth:0,}]}>
+                        <View style={[styles.row, {marginTop: 15}]}fixed>
+                            <Text style={[styles.header2, { width: "25%", paddingTop: 0, backgroundColor: '#ffffff', borderTopWidth: 1 }]}>CODE NO. {'\n'} (For Lab Use ONLY)</Text>
+                            <Text style={[styles.header, { width: "43%", backgroundColor: '#ffffff', paddingHorizontal: 18, paddingBottom: 15, borderTopWidth: 1 }]}>SAMPLE DESCRIPTION {'\n'} (Province-District No.-Number Sample Collection-Name of Sample) {'\n'} e.g., CS-2-001-Premium Hag Starter Pellet</Text>
+                            <Text style={[styles.header, { width: "35%", paddingTop: 0, backgroundColor: '#ffffff', borderTopWidth: 1 }]}>ADDRESS</Text>
                         </View>
-                        <View style={[styles.row, { textAlign: 'center' }]}>
-                            <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>Lab Code</Text>
+                        <View style={[styles.row, { textAlign: 'center' }]} fixed>
+                            <Text style={[styles.roaCell2, { width: "12%", paddingVertical: 0}]}>Lab Code</Text>
                             <Text style={[styles.roaCell, { width: "13%", paddingVertical: 0 }]}>Sample Code</Text>
                             <Text style={[styles.roaCell, { width: "43%", paddingVertical: 0 }]}></Text>
                             <Text style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>Barangay</Text>
@@ -100,7 +98,7 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
 
                         {request.ArfAttachment.map((item, index) => (
                             <View style={[styles.row, { textAlign: 'center' }]} key={index} wrap={false}>
-                                <View style={[styles.roaCell, { width: "12%", paddingVertical: 0 }]}>
+                                <View style={[styles.roaCell, { width: "12%", paddingVertical: 0, borderLeftWidth: 1 }]}>
                                     <Text>{item.labCode?.substring(0, 14)}</Text>
                                     <Text>{item.labCode?.substring(14)}</Text>
                                 </View>
@@ -130,8 +128,11 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
                     </button>
                 </PDFDownloadLink>
             ) : (
+                // When request is not loaded yet, show a disabled button.
+                // Use `disabledIcon` if provided, otherwise fall back to `icon` so the
+                // UI is visible (but disabled) instead of rendering an empty button.
                 <button className="btn p-0 border-0" disabled>
-                    {disabledIcon}
+                    {disabledIcon || icon}
                 </button>
             )}
         </>

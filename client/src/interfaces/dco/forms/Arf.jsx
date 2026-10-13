@@ -195,7 +195,7 @@ function Arf() {
 
   const submitForm = async (e) => {
     e.preventDefault();
-    const form = { ...request, sampleDetails: sample, ArfAttachment: arfAttachmentDetails };
+    const form = { ...request, sampleDetails: sample };
     await axios.post("http://localhost:8001/api/client/newClient", form,
       {
         withCredentials: true,
@@ -267,7 +267,7 @@ function Arf() {
                 </div>
 
                 <div className="col-md-6">
-                  <label className='form-label'>Request ID: </label>
+                  <label className='form-label'>Request Number: </label>
                   <input type="text" className="form-control border border-dark" id="requestId" name="requestId" onChange={inputHandler} value={request.requestId} placeholder="" />
                 </div>
 
@@ -525,7 +525,7 @@ function Arf() {
                     </div>
                   </div>
 
-                  <div className="mb-3">
+                  <div className="mb-3"> 
                     <label className="form-label">Test Parameter Requested</label>
                     <input
                       type="text"
