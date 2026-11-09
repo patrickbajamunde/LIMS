@@ -9,7 +9,7 @@ function Sidebar() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const handleLogout = () => {
-        fetch('http://192.168.100.177:8001/api/auth/logout', {
+        fetch('http://192.168.1.91:8001/api/auth/logout', {
             method: 'POST',
             credentials: 'include',
         })

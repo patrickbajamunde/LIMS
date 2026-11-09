@@ -11,7 +11,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
     const [report, setReport] = useState(null)
 
     useEffect(() => {
-        axios.get(`http://192.168.100.177:8001/api/report/reportData/${roaId}`)
+        axios.get(`http://192.168.1.91:8001/api/report/reportData/${roaId}`)
             .then((response) => {
                 setReport(response.data);
             })
@@ -54,11 +54,11 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                     )}
 
                     <View style={[styles.boldFont, { position: 'absolute',marginLeft: 35, top: 105 }]} fixed>
-                        <Text>Customer Name: <Text style={{ fontWeight: 'normal' }}>{report.customerName}</Text></Text>
-                        <Text>Address: <Text style={{ fontWeight: 'normal' }}>{report.customerAddress}</Text></Text>
+                        <Text>Customer Name: <Text style={{ fontWeight: 'normal', color: '#2f5496'   }}>{report.customerName}</Text></Text>
+                        <Text>Address: <Text style={{ fontWeight: 'normal', color: '#2f5496'   }}>{report.customerAddress}</Text></Text>
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ width: '50%' }}>
-                                <Text>Contact Number: <Text style={{ fontWeight: 'normal' }}>{report.customerContact}</Text></Text>
+                                <Text>Contact Number: <Text style={{ fontWeight: 'normal', color: '#2f5496'   }}>{report.customerContact}</Text></Text>
                             </View>
                             <View style={{ width: '50%' }}>
                                 <Text>Report ID: <Text style={{ fontWeight: 'normal' }}>{report.reportId}-{copyCode}</Text></Text>
@@ -109,7 +109,7 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                                         {row.sampleCode.substring(row.sampleCode.lastIndexOf('-') + 1)}
                                     </Text>
                                 </View>
-                                <Text style={[styles.roaCell, styles.textWrap, { width: "28%", textAlign: 'left' }]} hyphenationCallback={word => [word]}>{row.sampleDescription}</Text>
+                                <Text style={[styles.roaCell, styles.textWrap, { width: "28%", textAlign: 'left', color:'#2f5496' }]} hyphenationCallback={word => [word]}>{row.sampleDescription}</Text>
                                 <Text style={[styles.roaCell, { width: "20%", textAlign: 'left' }]} hyphenationCallback={word => [word]}>{row.sampleParam?.trim().replace(/,\s*/g, '\n')}</Text>
                                 <Text style={[styles.roaCell, { width: "13%", textAlign: 'center' }]}>{row.result}</Text>
                                 <Text style={[styles.roaCell, { width: "29%" }]}>{row.testMethod}</Text>
@@ -117,8 +117,15 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
                         ))}
                     </View>
 
-                    <View style={[styles.row, { fontSize: 9, textAlign: 'justify', marginTop: 5, paddingHorizontal: 20 }]} fixed>
-                        <Text style={styles.italicFont}>Note: The result is based on the sample received and analyzed by the laboratory. This report shall not be reproduced without full approval of the Department of Agriculture Regional Field Office 5 - Integrated Laboratories Division.</Text>
+                    <View style={[{ fontSize: 9, textAlign: 'justify', marginTop: 5, paddingHorizontal: 20 }]} fixed>
+                        <Text style={styles.italicFont}>Note:</Text>
+                        <Text style={[styles.italicFont, {paddingLeft: 15}]}>{'\u2022'}    The above results were those obtained at the time of test and refer only to the particular item submitted. </Text>
+                        <Text style={[styles.italicFont, {paddingLeft: 15}]}>{'\u2022'}    The context in <Text style={{color: '#2f5496'}}>blue font</Text> is an information derived from the data provided by the customer. </Text>
+                        <View style={[styles.row, {paddingLeft: 15}]}>
+                            <Text style={styles.italicFont}>{'\u2022'} </Text>
+                            <Text style={[styles.italicFont, {paddingLeft: 6}]} hyphenationCallback={word => [word]}>This report shall not be reproduced, except in full, without prior written approval of the Department of Agriculture Regional Field Office 5 - Integrated Laboratories Division. </Text>
+                        </View>
+                        
                     </View>
                     <View style={[{marginLeft: 15,}]}>
                         <Text style={styles.boldFont}>
@@ -155,8 +162,8 @@ const GenerateRoa = ({ roaId, icon, disabledIcon, copyType, fileType, copyCode }
 
                     <View style={[styles.footer, { position: 'absolute', bottom: 20, left: 20 }]} fixed>
                         <View style={[styles.font]}>
-                            <Text>ILD5-RFCAL-002-0</Text>
-                            <Text>Effectivity Date: March 17,2026</Text>
+                            <Text>ILD5-RFCAL-FR-002-2</Text>
+                            <Text>Effectivity Date: June 30, 2026</Text>
                         </View>
                     </View>
                     

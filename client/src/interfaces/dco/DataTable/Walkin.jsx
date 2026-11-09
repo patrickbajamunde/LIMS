@@ -23,7 +23,7 @@ export default function Walkin() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://192.168.100.177:8001/api/client/userRequest", {
+                const response = await axios.get("http://192.168.1.91:8001/api/client/userRequest", {
                 });
 
                 const walkinOnly = response.data.filter(clientData => clientData.clientType === "Student" || clientData.clientType === "Private" || clientData.clientType === "Farmer");
@@ -43,7 +43,7 @@ export default function Walkin() {
             if (!confirmDelete) return;
 
             //if confirmDelete is true send a DELETE request from the API
-            await axios.delete(`http://192.168.100.177:8001/api/client/delete/arf/${arfId}`, {
+            await axios.delete(`http://192.168.1.91:8001/api/client/delete/arf/${arfId}`, {
                 withCredentials: true,
             });
 

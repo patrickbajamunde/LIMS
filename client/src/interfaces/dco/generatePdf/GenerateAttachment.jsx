@@ -11,7 +11,7 @@ const GenerateAttachment = ({ requestId, icon, disabledIcon }) => {
     const [request, setRequest] = useState(null)
 
     useEffect(() => {
-        axios.get(`http://192.168.100.177:8001/api/client/getClient/${requestId}`)
+        axios.get(`http://192.168.1.91:8001/api/client/getClient/${requestId}`)
             .then((response) => {
                 setRequest(response.data);
             })

@@ -16,7 +16,7 @@ function ArfData() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://192.168.100.177:8001/api/client/getClient/${id}`)
+        axios.get(`http://192.168.1.91:8001/api/client/getClient/${id}`)
             .then((response) => {
                 setRequestData(response.data)
             })
