@@ -4,10 +4,13 @@ import { FaCartArrowDown, FaUserAlt, FaSafari, FaTasks, FaCar } from 'react-icon
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
-import image2 from '../components/images/goverment.png';
-import image3 from '../components/images/corn.png';
-import image4 from '../components/images/search.png';
-import image5 from '../components/images/walk.png';
+import image3 from '../components/images/corn-purple.png';
+import image4 from '../components/images/apple-whole-solid.png';
+import image5 from '../components/images/person-walking-arrow-right-solid.png';
+import image6 from '../components/images/book-open-reader-solid.png';
+import image7 from '../components/images/building-columns-solid.png';
+import image8 from '../components/images/landmark-dome-solid.png';
+import image9 from '../components/images/wheat-awn-solid.png';
 import Dashboard from '../DataTable/Dashboard';
 import axios from "axios";
 
@@ -114,7 +117,7 @@ function Home() {
                   <h3 className='fs-2'>{regCount}</h3>
                   <p className='fs-5 mb-0'>Regulatory</p>
                 </div>
-                <i className='bi bi-person fs-1'></i>
+                <i className="bi bi-shield-fill-check fs-1" style={{ color: "#C7CF6F" }}></i>
               </div>
               <div
                 className='d-flex container rounded-bottom-1'
@@ -173,7 +176,7 @@ function Home() {
                 </div>
                 <div className='ms-4'>
                   <img
-                    src={image4}
+                    src={image7}
                     alt="description"
                     className='image2-style'
                     style={{ maxWidth: '150px', height: 'auto' }}
@@ -241,7 +244,7 @@ function Home() {
                 </div>
                 <div className='ms-4'>
                   <img
-                    src={image4}
+                    src={image9}
                     alt="description"
                     className='image2-style'
                     style={{ maxWidth: '150px', height: 'auto' }}
@@ -273,7 +276,7 @@ function Home() {
                 </div>
                 <div className='ms-4'>
                   <img
-                    src={image4}
+                    src={image8}
                     alt="description"
                     className='image2-style'
                     style={{ maxWidth: '150px', height: 'auto' }}
@@ -304,7 +307,7 @@ function Home() {
                 </div>
                 <div className='ms-4'>
                   <img
-                    src={image4}
+                    src={image6}
                     alt="description"
                     className='image2-style'
                     style={{ maxWidth: '150px', height: 'auto' }}

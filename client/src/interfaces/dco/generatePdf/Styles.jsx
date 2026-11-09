@@ -187,8 +187,8 @@ const styles = StyleSheet.create({
         fontFamily: 'Cambria',
         position: 'absolute',
         fontSize: 11,
-        bottom: 30,
-        right: 70,
+        bottom: 18,
+        left: 20
     },
 
     termsBold: {

@@ -55,14 +55,14 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
 
                         <View style={[styles.headerCell, { flexDirection: 'column', }]}>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 15 }]}>Document Code</Text>
-                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>ILD5-RFCAL-001-0</Text>
+                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>ILD5-RFCAL-FR-001-1</Text>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 25 }]}>Record ID</Text>
                             <Text style={[styles.normalFont, { fontSize: 8, paddingRight: 2, paddingLeft: 2 }]}>{request.requestId}</Text>
                         </View>
 
                         <View style={[styles.headerCell, { flexDirection: 'column', borderRightWidth: 0 }]}>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 5 }]}>Effectivity Date</Text>
-                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>March 17, 2026</Text>
+                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>June 30, 2026</Text>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 20 }]}>Page No.</Text>
                             <Text
                                 style={styles.testPdfpage}
@@ -187,7 +187,7 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
                     </View>
 
                     <View>
-                        <Text style={[styles.font, { paddingLeft: 25, marginTop: 16 }]}>ILD5-RFCAL-001-1{'\n'}Effectivity Date: March 17, 2026</Text>
+                        <Text style={[styles.font, { paddingLeft: 25, marginTop: 16 }]}>ILD5-RFCAL-FR-001-1{'\n'}Effectivity Date: June 30, 2026</Text>
                     </View>
                     <Text style={[styles.font, { marginLeft: 25 }]}>
                         -----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -227,14 +227,14 @@ const TestPdf = ({ requestId, icon, disabledIcon }) => {
 
                         <View style={[styles.headerCell, { flexDirection: 'column', }]}>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 15 }]}>Document Code</Text>
-                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>ILD5-RFCAL-001-0</Text>
+                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>ILD5-RFCAL-FR-001-1</Text>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 25 }]}>Record ID</Text>
                             <Text style={[styles.normalFont, { fontSize: 8, paddingRight: 2, paddingLeft: 2 }]}>{request.requestId}</Text>
                         </View>
 
                         <View style={[styles.headerCell, { flexDirection: 'column', borderRightWidth: 0 }]}>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 5 }]}>Effectivity Date</Text>
-                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>March 17, 2026</Text>
+                            <Text style={[styles.normalFont, { fontSize: 10, borderBottom: 1, padding: 5 }]}>June 30, 2026</Text>
                             <Text style={[styles.boldFont, { fontSize: 10, borderBottom: 1, paddingLeft: 20 }]}>Page No.</Text>
                             <Text
                                 style={styles.testPdfpage}
